@@ -19,7 +19,18 @@ Explore the [original repository](https://github.com/OurTextScores/OTS_WebEditor
 
 ## Install
 
-Download the release from GitHub using the steps below. Availability in Obsidian’s Community plugins directory depends on its separate review and publication. MuseScore itself does not need to be installed to render, edit or play scores in Obsidian.
+MuseScorer is available through [Obsidian Community plugins](https://community.obsidian.md/plugins/musescorer). MuseScore itself does not need to be installed to render, edit or play scores in Obsidian.
+
+### Install through Obsidian — recommended
+
+1. Open **Settings → Community plugins** in Obsidian Desktop.
+2. Enable community plugins if prompted.
+3. Select **Browse** and search for **MuseScorer**.
+4. Select **Install**, then **Enable**.
+
+You can now [embed your first score](#embed-a-score).
+
+### Manual installation — alternative
 
 1. Download **MuseScorer.zip** from the [0.0.1 release](https://github.com/kpaede/Musescorer/releases/tag/0.0.1). Choose this asset, rather than GitHub’s **Source code** archive.
 2. Extract the ZIP. Place its **musescorer** folder inside your vault’s `.obsidian/plugins/` folder. Create `plugins/` if it does not exist.
@@ -43,7 +54,9 @@ Your vault/
 
 ### Update an existing installation
 
-Disable **MuseScorer**, replace the three program files with those from the release, and enable it again. Keep the `drafts/` folder if it exists: it contains editor recovery snapshots.
+For a Community plugins installation, open **Settings → Community plugins**, select **Check for updates**, and install any available MuseScorer update.
+
+For a manual installation, disable **MuseScorer**, replace the three program files with those from the release, and enable it again. Keep the `drafts/` folder if it exists: it contains editor recovery snapshots.
 
 If you installed the preliminary beta with the uppercase ID `MuseScorer`, disable it first, rename its plugin folder to `musescorer`, and replace the three files. The permanent plugin ID is **musescorer**; the displayed name is **MuseScorer**.
 
