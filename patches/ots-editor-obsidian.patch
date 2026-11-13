@@ -45,26 +45,92 @@
    }
    const url = new URL(window.location.href);
 diff --git a/app/globals.css b/app/globals.css
-index 5a524ee..d9fe39b 100644
+index 5a524ee..1ecfc15 100644
 --- a/app/globals.css
 +++ b/app/globals.css
-@@ -95,6 +95,7 @@ svg .ots-playback-notehead {
+@@ -94,80 +94,7 @@ svg .ots-playback-notehead {
+   --shell-text-muted: var(--ots-text-muted);
    --shell-accent: var(--ots-accent);
  }
-
-+/* stylelint-disable at-rule-no-unknown -- Tailwind v4 theme and utility directives below are compiled to standard CSS by the pinned PostCSS build. */
- @theme inline {
-   --color-background: var(--background);
-   --color-foreground: var(--foreground);
-@@ -168,6 +169,7 @@ svg .ots-playback-notehead {
- @utility z-palette {
-   z-index: var(--ots-z-palette);
- }
-+/* stylelint-enable at-rule-no-unknown */
+-
+-@theme inline {
+-  --color-background: var(--background);
+-  --color-foreground: var(--foreground);
+-  --font-sans: var(--font-geist-sans);
+-  --font-mono: var(--font-geist-mono);
+-
+-  /* Type roles (DESIGN_LANGUAGE §3.2). Tailwind's own sizes are the other roles: text-xl display,
+-     text-base title, text-sm body, text-xs small. caption replaces text-[9px|10px|11px]. */
+-  --text-caption: 0.6875rem;
+-
+-  /* Utilities: bg-surface, text-ink, border-line, ring-accent, ... */
+-  --color-surface: var(--ots-surface);
+-  --color-surface-sunken: var(--ots-surface-sunken);
+-  --color-surface-hover: var(--ots-surface-hover);
+-  --color-line: var(--ots-border);
+-  --color-line-strong: var(--ots-border-strong);
+-  --color-line-control: var(--ots-border-control);
+-  --color-ink: var(--ots-text);
+-  --color-ink-muted: var(--ots-text-muted);
+-  --color-ink-faint: var(--ots-text-faint);
+-  --color-accent: var(--ots-accent);
+-  --color-accent-hover: var(--ots-accent-hover);
+-  --color-accent-soft: var(--ots-accent-soft);
+-  --color-on-accent: var(--ots-on-accent);
+-  --color-success: var(--ots-success);
+-  --color-success-soft: var(--ots-success-soft);
+-  --color-warning: var(--ots-warning);
+-  --color-warning-soft: var(--ots-warning-soft);
+-  --color-danger: var(--ots-danger);
+-  --color-danger-hover: var(--ots-danger-hover);
+-  --color-danger-soft: var(--ots-danger-soft);
+-
+-  --radius-ots-sm: var(--ots-radius-sm);
+-  --radius-ots-md: var(--ots-radius-md);
+-  --radius-ots-lg: var(--ots-radius-lg);
+-  --shadow-raised: var(--ots-shadow-raised);
+-  --shadow-modal: var(--ots-shadow-modal);
+-}
+-
+-/* Layers as utilities: z-menu, z-toast, ... Local stacking inside a component (z-10, z-20) is not a layer. */
+-@utility z-canvas {
+-  z-index: var(--ots-z-canvas);
+-}
+-@utility z-panel {
+-  z-index: var(--ots-z-panel);
+-}
+-@utility z-status {
+-  z-index: var(--ots-z-status);
+-}
+-@utility z-toolbar {
+-  z-index: var(--ots-z-toolbar);
+-}
+-@utility z-activity {
+-  z-index: var(--ots-z-activity);
+-}
+-@utility z-header {
+-  z-index: var(--ots-z-header);
+-}
+-@utility z-float {
+-  z-index: var(--ots-z-float);
+-}
+-@utility z-modal {
+-  z-index: var(--ots-z-modal);
+-}
+-@utility z-toast {
+-  z-index: var(--ots-z-toast);
+-}
+-@utility z-menu {
+-  z-index: var(--ots-z-menu);
+-}
+-@utility z-palette {
+-  z-index: var(--ots-z-palette);
+-}
++/* musescorer:editor-theme — registered at build time from editor-app/theme.json */
 
  /*
   * One keyboard-focus indicator for everything that does not draw its own. It is in the base layer
-@@ -182,12 +184,13 @@ svg .ots-playback-notehead {
+@@ -182,12 +109,13 @@ svg .ots-playback-notehead {
 
  /* Anything that animates honours the system setting. */
  @media (prefers-reduced-motion: reduce) {

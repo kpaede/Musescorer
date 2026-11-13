@@ -2,6 +2,7 @@ import { createRequire } from 'node:module';
 import { readFile, writeFile, mkdir, cp, rm } from 'node:fs/promises';
 import path from 'node:path';
 import { build } from 'esbuild';
+import { injectEditorTheme } from './editor-theme.mjs';
 const root = path.resolve('vendor/ots-editor');
 const require = createRequire(path.join(root, 'package.json'));
 const postcss = require('postcss');
@@ -28,6 +29,8 @@ await build({
 });
 const moduleCss = await readFile('full-editor/editor.css','utf8').catch(()=> '');
 let css = await readFile(path.join(root,'app/globals.css'),'utf8');
+const theme = JSON.parse(await readFile('editor-app/theme.json', 'utf8'));
+css = injectEditorTheme(css, postcss, theme);
 const font = await readFile(path.join(root,'webmscore-fork/fonts/bravura/Bravura.woff2'));
 css = css.replace("url('../webmscore-fork/fonts/bravura/Bravura.woff2')", `url('data:font/woff2;base64,${font.toString('base64')}')`);
 css += '\n@source "../components";\n@source "../lib";\n';

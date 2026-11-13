@@ -1,5 +1,6 @@
-/** Check shipped styles and the pinned editor sources, including their scoped Tailwind directives. */
+/** Match reviewers that check standard CSS without honoring suppression comments. */
 export default {
+ ignoreDisables: true,
  rules: {
   'at-rule-no-unknown': true,
   'declaration-no-important': true,

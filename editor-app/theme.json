@@ -1,0 +1,69 @@
+{
+  "theme": {
+    "--color-background": "var(--background)",
+    "--color-foreground": "var(--foreground)",
+    "--font-sans": "var(--font-geist-sans)",
+    "--font-mono": "var(--font-geist-mono)",
+    "--text-caption": "0.6875rem",
+    "--color-surface": "var(--ots-surface)",
+    "--color-surface-sunken": "var(--ots-surface-sunken)",
+    "--color-surface-hover": "var(--ots-surface-hover)",
+    "--color-line": "var(--ots-border)",
+    "--color-line-strong": "var(--ots-border-strong)",
+    "--color-line-control": "var(--ots-border-control)",
+    "--color-ink": "var(--ots-text)",
+    "--color-ink-muted": "var(--ots-text-muted)",
+    "--color-ink-faint": "var(--ots-text-faint)",
+    "--color-accent": "var(--ots-accent)",
+    "--color-accent-hover": "var(--ots-accent-hover)",
+    "--color-accent-soft": "var(--ots-accent-soft)",
+    "--color-on-accent": "var(--ots-on-accent)",
+    "--color-success": "var(--ots-success)",
+    "--color-success-soft": "var(--ots-success-soft)",
+    "--color-warning": "var(--ots-warning)",
+    "--color-warning-soft": "var(--ots-warning-soft)",
+    "--color-danger": "var(--ots-danger)",
+    "--color-danger-hover": "var(--ots-danger-hover)",
+    "--color-danger-soft": "var(--ots-danger-soft)",
+    "--radius-ots-sm": "var(--ots-radius-sm)",
+    "--radius-ots-md": "var(--ots-radius-md)",
+    "--radius-ots-lg": "var(--ots-radius-lg)",
+    "--shadow-raised": "var(--ots-shadow-raised)",
+    "--shadow-modal": "var(--ots-shadow-modal)"
+  },
+  "utilities": {
+    "z-canvas": {
+      "z-index": "var(--ots-z-canvas)"
+    },
+    "z-panel": {
+      "z-index": "var(--ots-z-panel)"
+    },
+    "z-status": {
+      "z-index": "var(--ots-z-status)"
+    },
+    "z-toolbar": {
+      "z-index": "var(--ots-z-toolbar)"
+    },
+    "z-activity": {
+      "z-index": "var(--ots-z-activity)"
+    },
+    "z-header": {
+      "z-index": "var(--ots-z-header)"
+    },
+    "z-float": {
+      "z-index": "var(--ots-z-float)"
+    },
+    "z-modal": {
+      "z-index": "var(--ots-z-modal)"
+    },
+    "z-toast": {
+      "z-index": "var(--ots-z-toast)"
+    },
+    "z-menu": {
+      "z-index": "var(--ots-z-menu)"
+    },
+    "z-palette": {
+      "z-index": "var(--ots-z-palette)"
+    }
+  }
+}

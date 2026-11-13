@@ -40,7 +40,7 @@ The monitoring workflow in the plugin repository runs weekly on Monday at 08:23 
 
 - `components/ScoreEditor.tsx`: report the active native session and imported filename to the Obsidian host; stop original-editor audio when another leaf takes over.
 - `components/score-editor/score-url.ts`: avoid replacing the browser URL inside the local iframe.
-- `app/globals.css`: replace reduced-motion important declarations with selector specificity. A scoped Stylelint comment documents the Tailwind v4 `@theme`/`@utility` syntax, which is compiled by PostCSS before shipping; unknown at-rules remain errors elsewhere.
+- `app/globals.css`: replace reduced-motion important declarations with selector specificity, and move the original 30 Tailwind theme values and 11 utilities into `editor-app/theme.json`. The stylesheet contains standard CSS and a checked registration marker. `scripts/editor-theme.mjs` registers the configuration with PostCSS at build time; the resulting editor CSS and JavaScript are byte-identical to the preceding build. Review this configuration together with upstream stylesheet changes. CSS lint does not honor suppression comments.
 
 The engine wrapper sources remain unmodified. The local asset injection is an esbuild hook in `esbuild.config.mjs`. Module aliases, the local fetch bridge, disabling editor analytics and gating the unavailable Performance command are in our build/adapters, outside the original frontend. The Performance gate checks its expected original command definition and fails the build if upstream changes require review; it does not modify the vendored source or its lock.
 
