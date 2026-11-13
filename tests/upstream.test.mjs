@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { checkUpstreams, formatReport } from '../scripts/check-upstream.mjs';
+import { checkUpstreams, formatReport, githubAnnotations } from '../scripts/check-upstream.mjs';
 
 const pin = 'a'.repeat(40);
 const head = 'b'.repeat(40);
@@ -34,4 +34,18 @@ test('mismatched editor and engine pins fail before contacting GitHub', async ()
 test('upstream API failures cannot be mistaken for current dependencies', async () => {
  await assert.rejects(checkUpstreams(engine, editor, async () => { throw new Error('API unavailable'); }), /API unavailable/);
  await assert.rejects(checkUpstreams(engine, editor, async () => ({ default_branch: 'main', sha: 'invalid' })), /Invalid upstream commit/);
+});
+
+test('available updates produce warnings without turning a successful comparison into an error', async () => {
+ const unchanged = await checkUpstreams(engine, editor, fakeGitHub());
+ assert.deepEqual(githubAnnotations(unchanged), []);
+ const changed = await checkUpstreams(engine, editor, fakeGitHub(head, 'v4.8.0'));
+ const warnings = githubAnnotations(changed);
+ assert.equal(warnings.length, 2);
+ assert.ok(warnings.every(line => line.startsWith('::warning ') && !line.includes('::error')));
+ assert.match(warnings[0], /OTS editor and engine/u);
+ assert.match(warnings[1], /MuseScore stable release/u);
+ const escaped = githubAnnotations([{ ...changed[0], latest: 'value%\r\n::error::injected' }])[0];
+ assert.ok(escaped.includes('value%25%0D%0A::error::injected'));
+ assert.ok(!escaped.includes('\n'));
 });

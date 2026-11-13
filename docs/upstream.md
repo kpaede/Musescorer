@@ -25,7 +25,7 @@ git remote add ots-upstream https://github.com/OurTextScores/OTS_WebEditor.git
 
 Only push plugin branches to `origin`. Review OTS history in a separate clone of `ots-fork`, with the original repository as its `upstream` remote; do not merge the website's root tree into the plugin. Keep the OTS fork's default branch aligned with the original and use separate branches for contributions.
 
-The monitoring workflow in the plugin repository runs weekly on Monday at 08:23 UTC and can also be started manually. It writes a summary and fails when an upstream differs, making changes visible in Actions. Notification delivery depends on your GitHub settings. The check does not create issues, pull requests or messages, and no notification subscription is changed. Fork workflows do not need to be enabled for this plugin check.
+The monitoring workflow in the plugin repository runs weekly on Monday at 08:23 UTC and can also be started manually. It writes a comparison summary and warning annotations when an upstream differs. Finding a new version is a successful check, not a failed job. API/network errors or inconsistent pins still fail the job. The optional local `--fail-on-update` flag retains a strict exit status for callers that explicitly need it; the scheduled workflow does not use that flag. GitHub notification delivery depends on your settings, and warning annotations do not promise an email notification. The check does not create issues, pull requests or messages, and no notification subscription is changed. Fork workflows do not need to be enabled for this plugin check.
 
 ## Recorded sources and patches
 

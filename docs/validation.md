@@ -60,3 +60,13 @@ Strict build, lint and all nine tests pass. The real development-vault integrati
 - All 685 vendored editor inputs remain unchanged. The unavailable Performance command is gated only at bundle time. The README prominently credits OurTextScores/OTS_WebEditor, with separate attribution to MuseScore and the Obsidian template.
 
 Evidence: `test-results/features-report.json`, `test-results/embed-follow-report.json`, `embed-page-follow.png` and `embed-full-follow.png`. Temporary files, audio instrumentation and focus emulation were removed/restored. The CLI harness accepts complete replies even when an Electron CLI client retains a process handle; it only terminates its own completed client, never the running Obsidian application.
+
+## Upstream status and local asset audit
+
+The original failed upstream run completed its API comparisons successfully and exited with code 1 because `--fail-on-update` detected MuseScore 4.7.7 versus the pinned 4.7.4. OTS and the Obsidian template matched their pins. The scheduled workflow now uses warning annotations for version differences; technical failures still return a failure status. The strict flag remains available for explicit local use. Ten tests cover this behavior, including annotation escaping and API failure handling.
+
+The runtime entry bundle measured 37,088 bytes. The actual engine and instruments are separate local assets: 13,637,382 bytes of WASM, 13,754,257 bytes of native data and a 23,712,790-byte soundfont, plus fonts and the original editor. Generated folders contained unused duplicate files such as `webmscore.lib 2.wasm`; these were not network downloads or additional runtime requirements. Builds now recreate generated engine/editor folders, and packaging copies only the known runtime files and fonts listed in the resource manifest. After a clean build, the installation was approximately 61.7 MB and the ZIP 33.4 MB, with no duplicate-named runtime files.
+
+The engine client reads WASM/data/font/soundfont bytes through the local vault adapter, the worker receives local module inputs before initialization, and the editor's fetch bridge/content policy restricts assets to the local bundle. The native wrapper requests an initial 512 MiB WASM heap; the small entry file is not a measure of RAM consumption.
+
+A fresh real-WASM browser run passed native rendering, editing/undo/redo and nonzero PCM synthesis with **zero HTTP requests**. The corrected checker was exercised against GitHub: it reported MuseScore 4.7.7 as a warning and exited successfully. Build, lint and all ten tests passed.

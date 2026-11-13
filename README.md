@@ -11,6 +11,22 @@ Please visit the [original OTS_WebEditor repository](https://github.com/OurTextS
 
 The underlying engraving and synthesis engine is the work of the [MuseScore project and its contributors](https://github.com/musescore/MuseScore). The Obsidian scaffold comes from the [official sample plugin](https://github.com/obsidianmd/obsidian-sample-plugin). Original licenses and attribution are preserved in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and `licenses/`.
 
+## Runtime files and offline operation
+
+`main.js` is only the small Obsidian integration bundle (approximately 37 KB). The native engine, fonts, soundfont and original editor are separate local files shipped with the plugin:
+
+| Component | Approximate size |
+| --- | --- |
+| `engine/webmscore.lib.wasm`: native engraving and synthesis engine | 13.6 MB |
+| `engine/webmscore.lib.data`: native engine resources | 13.8 MB |
+| Additional local fonts in `engine/resources/` | 6.6 MB |
+| `engine/soundfont.sf3`: FluidR3Mono playback instruments | 23.7 MB |
+| Complete local editor in `full-editor/` | 3.3 MB |
+
+The complete installation is approximately **62 MB**, or **33 MB** as a ZIP (decimal units; sizes vary with builds). Rendering and playback do not download these assets from a CDN. The Obsidian vault adapter reads their bytes from the installed plugin folder and transfers them to the worker. The editor runs in a local iframe with remote network access blocked by its content policy. Missing runtime assets produce an error instead of triggering an online download.
+
+The separate developer/upstream check contacts GitHub, and initial development dependency installation uses npm. Neither is part of score rendering or playback. Disk size is also different from RAM use: the native wrapper requests an initial 512 MiB WASM heap, with additional memory for scores, audio and fonts.
+
 ## Embed scores
 
 The default view starts on the first page and lets you scroll through the score inside the embed:
@@ -97,6 +113,8 @@ npm run check:upstream
 ```
 
 This developer command checks GitHub for changes to OTS, the Obsidian sample template and the latest MuseScore release. It reports review links without changing any dependency. The [plugin repository](https://github.com/kpaede/Musescorer) includes a weekly/manual GitHub Actions check. A separate [OTS fork](https://github.com/kpaede/OTS_WebEditor) preserves the connection to the original [OurTextScores/OTS_WebEditor](https://github.com/OurTextScores/OTS_WebEditor) repository for source review and contributions. See [the upstream maintenance guide](docs/upstream.md) for the Git remotes and update procedure.
+
+Available upstream changes appear as warning annotations and a comparison summary. A new release is not a workflow failure; network/API errors or inconsistent pins still fail the check. No dependency is upgraded automatically.
 
 ## Development vault
 

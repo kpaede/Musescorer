@@ -1,11 +1,12 @@
 import esbuild from 'esbuild';
 import process from 'node:process';
 import { builtinModules } from 'node:module';
-import { cp, mkdir, readFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, rm } from 'node:fs/promises';
 import { verifyEngine } from './scripts/verify-engine.mjs';
 
 const prod = process.argv[2] === 'production';
 await verifyEngine();
+await rm('engine', { recursive: true, force: true });
 await mkdir('engine', { recursive: true });
 for (const name of ['webmscore.lib.wasm', 'webmscore.lib.data', 'soundfont.sf3', 'resources.json', 'resources']) {
  await cp(`vendor/webmscore/${name}`, `engine/${name}`, { recursive: true });

@@ -1,11 +1,12 @@
 import { createRequire } from 'node:module';
-import { readFile, writeFile, mkdir, cp } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, cp, rm } from 'node:fs/promises';
 import path from 'node:path';
 import { build } from 'esbuild';
 const root = path.resolve('vendor/ots-editor');
 const require = createRequire(path.join(root, 'package.json'));
 const postcss = require('postcss');
 const tailwind = require('@tailwindcss/postcss');
+await rm('full-editor', { recursive: true, force: true });
 await mkdir('full-editor', { recursive: true });
 await build({
  entryPoints: ['editor-app/entry.tsx'], bundle: true, platform: 'browser', format: 'iife', target: 'es2021', minify: true, jsx: 'automatic', outfile: 'full-editor/editor.js',

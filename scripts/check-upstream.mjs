@@ -66,14 +66,23 @@ export function formatReport(results) {
  ].join('\n');
 }
 
+export function githubAnnotations(results) {
+ const escape = value => value.replace(/%/gu, '%25').replace(/\r/gu, '%0D').replace(/\n/gu, '%0A');
+ return results.filter(result => result.changed).map(result =>
+  `::warning title=Upstream changes detected::${escape(`${result.name}: pinned ${result.pinned}, upstream ${result.latest}. Review ${result.url}`)}`,
+ );
+}
+
 async function main() {
  const flags = new Set(process.argv.slice(2));
- for (const flag of flags) if (!['--json', '--fail-on-update'].includes(flag)) throw new Error(`Unknown option: ${flag}`);
+ for (const flag of flags) if (!['--json', '--fail-on-update', '--github-annotations'].includes(flag)) throw new Error(`Unknown option: ${flag}`);
+ if (flags.has('--json') && flags.has('--github-annotations')) throw new Error('Use --json or --github-annotations separately.');
  const [engine, editor] = await Promise.all(['engine-lock.json', 'editor-lock.json'].map(async name => JSON.parse(await readFile(new URL(name, root), 'utf8'))));
  const results = await checkUpstreams(engine, editor);
  const report = formatReport(results);
  console.log(flags.has('--json') ? JSON.stringify(results, null, 2) : report);
  if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, report);
+ if (flags.has('--github-annotations')) for (const annotation of githubAnnotations(results)) console.log(annotation);
  if (flags.has('--fail-on-update') && results.some(result => result.changed)) process.exitCode = 1;
 }
 

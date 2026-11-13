@@ -19,4 +19,4 @@ jobs:
       - name: Compare reviewed pins with upstream
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node scripts/check-upstream.mjs --fail-on-update
+        run: node scripts/check-upstream.mjs --github-annotations
