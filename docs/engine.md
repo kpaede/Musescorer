@@ -44,7 +44,7 @@ Vendored sources are unmodified. The esbuild `local-emscripten-assets` hook inse
 Object.assign(moduleOptions, globalThis.MUSESCORER_MODULE_OPTIONS || {});
 ```
 
-The worker sets `wasmBinary` and `getPreloadedPackage` from transferred local ArrayBuffers **before** importing the bundled JS from a Blob. This avoids Emscripten attempting to fetch hidden `.obsidian` files using an Obsidian resource URL. The code is always read from the installed plugin folder through the vault adapter. No remotely downloaded code is executed.
+The worker sets `wasmBinary` and `getPreloadedPackage` from transferred local ArrayBuffers **before** importing the bundled JS from a Blob. This avoids Emscripten attempting to fetch hidden `.obsidian` files using an Obsidian resource URL. The three-file distribution decodes these resources from the installed main.js bundle through BundledAssets. They are not read from loose program files. No remotely downloaded code is executed.
 
 `fetchResource(path)` is an existing overridable method in OTS `index.js`. The worker replaces it with local resource RPC. The main process only reads paths present in the bundled `resources.json`. Replies bypass the render queue to prevent a font-loading deadlock. Seventeen optional music/text fonts are resolved from the pinned MuseScore QRC aliases. Default Leland, Bravura, Edwin and other core resources live in `webmscore.lib.data`. Soundfonts and the old `.mem.wasm` are unnecessary for SVG viewing. CJK fallback fonts and arbitrary user-installed system fonts are not included.
 
@@ -55,7 +55,7 @@ The [official API definitions](https://github.com/obsidianmd/obsidian-api/blob/m
 - `Plugin.registerMarkdownCodeBlockProcessor('musescore', ...)`
 - `MarkdownPostProcessorContext.addChild()` and `MarkdownRenderChild` lifetime
 - `Vault.getAbstractFileByPath()` / `TFile` / `Vault.readBinary()`
-- `DataAdapter.read()` / `readBinary()` for installed hidden plugin assets
+- `DataAdapter` operations for local recovery drafts; program assets use the in-memory bundled reader
 - component `register`, `registerEvent`, `registerDomEvent` for cleanup
 
 No private Obsidian API is used by the plugin. Developer smoke scripts may use developer tooling to inspect the application under test.
@@ -94,7 +94,7 @@ Playback uses the actual `WebMscore.hasSoundfont`, `WebMscore.setSoundFont(bytes
 
 Each audible run has a unique token separate from the editor session ID, so an old completion or stop cannot terminate replacement playback. Starting another run cancels the previous native stream. Editor mutations stop playback of that editor before changing its score. Engine state is never inferred from a guessed pointer or a fake renderer.
 
-The independently versioned FluidR3Mono GM asset is pinned by hash in `engine-lock.json` and copied to `engine/soundfont.sf3` by the build. It is not part of the notation `.data` preload, and is only read when the user requests playback. Native engine rebuilds do not require rebuilding this soundfont.
+The independently versioned FluidR3Mono GM asset is pinned by hash in `engine-lock.json` and compressed into the main.js asset map by the build. It is not part of the notation `.data` preload, and is only read when the user requests playback. Native engine rebuilds do not require rebuilding this soundfont.
 
 The editor is a registered Obsidian ItemView with persisted path state in a normal leaf. The complete original notation UI is bundled locally, as described below; the Next.js server and cloud services are not required for local notation editing.
 
@@ -103,11 +103,11 @@ The editor is a registered Obsidian ItemView with persisted path state in a norm
 
 The initial basic editor was replaced with the **complete original OTS notation UI**. `vendor/ots-editor/components/ScoreEditor.tsx` and its existing shell, palettes, commands, inspectors, dialogs, notation input, playback, comparison and local export components are bundled by esbuild. Tailwind and the original CSS modules are compiled locally, including Leland/Bravura UI fonts. `editor-app/tsconfig.json` strictly checks the entry adapter and its complete imported editor dependency graph; the plugin host is separately checked by the root strict TypeScript project.
 
-The editor is mounted in a local iframe inside the registered Obsidian ItemView. It loads compiled code from the installed plugin folder, never from the website. An iframe-source/origin/token-bound message bridge handles native RPC and a fixed whitelist of local assets. The native factory advertises methods actually present on the pinned engine instance; higher-order synthesis iterators use the exact same `_synthAudio`/`processSynthBatch` protocol as the upstream worker helper. All editor scores and previews share the existing worker and WASM module. A CSP and local fetch adapter prevent cloud/API calls; analytics is disabled. The original website's server-only AI/cloud APIs are explicitly unavailable offline.
+The editor is mounted in a local iframe inside the registered Obsidian ItemView. Its compiled code and CSS are decoded from main.js, never loaded from the website or loose runtime folders. An iframe-source/origin/token-bound message bridge handles native RPC and a fixed whitelist of local assets. The native factory advertises methods actually present on the pinned engine instance; higher-order synthesis iterators use the exact same `_synthAudio`/`processSynthBatch` protocol as the upstream worker helper. All editor scores and previews share the existing worker and WASM module. A CSP and local fetch adapter prevent cloud/API calls; analytics is disabled. The original website's server-only AI/cloud APIs are explicitly unavailable offline.
 
 Two small upstream hooks identify the active main score and stop audible playback when another leaf takes over. Original file-upload and new-score flows are kept separate from the vault source: imported/new documents can be saved as new vault copies and use the original checkpoint tools, but cannot silently replace the recovery draft of the initially embedded vault file. The host persists a native MSCZ recovery snapshot for the vault-linked document on history changes and before closing it.
 
-`editor-lock.json` pins the vendored frontend inputs. `npm run setup:editor` installs its original dependency lock without workspace resolution. `npm run build` invokes this setup if needed, verifies both input locks, type-checks both projects, and builds the local full editor and plugin. `full-editor/` is a required runtime folder included in the installable archive.
+`editor-lock.json` pins the vendored frontend inputs. `npm run setup:editor` installs its original dependency lock without workspace resolution. `npm run build` invokes this setup if needed, verifies both input locks, type-checks both projects, and builds the local full editor and plugin. `full-editor/` is a build intermediate. Its output is embedded in main.js; the installed plugin needs only the three standard files.
 
 The external-open action follows the actual Verovio implementation: FileSystemAdapter.getFullPath followed by Electron shell.openPath, with errors shown as notices. It hands over the original native file; the OS association for MSCZ/MSCX must point to MuseScore.
 
@@ -122,3 +122,12 @@ The embed transport suspends its dedicated AudioContext to pause. Scheduled buff
 The playing segment's native geometry is mapped through each page overlay's actual SVG viewBox. Page view scrolls the inner embed viewport to keep that segment visible, including across page boundaries. Full view scrolls the nearest surrounding Obsidian document scroller; it does not grow an inner vertical scroll window or move other leaves. Horizontal following remains within the embed when zoomed. Only the embed owning playback follows the score.
 
 The original Performance command hands scores to a separate `/perform` website application using `window.open`. That application is not part of this local editor bundle. A build-time adapter disables the command and labels it as unavailable in Obsidian, while preserving the original vendored command source and its checksum. The adapter fails the build if the expected upstream command definition changes, requiring review during an OTS update.
+
+
+## Three-file offline distribution
+
+`src/assets/bundled.ts` reads the virtual `musescorer:runtime-assets` module generated by `scripts/embedded-assets.mjs`. Each entry contains compressed Base64 bytes, the decoded size and SHA-256. The build verifies the original engine/editor inputs first, compiles their local adapters, and then packs all executable code, native resources, fonts, soundfont and legal notices. Desktop Node Brotli decompression runs asynchronously; fresh owned ArrayBuffers are verified before transfer. Decoded binary buffers are not retained in an unbounded cache or written as program files.
+
+`EngineClient` and `FullEditorHost` accept a RuntimeAssets reader. They have no fallback to loose engine/editor files or a remote server. The engine source, worker source, WASM and data are decoded when the first score needs the engine. The soundfont is decoded for playback, and editor JS/CSS only when an editor opens. The shared worker lifecycle and pinning rules remain unchanged.
+
+The release ZIP contains exactly main.js, manifest.json and styles.css. Third-party legal texts are accessible using the Show credits and licenses command, preserving the original bytes without requiring extra installed files. Large-bundle startup/Sync limits remain relevant; packaging correctness is separate from Community listing approval.

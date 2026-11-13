@@ -5,6 +5,7 @@ import { FullEditorHost } from '../full-editor/host';
 import { iconButton } from '../ui/icon-button';
 import { openInMuseScore } from '../ui/open-native';
 import { DraftStore } from './drafts';
+import type { RuntimeAssets } from '../assets/types';
 
 export const SCORE_EDITOR_TYPE = 'musescorer-editor';
 /** The complete upstream OTS notation editor, hosted locally inside an Obsidian leaf. */
@@ -15,7 +16,7 @@ export class ScoreEditor extends ItemView {
  private status?: HTMLElement;
  private frame?: HTMLIFrameElement;
  private closing = false;
- constructor(leaf: WorkspaceLeaf, private client: EngineClient, private player: PlaybackController, private drafts: DraftStore, private dir: string) { super(leaf); }
+ constructor(leaf: WorkspaceLeaf, private client: EngineClient, private player: PlaybackController, private drafts: DraftStore, private assets: RuntimeAssets) { super(leaf); }
  getViewType(): string { return SCORE_EDITOR_TYPE; }
  getDisplayText(): string { return this.file ? `${this.file.basename} – Score editor` : 'Score editor'; }
  getIcon(): string { return 'music-4'; }
@@ -50,7 +51,7 @@ export class ScoreEditor extends ItemView {
    const file = this.app.vault.getAbstractFileByPath(this.path);
    if (!(file instanceof TFile)) throw new Error(`File not found: ${this.path}`);
    this.file = file; this.status?.setText('Opening score editor …');
-   this.host = new FullEditorHost(this.app, this.client, this.player, this.drafts, this.frame, file, this.dir, message => this.status?.setText(message));
+   this.host = new FullEditorHost(this.app, this.client, this.player, this.drafts, this.frame, file, this.assets, message => this.status?.setText(message));
    await this.host.start();
   } catch (error) { this.fail(error); }
  }

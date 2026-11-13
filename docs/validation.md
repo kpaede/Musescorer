@@ -70,3 +70,18 @@ The runtime entry bundle measured 37,088 bytes. The actual engine and instrument
 The engine client reads WASM/data/font/soundfont bytes through the local vault adapter, the worker receives local module inputs before initialization, and the editor's fetch bridge/content policy restricts assets to the local bundle. The native wrapper requests an initial 512 MiB WASM heap; the small entry file is not a measure of RAM consumption.
 
 A fresh real-WASM browser run passed native rendering, editing/undo/redo and nonzero PCM synthesis with **zero HTTP requests**. The corrected checker was exercised against GitHub: it reported MuseScore 4.7.7 as a warning and exited successfully. Build, lint and all ten tests passed.
+
+## Self-contained three-file build
+
+The release candidate now contains exactly `main.js` (39,914,349 bytes), `manifest.json` (259 bytes) and `styles.css` (6,811 bytes). Its ZIP is 30,109,743 bytes. The large entry includes 46 compressed local resources and legal notices; it no longer depends on loose engine/editor folders. Only Obsidian, Electron, Buffer and zlib appear as direct platform imports. The native engine, fonts and original FluidR3Mono soundfont remain unchanged.
+
+`npm run test:install` passed in a fresh temporary plugin folder in KP_entwicklungskopie. The installed main.js and styles.css were byte-identical to the distribution; only the manifest's temporary ID/name changed to avoid simultaneous view registration. There were exactly three files before enabling the plugin. No extra program files were created during the tests; only the normal recovery-draft directory was allowed as user data.
+
+- The candidate loaded in 543 ms in one already-running application. This is not a cold-start benchmark or a performance guarantee.
+- Twenty bundled notice/license documents were listed; the attribution and complete GPL text were decoded and displayed offline.
+- Native rendering, both embed modes, 12 px page gaps, quiet/hover controls and native file handoff passed.
+- Real PCM audio, pause/resume with a frozen clock/highlight, native page following, full-view document scrolling and reachable Pause controls passed.
+- The full original editor passed menu/input checks, disabled Performance command, mouse selection/pitch edit, undo/redo, audio/highlighting, native copy saving, draft recovery and original-file SHA-256 preservation.
+- The temporary installation and fixture files were removed, and the original development plugin/view restored.
+
+Strict plugin/editor TypeScript builds, lint without warnings and all twelve tests passed. New decoder tests remove the original files before use, verify independent transferable buffers and reject unknown/corrupt resources. Evidence is in `test-results/three-file-install-report.json` and `dist/package-report.json`. This validates the three-file installation architecture; it does not claim Community approval, a sub-5-MB bundle, Standard Sync compatibility or support for every historical desktop version.

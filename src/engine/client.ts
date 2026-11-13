@@ -1,4 +1,4 @@
-import type { DataAdapter } from 'obsidian';
+import type { RuntimeAssets } from '../assets/types';
 import type { WorkerRequest, WorkerResponse } from './protocol';
 
 interface PendingCall { resolve(value: WorkerResponse): void; reject(error: Error): void; timer: number }
@@ -15,7 +15,7 @@ export class EngineClient {
  private disposed = false;
  private idle?: number;
  private pins = 0;
- constructor(private adapter: DataAdapter, private pluginDir: string) {}
+ constructor(private assets: RuntimeAssets) {}
 
  async request(message: EngineRequest, transfer: Transferable[] = []): Promise<WorkerResponse> {
   if (this.disposed) throw new Error('The plugin has been disabled.');
@@ -31,14 +31,14 @@ export class EngineClient {
   if (!this.pins && !this.disposed) this.idle = window.setTimeout(() => this.stopWorker(), 60_000);
  }
  recycleIfIdle(): void { if (!this.pins) this.stopWorker(); }
- readSoundfont(): Promise<ArrayBuffer> { return this.adapter.readBinary(`${this.pluginDir}/engine/soundfont.sf3`); }
+ readSoundfont(): Promise<ArrayBuffer> { return this.assets.readBinary('engine/soundfont.sf3'); }
 	private async startWorker(): Promise<void> {
 		const [workerSource, engineSource, wasm, data, resourceList] = await Promise.all([
-			this.adapter.read(`${this.pluginDir}/renderer-worker.js`),
-			this.adapter.read(`${this.pluginDir}/engine.js`),
-			this.adapter.readBinary(`${this.pluginDir}/engine/webmscore.lib.wasm`),
-			this.adapter.readBinary(`${this.pluginDir}/engine/webmscore.lib.data`),
-			this.adapter.read(`${this.pluginDir}/engine/resources.json`),
+			this.assets.read('renderer-worker.js'),
+			this.assets.read('engine.js'),
+			this.assets.readBinary('engine/webmscore.lib.wasm'),
+			this.assets.readBinary('engine/webmscore.lib.data'),
+			this.assets.read('engine/resources.json'),
 		]);
 		if (this.disposed) throw new Error('The plugin has been disabled.');
 		const names: unknown = JSON.parse(resourceList);
@@ -62,12 +62,12 @@ export class EngineClient {
 		if (message.type === 'resource') {
 			const worker = this.worker;
 			const load = this.resources.has(message.path)
-				? this.adapter.readBinary(`${this.pluginDir}/engine/resources/${message.path}`)
+				? this.assets.readBinary(`engine/resources/${message.path}`)
 				: Promise.resolve(null);
 			void load.then(data => {
 				if (worker === this.worker) worker?.postMessage({ type: 'resource', id: message.id, data }, data ? [data] : []);
 			}).catch(() => {
-				if (worker === this.worker) this.stopWorker(new Error(`Eine lokale MuseScore-Schriftdatei fehlt: ${message.path}`));
+				if (worker === this.worker) this.stopWorker(new Error(`A bundled MuseScore font is missing: ${message.path}`));
 			});
 			return;
 		}

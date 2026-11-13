@@ -3,7 +3,7 @@
 Embed native MuseScore scores in Obsidian, with local rendering, playback and the complete OTS notation editor. Uses the real MuseScore Studio **4.7.4** engine from [OTS_WebEditor](https://github.com/OurTextScores/OTS_WebEditor), built on the [official Obsidian sample plugin](https://github.com/obsidianmd/obsidian-sample-plugin). Native files load directly without intermediate MusicXML conversion. Requires Obsidian Desktop **1.7.2+**. Runtime operation is offline.
 
 > [!WARNING]
-> **Development / manual installation only.** The current build requires additional local engine/editor files. Obsidian's Community installer downloads only `main.js`, `manifest.json` and optional `styles.css`; it does not install our ZIP or those additional files. Community release packaging is not ready. See [release readiness](docs/release-readiness.md) for the verified constraints and next steps.
+> **Three-file offline distribution.** Install only `main.js`, `manifest.json` and `styles.css`. All engine/editor resources and licenses are bundled inside `main.js`; no additional runtime folders or downloads are required. The bundle is approximately 40 MB and exceeds Sync Standard's per-file limit. Community listing/review is still pending; see [release readiness](docs/release-readiness.md).
 
 ## Credits — built on OTS_WebEditor
 
@@ -16,19 +16,15 @@ The underlying engraving and synthesis engine is the work of the [MuseScore proj
 
 ## Runtime files and offline operation
 
-`main.js` is only the small Obsidian integration bundle (approximately 37 KB). The native engine, fonts, soundfont and original editor are separate local files shipped with the plugin:
+`main.js` contains the complete original editor, worker code, native engine, resource data, fonts, soundfont and legal notices. Each resource is Brotli-compressed and Base64-encoded at build time. A lazy reader decodes it in memory using the desktop runtime's built-in Brotli support and checks its size and SHA-256 before use. Nothing is extracted or installed as additional program files.
 
-| Component | Approximate size |
-| --- | --- |
-| `engine/webmscore.lib.wasm`: native engraving and synthesis engine | 13.6 MB |
-| `engine/webmscore.lib.data`: native engine resources | 13.8 MB |
-| Additional local fonts in `engine/resources/` | 6.6 MB |
-| `engine/soundfont.sf3`: FluidR3Mono playback instruments | 23.7 MB |
-| Complete local editor in `full-editor/` | 3.3 MB |
+The three-file installation is approximately **40 MB**. Decoded resources still include about 13.6 MB of native WASM, 13.8 MB of engine data, 6.6 MB of additional fonts, a 23.7 MB soundfont and 3.3 MB of editor assets. The original soundfont and font coverage are preserved. Compression reduces the distribution size; it does not remove those capabilities.
 
-The complete installation is approximately **62 MB**, or **33 MB** as a ZIP (decimal units; sizes vary with builds). Rendering and playback do not download these assets from a CDN. The Obsidian vault adapter reads their bytes from the installed plugin folder and transfers them to the worker. The editor runs in a local iframe with remote network access blocked by its content policy. Missing runtime assets produce an error instead of triggering an online download.
+Rendering and playback never download assets from a CDN. Engine resources come from the installed `main.js`; the editor runs in a local iframe whose content policy blocks remote asset requests. The engine, soundfont and editor are decoded only when requested. Loading the larger JavaScript file itself still has a startup/memory cost; this is not a 37-KB loader anymore.
 
-The separate developer/upstream check contacts GitHub, and initial development dependency installation uses npm. Neither is part of score rendering or playback. Disk size is also different from RAM use: the native wrapper requests an initial 512 MiB WASM heap, with additional memory for scores, audio and fonts.
+Use **Show credits and licenses** in the command palette to read the bundled attribution, GPL and individual font/soundfont licenses offline. Original license bytes are preserved inside the distribution. Source and build inputs are available in this repository.
+
+The separate developer/upstream check contacts GitHub, and initial development dependency installation uses npm. Neither is part of score rendering or playback. Disk size is different from RAM use: the native wrapper requests an initial 512 MiB WASM heap, with additional memory for scores, audio and fonts. Sync Standard cannot synchronize this large `main.js`; install the plugin separately on each desktop device.
 
 ## Embed scores
 
@@ -95,15 +91,18 @@ npm run lint
 npm run test:engine
 npm run test:obsidian
 npm run package
+npm run test:install
 ```
 
-`npm run dev` watches plugin source changes. The build checks both plugin and original editor with strict TypeScript and verifies SHA-256 checksums for the editor and engine inputs, including the soundfont. Original UI sources live in `vendor/ots-editor`; Obsidian adapters live in `editor-app` and `src/full-editor`. On first build, `setup:editor` installs the original editor's dependencies from its separate lockfile. WASM, data, music fonts and soundfont are included in the source tree; no C++ build is needed to start.
+`npm run dev` watches plugin source changes. The build checks both plugin and original editor with strict TypeScript and verifies SHA-256 checksums for the editor and engine inputs, including the soundfont. Original UI sources live in `vendor/ots-editor`; Obsidian adapters live in `editor-app` and `src/full-editor`. On first build, `setup:editor` installs the original editor's dependencies from its separate lockfile. WASM, data, music fonts and soundfont are included in the source tree; no C++ build is needed to start. `scripts/embedded-assets.mjs` packs the runtime and legal notices into the main bundle. `engine/`, `engine.js`, `renderer-worker.js` and `full-editor/` are build/test intermediates, not installation requirements.
 
 `npm run test:engine` uses the installed Chrome app on macOS. Set `CHROME_PATH=/path/to/chromium` elsewhere. It checks actual SVG output, native edits and saving, undo/redo and nonzero synthesized PCM without HTTP requests from the engine.
 
 `npm run test:obsidian` requires a running Obsidian instance with its CLI enabled. It creates its own temporary fixture notes and scores in the development vault, leaving user examples unchanged. It checks hover controls, both modes, page gaps, real audio buffers, pause/resume with a frozen audio clock and retained highlighting, native page following in both modes, the disabled Performance command, the complete editor in a leaf, edits, native copy saving and draft recovery. Temporary test files are removed and focus emulation is restored. Reports and screenshots are written to `test-results/`.
 
-This working folder is already installed under `.obsidian/plugins/MuseScorer` in the development vault. For another vault, copy **all** of `dist/MuseScorer/` into `<Vault>/.obsidian/plugins/MuseScorer/`, or extract `dist/MuseScorer.zip` there. **Include `renderer-worker.js`, `engine.js`, and the complete `engine/` and `full-editor/` folders.** The usual three plugin files alone are insufficient.
+For a manual installation, copy the **three files** from `dist/MuseScorer/` into `<Vault>/.obsidian/plugins/MuseScorer/`, or extract `dist/MuseScorer.zip` there. The archive contains exactly those three files. The GitHub release workflow attaches the same standard assets.
+
+`npm run test:install` installs a byte-identical copy of `main.js` and `styles.css` into a fresh temporary plugin folder in the same development vault. Only the test manifest identity changes to avoid registration conflicts. It checks offline licenses and runs the real viewer, playback, full-editor and page-following tests, then removes the test installation and restores the development plugin. Recovery drafts remain user data; no engine/editor files are created at runtime.
 
 The local ID matches the existing `MuseScorer` folder. Choose a permanent lowercase ID and rename the folder before a first community release.
 

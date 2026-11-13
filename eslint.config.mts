@@ -40,4 +40,8 @@ export default defineConfig(
 		},
 	},
 	...obsidianmd.configs.recommended,
+    {
+        files: ['src/ui/licenses.ts'],
+        rules: { 'obsidianmd/ui/sentence-case': ['warn', { brands: ['Obsidian', 'OTS_WebEditor', 'OurTextScores', 'MuseScore'] }] },
+    },
 );

@@ -5,7 +5,7 @@
   "main": "main.js",
   "type": "module",
   "scripts": {
-    "dev": "node esbuild.config.mjs",
+    "dev": "npm run build:editor && node esbuild.config.mjs",
     "build": "tsc -noEmit -skipLibCheck && npm run build:editor && node esbuild.config.mjs production",
     "version": "node version-bump.mjs && git add manifest.json versions.json",
     "lint": "eslint .",
@@ -17,7 +17,8 @@
     "build:editor": "node scripts/ensure-editor.mjs && node scripts/verify-editor.mjs && tsc -p editor-app/tsconfig.json --noEmit && node scripts/build-full-editor.mjs",
     "setup:editor": "node scripts/ensure-editor.mjs",
     "verify:editor": "node scripts/verify-editor.mjs",
-    "check:upstream": "node scripts/check-upstream.mjs"
+    "check:upstream": "node scripts/check-upstream.mjs",
+    "test:install": "node scripts/test-three-file-install.mjs"
   },
   "keywords": [],
   "license": "GPL-3.0-only",

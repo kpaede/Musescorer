@@ -1,49 +1,37 @@
 # Community release readiness
 
-Research date: 2026-11-13. **The current build supports development and manual ZIP installation, not normal Community installation.** Working rendering/playback in the development vault does not establish that the standard installer can install this build.
+Updated: 2026-11-13. The distribution now uses exactly **main.js, manifest.json and styles.css**. It is a fully local, self-contained build; Community listing/review has not been submitted.
 
-## Verified installation behavior
+## Implemented distribution
 
-The official [submission instructions](https://docs.obsidian.md/Plugins/Releasing/Submit%20your%20plugin) say that Obsidian downloads `main.js`, `manifest.json` and optional `styles.css` from the GitHub release matching the manifest version. A separate ZIP, WASM or editor directory is not installed by that mechanism. The tag must match the manifest's `x.y.z` version. Initial publication now uses the Community directory and its review process.
+The main bundle embeds the native WASM, native data, optional fonts, complete original OTS editor, worker/glue code, soundfont and legal notices. Assets are compressed with Brotli at build time, encoded into the bundle and decoded in memory only on demand. Their decoded size and SHA-256 are verified. No executable dependency installer, CDN loader or cache of extracted program files is used.
 
-Additional files can exist in a plugin directory. Our files are there because the local build copies assets directly into the development vault's plugin folder. That is different from receiving those files through the normal installer. A fresh temporary installation containing only the three standard files failed when the actual `EngineClient` tried to read `renderer-worker.js`.
+`engine/`, `engine.js`, `renderer-worker.js` and `full-editor/` in the source checkout are build/test intermediates. The package script never copies them to the installation. `dist/MuseScorer/` and its ZIP contain only the three standard files. The original soundfont and font coverage are preserved.
 
-GitHub itself supports additional binary release attachments; its [release documentation](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases) does not limit releases to the three Obsidian filenames. Attaching an engine archive therefore remains useful for manual installation, but does not make Community installation complete. The existing release workflow creates a draft with a manual ZIP and standard assets; those individual standard assets currently cannot operate by themselves.
+Use `npm run package` to build the candidate and `npm run test:install` to exercise an isolated three-file installation in the designated development vault. The test checks that main.js/styles.css match the package hashes, reads bundled legal notices offline, and runs the real rendering, editor, native copy/recovery, audio, pause/highlighting and page-following tests. It restores the original plugin and removes the temporary installation. Only the test manifest ID is changed to prevent conflicting registrations.
 
-## Size constraints
+The first complete candidate passed this test: main.js 39,914,349 bytes, styles.css 6,811 bytes, manifest.json 259 bytes; ZIP 30,109,743 bytes. Twenty legal documents were accessible offline. The temporary plugin loaded in 543 ms in one warm application run; large-bundle startup cost remains relevant. See `docs/validation.md` for the evidence and limits.
 
-The official [Sync plans documentation](https://help.obsidian.md/sync/plans) sets a 5 MB per-file limit for Sync Standard and 200 MB for Sync Plus. This is distinct from a total GitHub release limit. A large single bundle creates a real compatibility problem for Standard synchronization even if it is technically installable separately on each device.
+## Installer and update rules
 
-The public [plugin guidelines](https://github.com/obsidianmd/obsidian-developer-docs/blob/main/en/Plugins/Releasing/Plugin%20guidelines.md), submission requirements and Community review documentation inspected here do not establish a blanket hard 5 MB cap on the sum of release attachments. The [review FAQ](https://docs.obsidian.md/community-directory/faq) distinguishes errors, warnings and recommendations but does not publish a specific bundle-size threshold. Treat a small standard bundle as a release target; do not claim a larger bundle is automatically approved.
+The official [submission instructions](https://docs.obsidian.md/Plugins/Releasing/Submit%20your%20plugin) specify the three standard release assets and a tag matching the manifest's x.y.z version. A GitHub ZIP or additional WASM attachment is not automatically installed. The previous split build failed in a fresh three-file directory; the embedded asset reader replaces that dependency on loose files.
 
-### Measurements of the current pinned assets
+GitHub itself permits [additional binary release attachments](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases), but installation correctness must be proven using only the standard assets. The release workflow attaches those assets and a ZIP of the same three files. The bundled Show credits and licenses command makes the legal notices available offline.
 
-Exploratory Brotli quality 9 compression, followed by Base64 for a JavaScript literal; no production loader was changed:
+## Size and startup tradeoffs
 
-| Asset | Raw bytes | Brotli bytes | Base64 bytes |
-| --- | ---: | ---: | ---: |
-| Native WASM | 13,637,382 | 3,205,068 | 4,273,424 |
-| Native data preload | 13,754,257 | 3,239,607 | 4,319,476 |
-| FluidR3Mono soundfont | 23,712,790 | 19,013,131 | 25,350,844 |
-| Original editor JavaScript | 2,342,225 | 628,981 | 838,644 |
-| Original editor CSS | 824,709 | 295,684 | 394,248 |
+The main bundle is approximately **40 MB**, larger than the previous 37-KB integration-only entry file. Loading/parsing that file still costs time and memory even though engine/editor decompression is deferred. The native wrapper requests a 512 MiB initial WASM heap, plus score/audio/font memory. No sub-5-MB or minimal-memory claim is made.
 
-WASM plus the data preload alone total 8,592,900 Base64 bytes in this experiment, before the editor, optional fonts, soundfont or loader. This does not prove an optimal compression bound, but rules out solving the current payload with a small packaging tweak. The complete current manual installation is approximately 61.7 MB and its ZIP 33.4 MB.
+The official [Sync plans documentation](https://help.obsidian.md/sync/plans) sets a 5 MB per-file limit for Standard and 200 MB for Plus. This bundle therefore cannot be synchronized by Standard. Users need to install it separately on each desktop device. The [review FAQ](https://docs.obsidian.md/community-directory/faq) distinguishes errors, warnings and recommendations; this project does not claim automatic approval of a large bundle.
 
-## Remote resources and dependency installation
+Exploratory Brotli quality 9 measurements explain the size: the native WASM alone becomes 4,273,424 Base64 bytes, the native data 4,319,476, and the current soundfont 25,350,844. The original editor, optional fonts and notices add further data. Compression is useful but cannot bring the entire current payload below 5 MB by itself. Smaller soundfonts or a reduced native/font resource set would be a separate optimization with quality/compatibility validation.
 
-The current [Developer policies](https://docs.obsidian.md/community-directory/developer-policies) prohibit plugins from installing or updating themselves or their dependencies. They also require README disclosure of network use. A downloader for executable engine/editor dependencies must not be assumed compliant simply because it uses a pinned version, hashes, user confirmation or a GitHub release.
+## No runtime dependency downloads
 
-The public policy does not give a WASM-specific exception or explicitly classify every kind of non-executable asset. Soundfonts, fonts and engine resource data need to be considered separately from executable JavaScript/WASM. A proposed asset-download design would require a concrete policy/review assessment before it is adopted. No automatic runtime downloader has been added. The current manual package remains offline after installation.
+The current [Developer policies](https://docs.obsidian.md/community-directory/developer-policies) prohibit plugins from installing or updating themselves or dependencies and require disclosure of network use. The new design keeps executable code and resources in the normal release rather than assuming a downloader exception. Decompressing bundled bytes in memory does not obtain a separate dependency or update code from a server.
 
-## Architectural choices
+Only the explicitly invoked developer/upstream checker contacts GitHub; build-time npm setup is separate from plugin runtime. The iframe content policy continues to block remote resource access.
 
-| Approach | Normal installer | Size target | Remaining work |
-| --- | --- | --- | --- |
-| Current ZIP with separate worker/engine/editor files | Incomplete | Small `main.js` hides the real dependency size | Manual installation only. |
-| Fully self-contained three-file build with embedded local code and binary resources | Technically feasible as a build architecture; not implemented or approved yet | Current complete payload substantially exceeds 5 MB | Bundle/extract resources from standard assets, defer initialization, measure startup and validate a fresh three-file installation. |
-| Small code bundle with separately supplied data/resources | Not implemented; needs a complete provisioning design | Requires measured budgeting and possibly a smaller engine/font set | Keep executable code in the standard release, distinguish manual provision from automatic installation, and resolve policy treatment before adopting downloads. |
+## Remaining publication work
 
-The next engineering milestone should be a genuine three-file installation prototype, tested without the source tree or preexisting generated folders. Measure the full bundle rather than just `main.js` from the current split build. Do not promise both the entire current native engine/editor/soundfont and a sub-5-MB offline distribution without changing the payload or architecture.
-
-Before Community submission, settle the permanent plugin ID, choose and validate a distribution architecture, record network/dependency behavior accurately, and use the directory's [Review branch](https://docs.obsidian.md/community-directory/faq) feature to assess the actual candidate. No Community entry, approval or policy clarification request has been submitted as part of this research.
+Choose the permanent lowercase plugin ID before the first public Community release, review real startup/size measurements, provide corresponding source and attribution, and use the directory's [Review branch](https://docs.obsidian.md/community-directory/faq) feature on the actual candidate. A working three-file installation is not a claim of Community approval or of compatibility with every historical desktop version.

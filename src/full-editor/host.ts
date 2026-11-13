@@ -3,6 +3,7 @@ import type { EngineClient } from '../engine/client';
 import type { PlaybackController } from '../playback/controller';
 import { DraftStore } from '../editor/drafts';
 import { SaveCopyModal } from '../editor/save-copy';
+import type { RuntimeAssets } from '../assets/types';
 
 interface FrameRequest { type: 'musescorer-request'; token: string; id: number; method: string; args: unknown[] }
 export class FullEditorHost {
@@ -19,7 +20,7 @@ export class FullEditorHost {
  private source?: ArrayBuffer;
  private unregisterAudio?: () => void;
  private initialFormat: string;
- constructor(private app: App, private client: EngineClient, private player: PlaybackController, private drafts: DraftStore, private frame: HTMLIFrameElement, private file: TFile, private dir: string, private onStatus: (message: string) => void) {
+ constructor(private app: App, private client: EngineClient, private player: PlaybackController, private drafts: DraftStore, private frame: HTMLIFrameElement, private file: TFile, private assets: RuntimeAssets, private onStatus: (message: string) => void) {
   this.sourceMtime = file.stat.mtime; this.initialFormat = file.extension;
  }
  async start(): Promise<void> {
@@ -29,7 +30,7 @@ export class FullEditorHost {
   this.sourceMtime = draft?.sourceMtime ?? this.file.stat.mtime;
   this.source = draft?.data ?? await this.app.vault.readBinary(this.file);
   this.initialFormat = draft ? 'mscz' : this.file.extension;
-  const [script, css] = await Promise.all([this.app.vault.adapter.read(`${this.dir}/full-editor/editor.js`), this.app.vault.adapter.read(`${this.dir}/full-editor/editor.css`)]);
+  const [script, css] = await Promise.all([this.assets.read('full-editor/editor.js'), this.assets.read('full-editor/editor.css')]);
   if (this.closed) return;
   this.scriptUrl = URL.createObjectURL(new Blob([script], { type: 'text/javascript' }));
   const params = new URLSearchParams({ score: `/musescorer-source.${this.initialFormat}`, scoreId: `obsidian:${this.file.path}` });
@@ -95,7 +96,7 @@ export class FullEditorHost {
   if (pathname === `/musescorer-source.${this.initialFormat}` && this.source) return { data: this.source, contentType: 'application/octet-stream' };
   if (/^\/(?:score-editor\/)?soundfonts\/[^/]+\.sf[23]$/u.test(pathname)) return { data: await this.client.readSoundfont(), contentType: 'application/octet-stream' };
   const data = /^\/(?:score-editor\/)?data\/(templates|clefs)\.json$/u.exec(pathname);
-  if (data) return { data: new TextEncoder().encode(await this.app.vault.adapter.read(`${this.dir}/full-editor/data/${data[1]}.json`)).buffer, contentType: 'application/json' };
+  if (data) return { data: await this.assets.readBinary(`full-editor/data/${data[1]}.json`), contentType: 'application/json' };
   throw new Error(`This resource is unavailable in the local editor: ${pathname}`);
  }
  async save(): Promise<void> {

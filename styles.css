@@ -1,6 +1,7 @@
 /* Like the Verovio embed: only the score is visible until hover or keyboard focus. */
 .musescorer { position: relative; max-width: 100%; margin: 0; padding: 0; border: 0; background: transparent; }
 .musescorer-controls { position: sticky; z-index: 5; top: 0; height: 0; }
+.musescorer-license-text { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 60vh; overflow: auto; font-size: var(--font-ui-small); }
 .musescorer-toolbar { position: absolute; z-index: 5; top: 8px; right: 8px; display: flex; align-items: center; flex-wrap: wrap; gap: 3px; max-width: calc(100% - 16px); padding: 4px; border: 1px solid var(--background-modifier-border); border-radius: 4px; background: var(--background-primary); box-shadow: 0 2px 8px rgb(0 0 0 / 10%); opacity: 0; pointer-events: none; transition: opacity 100ms ease; }
 .musescorer:hover .musescorer-toolbar, .musescorer:focus-within .musescorer-toolbar { opacity: 0.95; pointer-events: auto; }
 .musescorer-icon-button { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 28px; height: 28px; padding: 4px; border: 0; border-radius: 3px; box-shadow: none; background: transparent; color: var(--text-normal); cursor: pointer; }

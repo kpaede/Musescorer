@@ -14,11 +14,12 @@ export async function obsidianCli(vault, command, ...args) {
    if (!output.endsWith('\n')) return;
    const text = output.trim();
    try {
-    if (command === 'eval' && text.startsWith('=> ')) JSON.parse(text.slice(3));
+    const reply = text.split(/\r?\n/u).filter(line => line.startsWith('=> ')).at(-1);
+    if (command === 'eval' && reply) JSON.parse(reply.slice(3));
     else if (command === 'dev:cdp') JSON.parse(text);
     else if (command === 'dev:screenshot' && text.startsWith('/')) { /* Complete screenshot path. */ }
     else return;
-    resolve({ stdout: output });
+    resolve({ stdout: command === 'eval' ? reply : output });
    } catch { /* Wait until the complete JSON reply has arrived. */ }
   });
  });
@@ -28,5 +29,6 @@ export async function obsidianCli(vault, command, ...args) {
   const timer = setTimeout(() => { if (child.exitCode === null) child.kill('SIGKILL'); }, 1000);
   child.once('close', () => clearTimeout(timer));
  }
- return stdout.trim();
+ const reply = command === 'eval' ? stdout.trim().split(/\r?\n/u).filter(line => line.startsWith('=> ')).at(-1) : undefined;
+ return reply ?? stdout.trim();
 }

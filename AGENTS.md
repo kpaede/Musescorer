@@ -6,8 +6,9 @@
 - Keep the OTS dependency pinned and Obsidian adaptations separate. Follow `docs/upstream.md` when reviewing upstream updates.
 - Target: Obsidian Community Plugin (TypeScript → bundled JavaScript).
 - Entry point: `src/main.ts` compiled to `main.js` and loaded by Obsidian.
-- Required artifacts for the current manual installation: `main.js`, `manifest.json`, `styles.css`, `renderer-worker.js`, `engine.js`, and the complete `engine/` and `full-editor/` folders. Use `npm run package` to include all runtime assets and licenses.
-- The current build is not compatible with Community installation from only the three standard files. Read `docs/release-readiness.md` before changing distribution; do not describe the manual ZIP as a Community-ready release or assume an automatic dependency downloader is permitted.
+- Required install/release artifacts: exactly `main.js`, `manifest.json` and `styles.css`. All native/worker/editor resources and legal notices are compressed inside `main.js` and decoded in memory on demand.
+- `engine/`, `engine.js`, `renderer-worker.js` and `full-editor/` are generated build/test intermediates. Never make the installed plugin depend on them or introduce a runtime downloader. Use `npm run package` and `npm run test:install` to verify the three-file distribution.
+- The large offline bundle exceeds Sync Standard's per-file limit. Do not claim a sub-5-MB bundle or Community approval; read `docs/release-readiness.md` for the verified state.
 
 ## Environment & tooling
 

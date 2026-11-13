@@ -5,16 +5,19 @@ import { ScoreView } from './viewer/score-view';
 import { PlaybackController } from './playback/controller';
 import { DraftStore } from './editor/drafts';
 import { SCORE_EDITOR_TYPE, ScoreEditor } from './editor/score-editor';
+import { BundledAssets } from './assets/bundled';
+import { LicensesModal } from './ui/licenses';
 
 export default class MuseScorerPlugin extends Plugin {
  onload(): void {
   const dir = this.manifest.dir;
   if (!dir) throw new Error('Could not determine the plugin folder.');
-  const client = new EngineClient(this.app.vault.adapter, dir);
+  const assets = new BundledAssets();
+  const client = new EngineClient(assets);
   const renderer = new ScoreRenderer(client);
   const player = new PlaybackController(client, this.app.vault);
   const drafts = new DraftStore(this.app.vault.adapter, dir);
-  this.registerView(SCORE_EDITOR_TYPE, leaf => new ScoreEditor(leaf, client, player, drafts, dir));
+  this.registerView(SCORE_EDITOR_TYPE, leaf => new ScoreEditor(leaf, client, player, drafts, assets));
   const openEditor = (file: TFile): void => {
    void (async () => {
     const existing = this.app.workspace.getLeavesOfType(SCORE_EDITOR_TYPE).find(leaf => leaf.view.getState().path === file.path);
@@ -27,6 +30,9 @@ export default class MuseScorerPlugin extends Plugin {
    context.addChild(new ScoreView(element, this.app, renderer, source, openEditor, player));
   });
   this.addCommand({ id: 'open-score-editor', name: 'Open score editor', callback: () => new ScorePicker(this.app, openEditor).open() });
+  this.addCommand({ id: 'show-credits-and-licenses', name: 'Show credits and licenses', callback: () => {
+   const modal = new LicensesModal(this.app, assets); modal.open(); this.register(() => modal.close());
+  } });
   this.registerEvent(this.app.workspace.on('file-menu', (menu, file) => {
    if (file instanceof TFile && /^(?:mscz|mscx)$/iu.test(file.extension)) menu.addItem(item => item.setTitle('Open in score editor').setIcon('pencil').onClick(() => openEditor(file)));
   }));
