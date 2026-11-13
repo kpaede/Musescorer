@@ -27,6 +27,10 @@ For a manual installation, copy the **three files** from `dist/musescorer/` into
 
 `npm run test:install` installs a byte-identical copy of `main.js` and `styles.css` into a fresh temporary plugin folder in the same development vault. Only the test manifest identity changes to avoid registration conflicts. It checks offline licenses and runs the real viewer, playback, full-editor and page-following tests, then removes the test installation and restores the development plugin. Recovery drafts remain user data; no engine/editor files are created at runtime.
 
+`npm run lint` checks both `src/` and the local `editor-app/` adapters with type-aware ESLint, then runs `npm run lint:css` against the plugin stylesheet and all vendored editor CSS. React type declarations are installed at the repository root as well as in the original editor dependency tree, so review tools can resolve the adapter imports from either TypeScript configuration. Node platform imports use their explicit `node:` names.
+
+The editor stylesheet contains Tailwind v4 source directives. Its narrow, documented Stylelint exception covers only the `@theme`/`@utility` section; unknown at-rules remain errors elsewhere. PostCSS compiles those directives before the CSS enters the bundle. Reduced-motion overrides use selector specificity, including pseudo-elements. Keep this adaptation in the upstream patch and checksum inventory.
+
 The permanent plugin ID is `musescorer`, matching the installed folder name. The display name remains MuseScorer. If upgrading from the preliminary beta with ID `MuseScorer`, disable that installation, rename its folder to `musescorer` and replace the three program files; keep existing recovery drafts.
 
 ## Runtime files and offline operation
@@ -43,7 +47,7 @@ The separate developer/upstream check contacts GitHub, and initial development d
 
 ## Upstream updates
 
-The OTS editor and engine are pinned to reviewed commits in `editor-lock.json` and `engine-lock.json`. Two small frontend adaptations are recorded in `patches/ots-editor-obsidian.patch`; Obsidian integration stays outside the vendored source.
+The OTS editor and engine are pinned to reviewed commits in `editor-lock.json` and `engine-lock.json`. Three small frontend adaptations are recorded in `patches/ots-editor-obsidian.patch`; the remaining Obsidian integration stays outside the vendored source.
 
 ```sh
 npm run check:upstream

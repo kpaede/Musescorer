@@ -2,7 +2,7 @@
 
 ## Repository strategy
 
-Maintain MuseScorer as its own Obsidian plugin repository with a pinned, vendored OTS dependency. The notation UI remains close to OTS: 685 recorded frontend inputs, with Obsidian hooks in only two upstream files at the current pin. Most integration code lives separately in `editor-app/` and `src/`. We can continue taking upstream changes; every update still needs review and native integration tests.
+Maintain MuseScorer as its own Obsidian plugin repository with a pinned, vendored OTS dependency. The notation UI remains close to OTS: 685 recorded frontend inputs, with adaptations in three upstream files at the current pin. Most integration code lives separately in `editor-app/` and `src/`. We can continue taking upstream changes; every update still needs review and native integration tests.
 
 The plugin repository is [kpaede/Musescorer](https://github.com/kpaede/Musescorer). The separate [kpaede/OTS_WebEditor](https://github.com/kpaede/OTS_WebEditor) repository is a real GitHub fork of [OurTextScores/OTS_WebEditor](https://github.com/OurTextScores/OTS_WebEditor). It preserves the GitHub upstream relationship and provides a place to review source updates and contribute shared hooks or fixes. The plugin remains its own repository; it is not itself a fork of the entire OTS website. Forking the entire MuseScore desktop project would add a large maintenance burden: OTS already maintains its native bridge and engine patch set.
 
@@ -36,10 +36,11 @@ The monitoring workflow in the plugin repository runs weekly on Monday at 08:23 
 | Obsidian sample plugin | `07ceb81d1fb3384af611ebf665a1ec42a7e5926d` | Selectively take tooling/API changes. |
 | FluidR3Mono GM soundfont | SHA-256 in `engine-lock.json` | Independently versioned; retain its license. |
 
-`patches/ots-editor-obsidian.patch` captures the two frontend modifications against the exact OTS commit:
+`patches/ots-editor-obsidian.patch` captures the three frontend modifications against the exact OTS commit:
 
 - `components/ScoreEditor.tsx`: report the active native session and imported filename to the Obsidian host; stop original-editor audio when another leaf takes over.
 - `components/score-editor/score-url.ts`: avoid replacing the browser URL inside the local iframe.
+- `app/globals.css`: replace reduced-motion important declarations with selector specificity. A scoped Stylelint comment documents the Tailwind v4 `@theme`/`@utility` syntax, which is compiled by PostCSS before shipping; unknown at-rules remain errors elsewhere.
 
 The engine wrapper sources remain unmodified. The local asset injection is an esbuild hook in `esbuild.config.mjs`. Module aliases, the local fetch bridge, disabling editor analytics and gating the unavailable Performance command are in our build/adapters, outside the original frontend. The Performance gate checks its expected original command definition and fails the build if upstream changes require review; it does not modify the vendored source or its lock.
 

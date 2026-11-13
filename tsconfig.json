@@ -4,6 +4,8 @@
 		"inlineSources": true,
 		"module": "ESNext",
 		"target": "ES2021",
+		"jsx": "react-jsx",
+		"types": ["node"],
 		"strict": true,
 		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,

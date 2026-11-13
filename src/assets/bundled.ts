@@ -1,5 +1,5 @@
-import { brotliDecompress } from 'zlib';
-import { Buffer } from 'buffer';
+import { brotliDecompress } from 'node:zlib';
+import { Buffer } from 'node:buffer';
 import { embedded } from 'musescorer:runtime-assets';
 import type { RuntimeAssets } from './types';
 

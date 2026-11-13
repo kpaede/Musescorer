@@ -95,6 +95,7 @@ svg .ots-playback-notehead {
   --shell-accent: var(--ots-accent);
 }
 
+/* stylelint-disable at-rule-no-unknown -- Tailwind v4 theme and utility directives below are compiled to standard CSS by the pinned PostCSS build. */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -168,6 +169,7 @@ svg .ots-playback-notehead {
 @utility z-palette {
   z-index: var(--ots-z-palette);
 }
+/* stylelint-enable at-rule-no-unknown */
 
 /*
  * One keyboard-focus indicator for everything that does not draw its own. It is in the base layer
@@ -182,13 +184,14 @@ svg .ots-playback-notehead {
 
 /* Anything that animates honours the system setting. */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  /* Specificity keeps reduced motion above later component styles without important declarations. */
+  html:root:root:root *,
+  html:root:root:root *::before,
+  html:root:root:root *::after {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
+    scroll-behavior: auto;
   }
 }
 

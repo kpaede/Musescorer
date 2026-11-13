@@ -9,7 +9,7 @@ window.addEventListener('message', (event: MessageEvent<unknown>) => {
  if (event.source !== window.parent || data.token !== config.token || data.type !== 'musescorer-response') return;
  const call = pending.get(data.id as number); if (!call) return;
  pending.delete(data.id as number);
- if (data.error) call.reject(new Error(String(data.error))); else call.resolve(data.value);
+ if (data.error) call.reject(new Error(typeof data.error === 'string' ? data.error : 'The score editor request failed.')); else call.resolve(data.value);
 });
 export function invoke(method: string, args: unknown[] = []): Promise<unknown> {
  return new Promise((resolve, reject) => {

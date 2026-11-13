@@ -85,3 +85,15 @@ The release candidate now contains exactly `main.js` (39,914,349 bytes), `manife
 - The temporary installation and fixture files were removed, and the original development plugin/view restored.
 
 Strict plugin/editor TypeScript builds, lint without warnings and all twelve tests passed. New decoder tests remove the original files before use, verify independent transferable buffers and reject unknown/corrupt resources. Evidence is in `test-results/three-file-install-report.json` and `dist/package-report.json`. This validates the three-file installation architecture; it does not claim Community approval, a sub-5-MB bundle, Standard Sync compatibility or support for every historical desktop version.
+
+## License, type resolution and CSS review corrections — 2026-11-13
+
+The root license now contains the standard GPLv3 text. The full original OTS/MuseScore license, including its copyright and font-exception preamble, is preserved byte-for-byte in `licenses/OTS_WebEditor_LICENSE.txt` and the vendored source licenses. It remains available offline in the license dialog.
+
+Root React declarations, explicit adapter types, a guarded editor mount and explicit Node module imports address the reported unresolved/unsafe types. The three reported TypeScript files also pass a separate diagnostic check using the root configuration. Type-aware ESLint now includes the previously excluded editor adapters. A newly covered host error response was narrowed to a string, with a meaningful fallback for malformed values.
+
+The two plugin padding overrides and four upstream reduced-motion declarations no longer use important declarations. The original Tailwind directives remain source inputs with a scoped, explained unknown-at-rule exception. Stylelint checks the plugin stylesheet and all six original editor stylesheets. The original CSS adaptation is recorded as the third file in the upstream patch and checksum inventory; the patch passes a reverse-application check.
+
+Strict plugin/editor builds, expanded lint and all fourteen tests pass. An isolated three-file installation loaded in 489 ms in the running development vault and listed 21 offline legal documents. Native rendering, both embed modes, pause/highlighting, page following, editor edits/undo/redo, audible synthesis, native copy saving and draft recovery pass. The temporary installation was removed and the development plugin restored. A separate headless Chrome check confirmed that later component styles retain two-second transitions normally and switch to 0.01 ms animations/transitions, one iteration and automatic scrolling under reduced motion, including pseudo-elements. Compiled CSS contains no Tailwind source directives.
+
+Compatible root development-dependency security updates were applied without changing the original editor's dependency lock. A full root `npm audit` still reports 14 advisories in the development-tool/type-definition dependency tree; resolving them fully requires a separate tooling compatibility review. These validation results do not assert a clean audit of all upstream dependencies.

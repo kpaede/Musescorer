@@ -1,8 +1,10 @@
 import { initializeHost } from './bridge-runtime';
-import React from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot, type Root } from 'react-dom/client';
 import ScoreEditor from '../vendor/ots-editor/components/ScoreEditor';
 import { NoticeHost } from '../vendor/ots-editor/components/shell/notices';
 import { Announcer } from '../vendor/ots-editor/components/shell/announcer';
 initializeHost();
-createRoot(document.getElementById('root')!).render(<><ScoreEditor /><NoticeHost /><Announcer /></>);
+const container = document.getElementById('root');
+if (!container) throw new Error('The score editor root element is missing.');
+const root: Root = createRoot(container);
+root.render(<><ScoreEditor /><NoticeHost /><Announcer /></>);
