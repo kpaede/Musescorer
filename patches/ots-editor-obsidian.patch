@@ -1,0 +1,46 @@
+--- a/components/ScoreEditor.tsx
++++ b/components/ScoreEditor.tsx
+@@ -2932,7 +2932,9 @@
+     ],
+   );
+ 
+-  const exposeScoreToWindow = (s: Score | null) => {
++  const exposeScoreToWindow = (s: Score | null, sourceFileName?: string) => {
++    // Obsidian host: identify the main score without exposing a global mutable handle.
++    window.dispatchEvent(new CustomEvent('musescorer-score', { detail: { score: s, sourceFileName } }));
+     // Debug handle for Playwright and console sessions to poke at WASM bindings
+     // directly. Nothing in the product reads it, so a production build should not
+     // carry it: a live Score handle on `window` widens what injected script can
+@@ -3805,7 +3807,7 @@
+       scoreRef.current = loadedScore;
+       setProgressivePagingActive(progressivePaging);
+       setProgressiveHasMorePages(progressivePaging && progressiveHasMore);
+-      exposeScoreToWindow(loadedScore);
++      exposeScoreToWindow(loadedScore, options?.preserveScoreId ? undefined : file.name);
+       const mutationsAvailable = hasMutationApi(loadedScore);
+       if (!mutationsAvailable) {
+         console.warn('Mutation APIs not detected on loaded score; enabling toolbar anyway.');
+@@ -7693,6 +7695,13 @@
+   const stopAudio = async (options?: { awaitCancel?: boolean }) => {
+     await Promise.all([editorPlayback.stopAt(0), stopPreviewAudio(options)]);
+   };
++
++  // Obsidian owns the audible transport across leaves and embeds.
++  useEffect(() => {
++    const stop = () => { void stopAudio({ awaitCancel: true }); };
++    window.addEventListener('musescorer-stop-audio', stop);
++    return () => window.removeEventListener('musescorer-stop-audio', stop);
++  });
+ 
+   const ensureAudioContextReady = async () => {
+     const audioCtx = audioCtxRef.current || new AudioContext({ sampleRate: 44100 });
+--- a/components/score-editor/score-url.ts
++++ b/components/score-editor/score-url.ts
+@@ -1,5 +1,6 @@
+ export const updateUrlScoreId = (nextScoreId: string) => {
+-  if (typeof window === 'undefined') {
++  // Obsidian persists the source in its leaf; srcdoc has no navigable Next.js URL.
++  if (typeof window === 'undefined' || '__MUSESCORER_CONFIG' in window) {
+     return;
+   }
+   const url = new URL(window.location.href);

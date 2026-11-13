@@ -1,0 +1,47 @@
+import { MUSIC_CONTEXT_TOOL_CONTRACT } from './music-context-contract';
+import { MUSIC_CONVERT_TOOL_CONTRACT } from './music-convert-contract';
+import { MUSIC_DIFF_FEEDBACK_TOOL_CONTRACT } from './music-diff-feedback-contract';
+import { MUSIC_FUNCTIONAL_HARMONY_ANALYZE_TOOL_CONTRACT } from './music-functional-harmony-analyze-contract';
+import { MUSIC_GENERATE_TOOL_CONTRACT } from './music-generate-contract';
+import { MUSIC_HARMONY_ANALYZE_TOOL_CONTRACT } from './music-harmony-analyze-contract';
+import { MUSIC_PATCH_TOOL_CONTRACT } from './music-patch-contract';
+import { MUSIC_SCOREOPS_TOOL_CONTRACT } from './music-scoreops-contract';
+import { MUSIC_RENDER_TOOL_CONTRACT } from './music-render-contract';
+import { MUSIC_MMA_TEMPLATE_TOOL_CONTRACT } from './music-mma-template-contract';
+import { MUSIC_MMA_RENDER_TOOL_CONTRACT } from './music-mma-render-contract';
+import { MUSIC_OMR_TRANSCRIBE_TOOL_CONTRACT } from './music-omr-transcribe-contract';
+import { MUSIC_MULTITRACK_VAE_TOOL_CONTRACT } from './music-multitrack-vae-contract';
+import { MUSIC_INFILL_TOOL_CONTRACT } from './music-infill-contract';
+
+export { MUSIC_CONTEXT_TOOL_CONTRACT } from './music-context-contract';
+export { MUSIC_CONVERT_TOOL_CONTRACT } from './music-convert-contract';
+export { MUSIC_DIFF_FEEDBACK_TOOL_CONTRACT } from './music-diff-feedback-contract';
+export { MUSIC_FUNCTIONAL_HARMONY_ANALYZE_TOOL_CONTRACT } from './music-functional-harmony-analyze-contract';
+export { MUSIC_GENERATE_TOOL_CONTRACT } from './music-generate-contract';
+export { MUSIC_HARMONY_ANALYZE_TOOL_CONTRACT } from './music-harmony-analyze-contract';
+export { MUSIC_PATCH_TOOL_CONTRACT } from './music-patch-contract';
+export { MUSIC_SCOREOPS_TOOL_CONTRACT } from './music-scoreops-contract';
+export { MUSIC_RENDER_TOOL_CONTRACT } from './music-render-contract';
+export { MUSIC_MMA_TEMPLATE_TOOL_CONTRACT } from './music-mma-template-contract';
+export { MUSIC_MMA_RENDER_TOOL_CONTRACT } from './music-mma-render-contract';
+export { MUSIC_OMR_TRANSCRIBE_TOOL_CONTRACT } from './music-omr-transcribe-contract';
+export { MUSIC_MULTITRACK_VAE_TOOL_CONTRACT } from './music-multitrack-vae-contract';
+export { MUSIC_INFILL_TOOL_CONTRACT } from './music-infill-contract';
+export type { MusicToolContract, JsonSchema } from './types';
+
+export const MUSIC_TOOL_CONTRACTS = [
+  MUSIC_CONTEXT_TOOL_CONTRACT,
+  MUSIC_CONVERT_TOOL_CONTRACT,
+  MUSIC_DIFF_FEEDBACK_TOOL_CONTRACT,
+  MUSIC_FUNCTIONAL_HARMONY_ANALYZE_TOOL_CONTRACT,
+  MUSIC_GENERATE_TOOL_CONTRACT,
+  MUSIC_HARMONY_ANALYZE_TOOL_CONTRACT,
+  MUSIC_PATCH_TOOL_CONTRACT,
+  MUSIC_SCOREOPS_TOOL_CONTRACT,
+  MUSIC_RENDER_TOOL_CONTRACT,
+  MUSIC_MMA_TEMPLATE_TOOL_CONTRACT,
+  MUSIC_MMA_RENDER_TOOL_CONTRACT,
+  MUSIC_OMR_TRANSCRIBE_TOOL_CONTRACT,
+  MUSIC_MULTITRACK_VAE_TOOL_CONTRACT,
+  MUSIC_INFILL_TOOL_CONTRACT,
+];

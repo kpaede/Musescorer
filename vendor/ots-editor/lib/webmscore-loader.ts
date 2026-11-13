@@ -1,0 +1,900 @@
+export type InputFileFormat =
+  | 'mscz'
+  | 'mscx'
+  | 'mxl'
+  | 'mei'
+  | 'mnx'
+  | 'musicxml'
+  | 'xml'
+  | 'midi'
+  | 'kar'
+  | 'gtp'
+  | 'gp3'
+  | 'gp4'
+  | 'gp5'
+  | 'gpx'
+  | 'gp'
+  | 'ptb';
+
+/** Read-only point query; geometry and identity are valid only as a snapshot of this call. */
+export type ScoreObjectHit =
+  | { schemaVersion: 1; coordinateSpace: 'page-local-360dpi'; status: 'invalid-input' | 'unavailable' | 'no-hit' | 'unsupported' }
+  | { schemaVersion: 1; coordinateSpace: 'page-local-360dpi'; status: 'ok'; kind: 'note' | 'rest';
+      location: { measureIndex: number | null; staffIndex: number | null; voiceIndex: number };
+      geometry: { page: number; x: number; y: number; width: number; height: number } | null };
+
+import type {
+  ContextHitReport,
+  ElementPropertyState,
+  MeasureProperties,
+  ScoreDialogMethods,
+  SelectOptions,
+  StaffProperties,
+  StyleValue,
+} from './webmscore-score-settings-types';
+
+export type { ContextHitReport, ElementPropertyState, MeasureProperties, SelectOptions, StaffProperties, StyleValue };
+
+/** One part's vertical extent within one laid-out system, in page coordinates. */
+export interface StaffSystemBand {
+  page: number;
+  system: number;
+  partIndex: number;
+  y: number;
+  height: number;
+}
+
+/** A measure MuseScore considers irregular, and by how much. */
+export interface IrregularMeasure {
+  index: number;
+  number: string;
+  /** First short measure: displayed as pickup measure 0, not a one-based bar. */
+  pickup?: boolean;
+  /** `n/d`, the length the measure actually holds. */
+  actual: string;
+  /** `n/d`, the time signature in force there. */
+  nominal: string;
+  irregular: boolean;
+}
+
+export interface Positions {
+  /** Additive schema; absent on legacy engines. Missing geometry retains its ID with page=-1. */
+  schemaVersion?: 1;
+  /** Revision of the playback options its event times use; absent on engines without options. */
+  optionsRevision?: number;
+  complete?: boolean;
+  elements: Array<{
+    id: number;
+    /** Written musical anchor, stable across layout; legacy array IDs are layout-scoped. */
+    writtenTick?: number;
+    geometryAvailable?: boolean;
+    x: number;
+    y: number;
+    sx: number;
+    sy: number;
+    width?: number;
+    height?: number;
+    page: number;
+  }>;
+  events: Array<{
+    elid: number;
+    position: number;
+  }>;
+  pageSize: {
+    height: number;
+    width: number;
+  };
+}
+
+export interface PlaybackDiagnostics {
+  schemaVersion: 1;
+  activeStreams: number;
+  retainedStreams: number;
+  sequences: number;
+  wasmHeapBytes: number;
+  soundFontGeneration: number;
+  loadedSoundFontGeneration: number;
+  lastPrepare: {
+    soundFontMs: number;
+    releaseMs: number;
+    scopeMs: number;
+    modelLoadMs: number;
+    tracksMs: number;
+    trackDataMs: number;
+    seekMs: number;
+    totalMs: number;
+    firstBatchMs: number;
+    tracks: number;
+    reused: boolean;
+  };
+}
+
+export interface PlaybackCapabilities {
+  schemaVersion: 1;
+  positionsSchemaVersion: 1;
+  partialLayoutSafe: boolean;
+  streamHandlesVersion: number;
+  preparedPlaybackVersion?: 1;
+  soundFontGeneration: boolean;
+  pcm?: { sampleRate: number; channels: number; framesPerChunk: number; format: 'f32-planar' };
+  /** Transient tempo/repeat options; absent on engines that always play written repeats at 100%. */
+  playbackOptions?: {
+    schemaVersion: 1;
+    minTempoMultiplier: number;
+    maxTempoMultiplier: number;
+    playRepeats: boolean;
+    positionConversion: boolean;
+  };
+  /** Present when `playbackFollowMap()` is supported. */
+  followMapSchemaVersion?: number;
+}
+
+/**
+ * Repeat-expanded playback cursor intervals with native geometry (followmap.h). Within an interval the cursor moves
+ * linearly in time from xStart to xEnd (the engine splits intervals wherever that would not hold); geometry is null
+ * where the page is not laid out. Times use the options revision `optionsRevision`.
+ */
+export interface PlaybackFollowMap {
+  schemaVersion: 1;
+  optionsRevision: number;
+  coordinateSpace: 'page-local-360dpi';
+  complete: boolean;
+  durationMs: number;
+  renderDurationMs: number;
+  spatium: number;
+  pages: Array<{ page: number; width: number; height: number }>;
+  intervals: Array<{
+    occurrenceIndex: number;
+    measureIndex: number;
+    segmentId: number | null;
+    startMs: number;
+    endMs: number;
+    geometry: null | {
+      page: number;
+      systemId: number;
+      xStart: number;
+      xEnd: number;
+      y: number;
+      height: number;
+    };
+  }>;
+}
+
+export interface PlaybackOptionsRequest {
+  tempoMultiplier: number;
+  playRepeats: boolean;
+}
+
+/** Accepted per-project options. Never part of the notation, undo history or saved file. */
+export interface PlaybackOptions extends PlaybackOptionsRequest {
+  schemaVersion: 1;
+  /** Changes only when an option does; audio, timeline and positions report the revision they used. */
+  revision: number;
+  changed?: boolean;
+}
+
+/** A playback location that survives a tempo change: written tick plus which pass over it, inside repeats. */
+export interface MusicalPlaybackPosition {
+  schemaVersion: 1;
+  optionsRevision: number;
+  timeMs: number;
+  writtenTick: number;
+  /** writtenTick plus progress through it, in [writtenTick, writtenTick + 1). */
+  fractionalTick: number;
+  occurrenceIndex: number;
+  /** 0 on the first pass over writtenTick. */
+  pass: number;
+  occurrenceKey: string;
+  atEnd: boolean;
+}
+
+export interface PlaybackTimeForPosition {
+  schemaVersion: 1;
+  optionsRevision: number;
+  timeMs: number;
+  writtenTick: number;
+  pass: number;
+  exact: boolean;
+  /** Why the location moved: its pass is no longer played, its tick is unreachable, or it is past the end. */
+  fallback: null | 'pass-unavailable' | 'tick-unreachable' | 'end';
+}
+
+export interface PlaybackTimelineOccurrence {
+  occurrenceIndex: number;
+  measureIndex: number;
+  startMs: number;
+  endMs: number;
+  /** Where the beats fall, in played time (tempo-aware); absent from builds before the click track. */
+  beatsMs?: number[];
+  /** The first beat is the measure's downbeat (false after a jump or into a volta, mid-measure). */
+  downbeat?: boolean;
+  /** Beats in a full measure of this meter: 4 in 4/4, 2 in 6/8 (a dotted quarter is the beat). */
+  beatsPerMeasure?: number;
+}
+
+export interface PlaybackTimeline {
+  schemaVersion: 1;
+  optionsRevision?: number;
+  durationMs: number;
+  renderDurationMs: number;
+  occurrences: PlaybackTimelineOccurrence[];
+}
+
+export interface GripEditInfo {
+  page: number;
+  grips: Array<{
+    index: number;
+    x: number;
+    y: number;
+    draggable: boolean;
+  }>;
+}
+
+export type InspectorPropertyName =
+  | 'visible'
+  | 'color'
+  | 'placement'
+  | 'offsetX'
+  | 'offsetY'
+  | 'small'
+  | 'stemDirection'
+  | 'lineStyle';
+
+export interface InspectorPropertyState {
+  value: boolean | number | string | null;
+  mixed: boolean;
+  applicableCount: number;
+}
+
+/** What is on the engine's undo stack (`Score.getUndoInfo`). */
+export interface UndoInfo {
+  index: number;
+  size: number;
+  clean: boolean;
+}
+
+/** One undo entry as the engine describes it (`Score.getUndoEntries`): the commands it ran, what it changed and where. */
+export interface UndoEntryInfo {
+  commands: string[];
+  elements: string[];
+  /** The selection's tick range when the edit was made; -1 when there was none. */
+  tickStart: number;
+  tickEnd: number;
+}
+
+export interface SelectedElementProperties {
+  selectionCount: number;
+  elementType: string;
+  properties: Partial<Record<InspectorPropertyName, InspectorPropertyState>>;
+}
+
+export interface FretDiagramData {
+  strings: number;
+  frets: number;
+  fretOffset: number;
+  showNut: boolean;
+  dots: Array<{ string: number; fret: number; type: number }>;
+  markers: Array<{ string: number; type: number }>;
+  barres: Array<{ fret: number; startString: number; endString: number }>;
+}
+
+export type SynthAudioBatchChunk = {
+  sampleRate?: number;
+  channels?: number;
+  framesPerChannel?: number;
+  chunk: Uint8Array;
+  startTime: number;
+  endTime?: number;
+  done?: boolean;
+};
+
+export type SynthAudioBatchIterator = (cancel?: boolean) => Promise<SynthAudioBatchChunk[]>;
+
+/** Structural measure positions are zero-based, including pickup measures. */
+export interface SystemLockRange {
+  startMeasure: number;
+  endMeasure: number;
+}
+
+export interface SystemLockState {
+  selection: SystemLockRange | null;
+  locks: SystemLockRange[];
+  locked: { value: boolean | null; mixed: boolean; applicableCount: number };
+  canLock: boolean;
+  canUnlock: boolean;
+  canMovePrevious: boolean;
+  canMoveNext: boolean;
+}
+
+export interface Score extends ScoreDialogMethods {
+  /** True when every mutating export leaves the score fully laid out (the 4.7 engine), so no relayout is needed. */
+  layoutsAfterCommands?: () => Promise<boolean> | boolean;
+  getSystemLockState?: () => Promise<SystemLockState | null>;
+  setSystemLock?: (locked: boolean) => Promise<boolean>;
+  moveSelectedMeasureToSystem?: (direction: 'previous' | 'next') => Promise<boolean>;
+  destroy: (soft?: boolean) => void;
+  /** True once destroy() was called (calls on it then fail with "Invalid score") */
+  readonly destroyed?: boolean;
+  saveSvg: (
+    pageNumber?: number,
+    drawPageBackground?: boolean,
+    highlightSelection?: boolean,
+  ) => Promise<string>;
+  savePdf: () => Promise<Uint8Array>;
+  saveXml?: () => Promise<Uint8Array>;
+  saveMxl?: () => Promise<Uint8Array>;
+  saveMsc?: (format?: 'mscz' | 'mscx') => Promise<Uint8Array>;
+  saveMidi?: (midiExpandRepeats?: boolean, exportRPNs?: boolean) => Promise<Uint8Array>;
+  saveAudio?: (format: 'wav' | 'ogg' | 'flac' | 'mp3') => Promise<Uint8Array>;
+  saveAudioForMeasureRange?: (
+    format: 'wav',
+    startMeasureIndex: number,
+    endMeasureIndex: number,
+  ) => Promise<Uint8Array>;
+  savePng?: (
+    pageNumber?: number,
+    drawPageBackground?: boolean,
+    transparent?: boolean,
+  ) => Promise<Uint8Array>;
+  setSoundFont: (data: Uint8Array) => Promise<void>;
+  synthAudioBatch?: (
+    startTime: number,
+    batchSize: number,
+  ) => Promise<SynthAudioBatchIterator> | SynthAudioBatchIterator;
+  synthAudioBatchFromSelection?: (
+    batchSize: number,
+  ) => Promise<SynthAudioBatchIterator> | SynthAudioBatchIterator;
+  synthAudioBatchForMeasureRange?: (
+    startMeasureIndex: number,
+    endMeasureIndex: number,
+    batchSize: number,
+  ) => Promise<SynthAudioBatchIterator> | SynthAudioBatchIterator;
+  synthSelectionPreviewBatch?: (
+    batchSize: number,
+    durationMs?: number,
+  ) => Promise<SynthAudioBatchIterator> | SynthAudioBatchIterator;
+  metadata: () => Promise<Record<string, unknown>>;
+  npages?: () => Promise<number>;
+  measurePositions: () => Promise<Positions>;
+  measureRangeForPage?: (
+    pageIndex: number,
+  ) =>
+    | Promise<{ startMeasureIndex: number; endMeasureIndex: number } | null>
+    | { startMeasureIndex: number; endMeasureIndex: number }
+    | null;
+  warmupPlayback?: () => Promise<boolean>;
+  playbackDiagnostics?: () => Promise<PlaybackDiagnostics | null>;
+  /** The engine's WASM heap; it only grows, so this is also its peak (roadmap E05). */
+  memoryInfo?: () => Promise<{ wasmHeapBytes: number }>;
+  setPlaybackReuse?: (enabled: boolean) => Promise<boolean>;
+  playbackCapabilities?: () => Promise<PlaybackCapabilities | null>;
+  playbackTimeline?: () => Promise<PlaybackTimeline | null> | PlaybackTimeline | null;
+  playbackOptions?: () => Promise<PlaybackOptions | null>;
+  playbackFollowMap?: () => Promise<PlaybackFollowMap | null>;
+  /** Applies to the whole project (its parts share the tempo map); retires its prepared stream on change. */
+  setPlaybackOptions?: (options: PlaybackOptionsRequest) => Promise<PlaybackOptions | null>;
+  playbackPositionAt?: (timeMs: number) => Promise<MusicalPlaybackPosition | null>;
+  playbackTimeForPosition?: (
+    position: Pick<MusicalPlaybackPosition, 'writtenTick' | 'fractionalTick' | 'pass'>,
+  ) => Promise<PlaybackTimeForPosition | null>;
+  selectionMeasureRange?: () =>
+    | Promise<{ startMeasureIndex: number; endMeasureIndex: number } | null>
+    | { startMeasureIndex: number; endMeasureIndex: number }
+    | null;
+  segmentPositions: () => Promise<Positions>;
+  measureSignatureCount?: (partIndex: number) => Promise<number> | number;
+  measureSignatureAt?: (partIndex: number, measureIndex: number) => Promise<string> | string;
+  measureSignatures?: (partIndex: number) => Promise<string[]> | string[];
+  measureLineBreaks?: () => Promise<boolean[]> | boolean[];
+  /**
+   * Measures whose actual length differs from their time signature — what
+   * MuseScore marks with a small plus, with both lengths named.
+   */
+  irregularMeasures?: () => Promise<IrregularMeasure[]> | IrregularMeasure[];
+  /** Set one measure's actual length back to its time signature. */
+  setMeasureLengthToTimeSignature?: (measureIndex: number) => Promise<boolean> | boolean;
+  setMeasureLineBreaks?: (breaks: boolean[]) => Promise<boolean> | boolean;
+  /**
+   * Optional mutation/undo surface exposed by custom webmscore builds.
+   * These methods may be undefined if the WASM bindings were not compiled with mutation support.
+   */
+  hitTestScoreObject?: (pageNumber: number, x: number, y: number) => Promise<ScoreObjectHit>;
+  contextHitAtPoint?: (pageNumber: number, x: number, y: number) => Promise<ContextHitReport>;
+  contextSelectionInfo?: () => Promise<ContextHitReport>;
+  /** Snap to previous (0) / next (1) for the selected hairpins and gradual tempo changes. */
+  toggleSnap?: (which: 0 | 1) => Promise<boolean> | boolean;
+  /** l.v. on the selected notes (Score::cmdToggleLaissezVib). */
+  toggleLaissezVib?: () => Promise<boolean> | boolean;
+  /** Harp pedal diagram (asText: text form) on the selected note or rest (roadmap E21). */
+  addHarpPedalDiagram?: (asText: boolean) => Promise<boolean> | boolean;
+  /** Pedals D C B | E F G A as flat/natural/sharp, and the form; {} unless a diagram is selected. */
+  getHarpPedalState?: () => Promise<{ pedals?: string[]; isDiagram?: boolean }>;
+  setHarpPedalState?: (state: { pedals?: string[]; isDiagram?: boolean }) => Promise<boolean> | boolean;
+  /** Ctrl+click: cycle to the next overlapping element at a page point; false with fewer than two. */
+  cycleSelectionAtPoint?: (pageNumber: number, x: number, y: number) => Promise<boolean> | boolean;
+  /** Enclose the selection: 0 brackets, 1 parentheses, 2 braces. */
+  addBrackets?: (kind: 0 | 1 | 2) => Promise<boolean> | boolean;
+  /** Typed element properties by MuseScore name (roadmap E09); values are engine tokens. */
+  getElementPropertyValues?: (names: string[]) => Promise<Record<string, ElementPropertyState>>;
+  /** One undoable edit; `reset` returns the property to its style default. */
+  setElementPropertyValue?: (name: string, token: string, reset?: boolean) => Promise<boolean> | boolean;
+  /** Select instrument… on the selected instrument change. */
+  changeInstrumentAt?: (instrumentId: string) => Promise<boolean> | boolean;
+  getStaffProperties?: (staffIdx: number) => Promise<Partial<StaffProperties>>;
+  setStaffProperties?: (staffIdx: number, values: Partial<StaffProperties>) => Promise<boolean> | boolean;
+  /** Add ▸ Image into the selected frame; `suffix` types the bytes (svg, png, jpg, …). */
+  addImageToFrame?: (suffix: string, data: Uint8Array) => Promise<boolean> | boolean;
+  getStyleValues?: (keys: string[]) => Promise<Record<string, StyleValue>>;
+  /** One undoable edit; false (nothing changed) for an unknown or mistyped key. */
+  setStyleValues?: (values: Record<string, StyleValue>) => Promise<boolean> | boolean;
+  /** A MuseScore style file (.mss) replaces the score's style. */
+  loadStyle?: (data: Uint8Array) => Promise<boolean> | boolean;
+  getMeasureProperties?: () => Promise<Partial<MeasureProperties>>;
+  setMeasureProperties?: (values: Partial<MeasureProperties>) => Promise<boolean> | boolean;
+  /** Select ▸ More…: pageNumber < 0 patterns on the single selection. */
+  selectWithOptions?: (pageNumber: number, x: number, y: number, options: SelectOptions) => Promise<boolean> | boolean;
+  /** Voicing and duration -1 keep each chord symbol's own setting. */
+  realizeChordSymbols?: (literal: boolean, voicing: number, duration: number) => Promise<boolean> | boolean;
+  /** Note input's right-click: the note at the point becomes a rest (MuseScore's remove-note). */
+  removeNoteAtPoint?: (pageNumber: number, x: number, y: number) => Promise<boolean> | boolean;
+  /** Add fretboard diagram on the selected chord symbols (a diagram of each chord, the symbol on it). */
+  addFretboardDiagramForHarmony?: () => Promise<boolean> | boolean;
+  /** Text into the selected frame: 0 frame text, 1 title, 2 subtitle, 3 composer, 4 lyricist, 5 part name. */
+  addFrameText?: (kind: 0 | 1 | 2 | 3 | 4 | 5, text: string) => Promise<boolean> | boolean;
+  /** Select ▸ Similar (0), on this staff (1), in this range (2); pageNumber < 0 patterns on the single selection. */
+  selectSimilar?: (mode: 0 | 1 | 2, pageNumber: number, x: number, y: number) => Promise<boolean> | boolean;
+  selectElementAtPoint?: (pageNumber: number, x: number, y: number) => Promise<unknown> | unknown;
+  selectMeasureAtPoint?: (pageNumber: number, x: number, y: number) => Promise<unknown> | unknown;
+  extendMeasureSelectionAtPoint?: (
+    pageNumber: number,
+    x: number,
+    y: number,
+  ) => Promise<unknown> | unknown;
+  selectPartMeasureByIndex?: (
+    partIndex: number,
+    measureIndex: number,
+  ) => Promise<unknown> | unknown;
+  selectTextElementAtPoint?: (
+    pageNumber: number,
+    x: number,
+    y: number,
+  ) => Promise<unknown> | unknown;
+  selectElementAtPointWithMode?: (
+    pageNumber: number,
+    x: number,
+    y: number,
+    mode: 0 | 1 | 2 | 3,
+  ) => Promise<unknown> | unknown;
+  beginElementDrag?: (pageNumber: number, x: number, y: number) => Promise<boolean> | boolean;
+  updateElementDrag?: (
+    pageNumber: number,
+    x: number,
+    y: number,
+    modifiers?: number,
+    dragMode?: 0 | 1 | 2,
+  ) => Promise<boolean> | boolean;
+  endElementDrag?: (commit: boolean) => Promise<boolean> | boolean;
+  applyDropAtPoint?: (
+    pageNumber: number,
+    x: number,
+    y: number,
+    elementType: 0 | 1 | 2,
+    subtype: number,
+  ) => Promise<boolean> | boolean;
+  beginGripEdit?: (
+    pageNumber: number,
+    x: number,
+    y: number,
+  ) => Promise<GripEditInfo | null> | GripEditInfo | null;
+  dragGrip?: (
+    gripIndex: number,
+    dx: number,
+    dy: number,
+    modifiers?: number,
+  ) => Promise<GripEditInfo | null> | GripEditInfo | null;
+  endGripEdit?: (commit: boolean) => Promise<boolean> | boolean;
+  getSpatium?: () => Promise<number> | number;
+  selectNextChord?: () => Promise<unknown> | unknown;
+  selectPrevChord?: () => Promise<unknown> | unknown;
+  extendSelectionNextChord?: () => Promise<unknown> | unknown;
+  extendSelectionPrevChord?: () => Promise<unknown> | unknown;
+  isSelectionRange?: () => Promise<unknown> | unknown;
+  /** The undo stack: `index` entries applied (0 nothing to undo, `size` nothing to redo), and whether the score is at its loaded state. */
+  getUndoInfo?: () => Promise<UndoInfo> | UndoInfo;
+  /** The undo entries in [from, to), oldest first. */
+  getUndoEntries?: (from: number, to: number) => Promise<UndoEntryInfo[]> | UndoEntryInfo[];
+  /** Moves the undo cursor to `target` (an `index` as getUndoInfo reports it); whether it got there. */
+  undoRedoTo?: (target: number) => Promise<boolean> | boolean;
+  extendSelectionNextMeasure?: () => Promise<unknown> | unknown;
+  extendSelectionPrevMeasure?: () => Promise<unknown> | unknown;
+  extendSelectionStaffAbove?: () => Promise<unknown> | unknown;
+  extendSelectionStaffBelow?: () => Promise<unknown> | unknown;
+  getSelectionBoundingBox?: () =>
+    | Promise<{ page: number; x: number; y: number; width: number; height: number } | null>
+    | { page: number; x: number; y: number; width: number; height: number }
+    | null;
+  getSelectionBoundingBoxes?: () =>
+    | Promise<Array<{ page: number; x: number; y: number; width: number; height: number }>>
+    | Array<{ page: number; x: number; y: number; width: number; height: number }>;
+  /**
+   * Vertical band of each part within each laid-out system, in page coordinates —
+   * the staff dimension `measurePositions()` does not carry. Only laid-out systems
+   * appear; the engine lays out lazily, so call `layoutUntilPage` first if a later
+   * page is needed.
+   */
+  staffSystemBands?: () => Promise<StaffSystemBand[]> | StaffSystemBand[];
+  /**
+   * Vertical padding below one staff of one measure, in spatium; `gapSpatium <= 0`
+   * removes it. The only way to leave a hole where the other compare pane has an extra
+   * bar — a line break can move a bar to another system but cannot create empty space.
+   */
+  setMeasureSpacer?: (
+    measureIndex: number,
+    staffIdx: number,
+    gapSpatium: number,
+  ) => Promise<boolean> | boolean;
+  clearSelection?: () => Promise<unknown> | unknown;
+  selectionMimeType?: () => Promise<string> | string;
+  selectionMimeData?: () => Promise<Uint8Array> | Uint8Array;
+  pasteSelection?: (mimeType: string, data: Uint8Array) => Promise<unknown> | unknown;
+  deleteSelection?: () => Promise<unknown> | unknown;
+  pitchUp?: () => Promise<unknown> | unknown;
+  pitchDown?: () => Promise<unknown> | unknown;
+  transpose?: (
+    mode: number,
+    direction: number,
+    key: number,
+    interval: number,
+    trKeys: boolean,
+    trChordNames: boolean,
+    useDoubleSharpsFlats: boolean,
+  ) => Promise<unknown> | unknown;
+  selectAll?: () => Promise<unknown> | unknown;
+  setAccidental?: (accidentalType: number) => Promise<unknown> | unknown;
+  doubleDuration?: () => Promise<unknown> | unknown;
+  halfDuration?: () => Promise<unknown> | unknown;
+  toggleDot?: () => Promise<unknown> | unknown;
+  toggleDoubleDot?: () => Promise<unknown> | unknown;
+  setNoteEntryMode?: (enabled: boolean) => Promise<unknown> | unknown;
+  getNoteInputCursorRect?: () =>
+    | Promise<{
+        page: number;
+        x: number;
+        y: number;
+        width: number;
+        height: number;
+        voice: number;
+      } | null>
+    | {
+        page: number;
+        x: number;
+        y: number;
+        width: number;
+        height: number;
+        voice: number;
+      }
+    | null;
+  setNoteEntryMethod?: (method: number) => Promise<unknown> | unknown;
+  setInputStateFromSelection?: () => Promise<unknown> | unknown;
+  setInputAccidentalType?: (accidentalType: number) => Promise<unknown> | unknown;
+  setInputDurationType?: (durationType: number) => Promise<unknown> | unknown;
+  toggleInputDot?: () => Promise<unknown> | unknown;
+  putNote?: (
+    pageNumber: number,
+    x: number,
+    y: number,
+    replace?: boolean,
+    insert?: boolean,
+  ) => Promise<boolean> | boolean;
+  addPitchByStep?: (
+    note: number,
+    addToChord?: boolean,
+    insert?: boolean,
+  ) => Promise<unknown> | unknown;
+  enterRest?: () => Promise<unknown> | unknown;
+  setDurationType?: (durationType: number) => Promise<unknown> | unknown;
+  toggleLineBreak?: () => Promise<unknown> | unknown;
+  togglePageBreak?: () => Promise<unknown> | unknown;
+  setVoice?: (voiceIndex: number) => Promise<unknown> | unknown;
+  changeSelectedElementsVoice?: (voiceIndex: number) => Promise<unknown> | unknown;
+  undo?: () => Promise<unknown> | unknown;
+  redo?: () => Promise<unknown> | unknown;
+  relayout?: () => Promise<unknown> | unknown;
+  layoutUntilPage?: (pageNumber: number) => Promise<unknown> | unknown;
+  layoutUntilPageState?: (pageNumber: number) => Promise<LayoutProgressState> | LayoutProgressState;
+  loadProfile?: () => Promise<Record<string, unknown>> | Record<string, unknown>;
+  setLayoutMode?: (layoutMode: number) => Promise<unknown> | unknown;
+  getLayoutMode?: () => Promise<number> | number;
+  setTimeSignature?: (numerator: number, denominator: number) => Promise<unknown> | unknown;
+  setTimeSignatureWithType?: (
+    numerator: number,
+    denominator: number,
+    timeSigType: number,
+  ) => Promise<unknown> | unknown;
+  setKeySignature?: (fifths: number) => Promise<unknown> | unknown;
+  setHarmonyVoiceLiteral?: (literal: boolean) => Promise<unknown> | unknown;
+  setChordSymbolStylePreset?: (preset: 'std' | 'jazz') => Promise<unknown> | unknown;
+  getKeySignature?: () => Promise<number> | number;
+  setClef?: (clefType: number) => Promise<unknown> | unknown;
+  addDynamic?: (dynamicType: number) => Promise<unknown> | unknown;
+  addHairpin?: (hairpinType: number) => Promise<unknown> | unknown;
+  addFermata?: (fermataVariant: number) => Promise<boolean> | boolean;
+  addBreath?: (breathType: number) => Promise<boolean> | boolean;
+  addArpeggio?: (arpeggioType: number) => Promise<boolean> | boolean;
+  addTremolo?: (tremoloType: number) => Promise<boolean> | boolean;
+  addOttava?: (ottavaType: number) => Promise<boolean> | boolean;
+  addTrill?: (trillType: number) => Promise<boolean> | boolean;
+  addGlissando?: (glissandoType: number) => Promise<boolean> | boolean;
+  addMarker?: (markerType: number) => Promise<boolean> | boolean;
+  addJump?: (jumpType: number) => Promise<boolean> | boolean;
+  setNoteheadGroup?: (noteheadGroup: number) => Promise<boolean> | boolean;
+  setBeamMode?: (beamMode: number) => Promise<boolean> | boolean;
+  setSelectionFilter?: (filterMask: number) => Promise<boolean> | boolean;
+  addMeasureRepeat?: (numMeasures: number) => Promise<boolean> | boolean;
+  setMultiMeasureRests?: (enabled: boolean) => Promise<boolean> | boolean;
+  multiMeasureRestsEnabled?: () => Promise<boolean> | boolean;
+  addPedal?: (pedalVariant: number) => Promise<unknown> | unknown;
+  addSostenutoPedal?: () => Promise<unknown> | unknown;
+  addUnaCorda?: () => Promise<unknown> | unknown;
+  splitPedal?: () => Promise<unknown> | unknown;
+  addRehearsalMark?: () => Promise<unknown> | unknown;
+  addTempoText?: (bpm: number) => Promise<unknown> | unknown;
+  addArticulation?: (articulationSymbolName: string) => Promise<unknown> | unknown;
+  addSlur?: () => Promise<unknown> | unknown;
+  moveSelectedChordRestToStaff?: (direction: 'up' | 'down') => Promise<boolean> | boolean;
+  flipStem?: () => Promise<boolean> | boolean;
+  addTie?: () => Promise<unknown> | unknown;
+  addGraceNote?: (graceType: number) => Promise<unknown> | unknown;
+  addTuplet?: (tupletCount: number) => Promise<unknown> | unknown;
+  addStaffText?: (text: string) => Promise<unknown> | unknown;
+  addSystemText?: (text: string) => Promise<unknown> | unknown;
+  addExpressionText?: (text: string) => Promise<unknown> | unknown;
+  addLyricText?: (text: string) => Promise<unknown> | unknown;
+  addHarmonyText?: (variant: number, text: string) => Promise<unknown> | unknown;
+  addFingeringText?: (text: string) => Promise<unknown> | unknown;
+  addLeftHandGuitarFingeringText?: (text: string) => Promise<unknown> | unknown;
+  addRightHandGuitarFingeringText?: (text: string) => Promise<unknown> | unknown;
+  addStringNumberText?: (text: string) => Promise<unknown> | unknown;
+  addInstrumentChangeText?: (text: string) => Promise<unknown> | unknown;
+  addStickingText?: (text: string) => Promise<unknown> | unknown;
+  addFiguredBassText?: (text: string) => Promise<unknown> | unknown;
+  setTitleText?: (text: string) => Promise<unknown> | unknown;
+  subtitle?: () => Promise<string> | string;
+  setSubtitleText?: (text: string) => Promise<unknown> | unknown;
+  setComposerText?: (text: string) => Promise<unknown> | unknown;
+  setLyricistText?: (text: string) => Promise<unknown> | unknown;
+  setSelectedText?: (text: string) => Promise<unknown> | unknown;
+  getSelectedElementProperties?: () =>
+    Promise<SelectedElementProperties> | SelectedElementProperties;
+  setSelectedElementProperty?: (
+    propertyName: InspectorPropertyName,
+    value: boolean | number | string,
+  ) => Promise<boolean> | boolean;
+  addFretDiagram?: (pattern: string) => Promise<boolean> | boolean;
+  getSelectedFretDiagram?: () => Promise<FretDiagramData | null> | FretDiagramData | null;
+  setSelectedFretDiagram?: (diagram: FretDiagramData) => Promise<boolean> | boolean;
+  addAmbitus?: () => Promise<boolean> | boolean;
+  explodeSelection?: () => Promise<boolean> | boolean;
+  implodeSelection?: () => Promise<boolean> | boolean;
+  regroupSelection?: () => Promise<boolean> | boolean;
+  resequenceRehearsalMarks?: () => Promise<boolean> | boolean;
+  appendPart?: (instrumentId: string) => Promise<unknown> | unknown;
+  appendPartByMusicXmlId?: (instrumentMusicXmlId: string) => Promise<unknown> | unknown;
+  removePart?: (partIndex: number) => Promise<unknown> | unknown;
+  setPartVisible?: (partIndex: number, visible: boolean) => Promise<unknown> | unknown;
+  listInstrumentTemplates?: () => Promise<unknown> | unknown;
+  addNoteFromRest?: () => Promise<unknown> | unknown;
+  toggleRepeatStart?: () => Promise<unknown> | unknown;
+  toggleRepeatEnd?: () => Promise<unknown> | unknown;
+  setRepeatCount?: (count: number) => Promise<unknown> | unknown;
+  setBarLineType?: (barLineType: number) => Promise<unknown> | unknown;
+  addVolta?: (endingNumber: number) => Promise<unknown> | unknown;
+  insertMeasures?: (count: number, target: number) => Promise<unknown> | unknown;
+  addPickupMeasure?: (numerator: number, denominator: number) => Promise<unknown> | unknown;
+  removeSelectedMeasures?: () => Promise<unknown> | unknown;
+  removeTrailingEmptyMeasures?: () => Promise<unknown> | unknown;
+}
+
+export interface LayoutProgressState {
+  targetPage: number;
+  targetSatisfied: boolean;
+  availablePages: number;
+  totalMeasures: number;
+  laidOutMeasures: number;
+  loadedUntilTick: number;
+  hasMorePages: boolean;
+  isComplete: boolean;
+}
+
+export interface WebMscoreInstance {
+  load: (
+    format: InputFileFormat,
+    data: Uint8Array,
+    fonts?: Uint8Array[],
+    doLayout?: boolean,
+  ) => Promise<Score>;
+  ready: Promise<void>;
+  /** Where the engine fetches fonts it does not preload (the 4.7 engine; 4.00 bundles everything) */
+  resourceBaseUrl?: string;
+}
+
+/**
+ * Base URL of the engine's on-demand resources (`fonts/…`, `fonts/fallback/…`). The server reads
+ * WEBMSCORE_RESOURCE_BASE_URL at runtime (the editor API image sets it; its build has no NEXT_PUBLIC_ values);
+ * the browser gets NEXT_PUBLIC_WEBMSCORE_RESOURCE_BASE_URL, inlined at build. Unset: nothing is fetched and those
+ * fonts fall back.
+ */
+export const webMscoreResourceBaseUrl = (): string | undefined => {
+  const raw = (
+    process.env.WEBMSCORE_RESOURCE_BASE_URL ||
+    process.env.NEXT_PUBLIC_WEBMSCORE_RESOURCE_BASE_URL ||
+    ''
+  ).trim();
+  if (!raw) return undefined;
+  return raw.endsWith('/') ? raw : `${raw}/`; // resource paths resolve below it, so it must end in a slash
+};
+
+const applyResourceBaseUrl = (instance: WebMscoreInstance) => {
+  const url = webMscoreResourceBaseUrl();
+  if (url && 'resourceBaseUrl' in instance) instance.resourceBaseUrl = url;
+};
+
+// NOTE:
+// The `webmscore` package can present different module shapes depending on
+// runtime/bundler interop (CJS/ESM default wrapping). Resolve once so callers
+// always receive an object with { ready, load }.
+const resolveWebMscore = (mod: unknown): WebMscoreInstance => {
+  const isModuleCandidate = (value: unknown): value is Record<string, unknown> =>
+    value !== null && (typeof value === 'object' || typeof value === 'function');
+  const moduleRecord = isModuleCandidate(mod) ? (mod as Record<string, unknown>) : undefined;
+  const defaultRecord = isModuleCandidate(moduleRecord?.default)
+    ? (moduleRecord.default as Record<string, unknown>)
+    : undefined;
+  const candidates = [
+    defaultRecord,
+    isModuleCandidate(defaultRecord?.default)
+      ? (defaultRecord.default as Record<string, unknown>)
+      : undefined,
+    moduleRecord,
+  ];
+
+  for (const candidate of candidates) {
+    if (!candidate) continue;
+    let load: unknown;
+    let ready: unknown;
+    try {
+      load = candidate.load;
+      ready = candidate.ready;
+    } catch {
+      continue;
+    }
+    if (
+      typeof load === 'function' &&
+      ready &&
+      typeof (ready as Promise<void>).then === 'function'
+    ) {
+      return candidate as unknown as WebMscoreInstance;
+    }
+  }
+
+  throw new Error('Unexpected webmscore module shape: missing ready/load');
+};
+
+let initialized = false;
+let webMscore: WebMscoreInstance | null = null;
+let initPromise: Promise<WebMscoreInstance> | null = null;
+let inProcessInitialized = false;
+let inProcessWebMscore: WebMscoreInstance | null = null;
+let inProcessInitPromise: Promise<WebMscoreInstance> | null = null;
+
+const ensureBrowserMscoreScriptUrl = () => {
+  if (typeof window === 'undefined') {
+    return;
+  }
+  const globalScope = globalThis as Record<string, unknown>;
+  if (
+    typeof globalScope.MSCORE_SCRIPT_URL === 'string' &&
+    globalScope.MSCORE_SCRIPT_URL.length > 0
+  ) {
+    return;
+  }
+  const base = typeof document !== 'undefined' ? document.baseURI : window.location.href;
+  globalScope.MSCORE_SCRIPT_URL = new URL('.', base).href;
+};
+
+export const loadWebMscore = async (): Promise<WebMscoreInstance> => {
+  if (initialized && webMscore) {
+    return webMscore;
+  }
+  if (initPromise) {
+    return initPromise;
+  }
+
+  initPromise = (async () => {
+    const imported = await import('./webmscore-worker-runtime.js');
+    const resolved = resolveWebMscore(imported as unknown);
+    await resolved.ready;
+    applyResourceBaseUrl(resolved);
+    webMscore = resolved;
+    initialized = true;
+    return resolved;
+  })();
+
+  try {
+    return await initPromise;
+  } finally {
+    initPromise = null;
+  }
+};
+
+export const loadWebMscoreInProcess = async (): Promise<WebMscoreInstance> => {
+  if (inProcessInitialized && inProcessWebMscore) {
+    return inProcessWebMscore;
+  }
+  if (inProcessInitPromise) {
+    return inProcessInitPromise;
+  }
+
+  inProcessInitPromise = (async () => {
+    ensureBrowserMscoreScriptUrl();
+    const originalFetch = globalThis.fetch;
+    let inProcessImport: unknown;
+    try {
+      inProcessImport =
+        typeof window === 'undefined'
+          ? await import('./webmscore-in-process-node-runtime.js')
+          : await import('./webmscore-in-process-browser-runtime.js');
+    } finally {
+      // The vendored Node shim clears global fetch during module evaluation.
+      // Keep that compatibility behavior local to webmscore initialization.
+      if (typeof originalFetch === 'function' && typeof globalThis.fetch !== 'function') {
+        globalThis.fetch = originalFetch;
+      }
+    }
+    const resolved = resolveWebMscore(inProcessImport);
+    await resolved.ready;
+    applyResourceBaseUrl(resolved);
+    inProcessWebMscore = resolved;
+    inProcessInitialized = true;
+    return resolved;
+  })();
+
+  try {
+    return await inProcessInitPromise;
+  } finally {
+    inProcessInitPromise = null;
+  }
+};
+
+/**
+ * Decode whatever this build of webmscore returned from `saveXml`.
+ *
+ * Deliberately not `new TextDecoder().decode(value)`: the bytes can arrive from
+ * another realm (the WASM module, a worker, or an embed iframe), where
+ * `value instanceof Uint8Array` is false even though the value is a perfectly
+ * good typed array. `TextDecoder` then refuses it with a message that says
+ * nothing about realms, and the symptom is a save that silently does nothing.
+ */
+export async function decodeScoreXml(value: unknown): Promise<string> {
+  if (typeof value === 'string') {
+    return value;
+  }
+  // `ArrayBuffer.isView` is realm-safe by specification; `instanceof` is not,
+  // which is the whole point of this function.
+  if (ArrayBuffer.isView(value)) {
+    return new TextDecoder().decode(
+      new Uint8Array(value.buffer, value.byteOffset, value.byteLength),
+    );
+  }
+  // For a bare buffer there is no `isView` equivalent, so match the brand
+  // rather than the constructor — `instanceof ArrayBuffer` is false for a
+  // buffer that came from another realm, which is exactly the case here.
+  const brand = Object.prototype.toString.call(value);
+  if (brand === '[object ArrayBuffer]' || brand === '[object SharedArrayBuffer]') {
+    return new TextDecoder().decode(new Uint8Array(value as ArrayBuffer));
+  }
+  if (brand === '[object Blob]' || brand === '[object File]') {
+    return (value as Blob).text();
+  }
+  throw new Error('The score engine returned an unsupported MusicXML payload.');
+}

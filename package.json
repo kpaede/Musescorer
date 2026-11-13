@@ -1,0 +1,45 @@
+{
+  "name": "musescorer",
+  "version": "0.2.0",
+  "description": "Local native MuseScore embeds, playback and the complete OTS notation editor for Obsidian.",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "tsc -noEmit -skipLibCheck && npm run build:editor && node esbuild.config.mjs production",
+    "version": "node version-bump.mjs && git add manifest.json versions.json",
+    "lint": "eslint .",
+    "test": "node --test tests/*.test.mjs",
+    "test:engine": "node scripts/smoke-engine.mjs",
+    "verify:engine": "node scripts/verify-engine.mjs",
+    "package": "npm run build && node scripts/package.mjs",
+    "test:obsidian": "node scripts/test-features.mjs",
+    "build:editor": "node scripts/ensure-editor.mjs && node scripts/verify-editor.mjs && tsc -p editor-app/tsconfig.json --noEmit && node scripts/build-full-editor.mjs",
+    "setup:editor": "node scripts/ensure-editor.mjs",
+    "verify:editor": "node scripts/verify-editor.mjs",
+    "check:upstream": "node scripts/check-upstream.mjs"
+  },
+  "keywords": [],
+  "license": "GPL-3.0-only",
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@types/node": "^22.15.17",
+    "esbuild": "0.25.5",
+    "eslint": "^9.39.4",
+    "eslint-plugin-obsidianmd": "^0.4.0",
+    "globals": "^17.6.0",
+    "jiti": "^2.6.1",
+    "obsidian": "latest",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.59.1",
+    "playwright": "^1.56.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kpaede/Musescorer.git"
+  },
+  "homepage": "https://github.com/kpaede/Musescorer#readme",
+  "bugs": {
+    "url": "https://github.com/kpaede/Musescorer/issues"
+  }
+}

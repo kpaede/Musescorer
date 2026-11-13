@@ -1,0 +1,33 @@
+{
+  "extends": "../vendor/ots-editor/tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "..",
+    "paths": {
+      "@/*": [
+        "vendor/ots-editor/*"
+      ],
+      "react": [
+        "vendor/ots-editor/node_modules/@types/react",
+        "node_modules/@types/react"
+      ],
+      "react/*": [
+        "vendor/ots-editor/node_modules/@types/react/*",
+        "node_modules/@types/react/*"
+      ],
+      "react-dom/*": [
+        "vendor/ots-editor/node_modules/@types/react-dom/*",
+        "node_modules/@types/react-dom/*"
+      ]
+    },
+    "typeRoots": [
+      "../vendor/ots-editor/node_modules/@types",
+      "../node_modules/@types"
+    ],
+    "tsBuildInfoFile": "../test-results/editor.tsbuildinfo"
+  },
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx",
+    "../vendor/ots-editor/types/**/*.d.ts"
+  ]
+}

@@ -1,0 +1,126 @@
+
+// The main entry point inside a Web Worker
+
+import WebMscore from './index.js'
+
+const SVG_UTF8_RESULT_KEY = '__webmscoreSvgUtf8'
+const DEBUG_RENDER_RPC = false
+
+/** @type {WebMscore} */
+let score
+
+/**
+ * @typedef {{ id: number; method: Exclude<keyof import('./index').default, 'scoreptr' | 'excerptId'> | 'load' | 'ready' | 'setLogLevel'; params: any[]; }} RPCReq
+ * @typedef {{ id: number; result?: any; error?: any; }} RPCRes
+ * @param {number} id 
+ * @param {any} result 
+ * @param {Transferable[]} transfer
+ */
+const rpcRes = (id, result, transfer = undefined) => {
+    /** @type {RPCRes} */
+    const res = {
+        id,
+        result,
+    }
+    self.postMessage(res, transfer)
+}
+
+/**
+ * @param {number} id 
+ * @param {Error} err 
+ */
+const rpcErr = (id, err) => {
+    /** @type {RPCRes} */
+    const res = {
+        id,
+        error: {
+            name: err.name,
+            message: err.message,
+            stack: err.stack,
+        },
+    }
+    self.postMessage(res)
+}
+
+/**
+ * @typedef {import('../schemas').SynthRes | Uint8Array | undefined} Res
+ * @param {Res | Res[]} obj 
+ * @returns {Transferable[] | undefined}
+ */
+const getTransferable = (obj) => {
+    if (!obj) return
+    if (Array.isArray(obj)) {
+        return obj.reduce((p, c) => p.concat(getTransferable(c)), []).filter(Boolean)
+    } else if (obj instanceof Uint8Array) {
+        return [obj.buffer]
+    } else if (obj.chunk instanceof Uint8Array) {
+        return [obj.chunk.buffer]
+    }
+}
+
+self.onmessage = async (e) => {
+    /** @type {RPCReq} */
+    const req = e.data  // JSON-RPC
+    const { id, method, params } = req
+
+    try {
+        switch (method) {
+            case 'ready':
+                await WebMscore.ready
+                rpcRes(id, 'done')
+                break
+
+            case 'load':
+                await WebMscore.ready
+                score = await WebMscore.load.apply(undefined, params)
+                rpcRes(id, { systemLocks: typeof score.getSystemLockState === 'function', hitTestScoreObject: typeof score.hitTestScoreObject === 'function', moveSelectedChordRestToStaff: typeof score.moveSelectedChordRestToStaff === 'function', contextMenu: typeof score.contextHitAtPoint === 'function', contextMenuEdits: typeof score.toggleSnap === 'function', scoreDialogs: typeof score.getStyleValues === 'function', staffDialogs: typeof score.getStaffProperties === 'function', elementProperties: typeof score.getElementPropertyValues === 'function', laissezVib: typeof score.toggleLaissezVib === 'function', brackets: typeof score.addBrackets === 'function', cycleSelection: typeof score.cycleSelectionAtPoint === 'function', harp: typeof score.getHarpPedalState === 'function', timeSig: typeof score.getTimeSigProperties === 'function', staffTextSwing: typeof score.getStaffTextSwing === 'function', styleDefaults: typeof score.getStyleDefaults === 'function', textStyleCatalog: typeof score.getTextStyleCatalog === 'function', lyricsEntry: typeof score.startLyricsEntry === 'function', textXml: typeof score.setSelectedTextXml === 'function', mei: typeof score.saveMei === 'function', mnx: typeof score.saveMnx === 'function', saveStyle: typeof score.saveStyle === 'function' })
+                break;
+
+            case 'setLogLevel':
+                await WebMscore.setLogLevel.apply(undefined, params)
+                rpcRes(id, 'done')
+                break
+
+            case 'setResourceBaseUrl':
+                WebMscore.resourceBaseUrl = params[0]
+                rpcRes(id, 'done')
+                break
+
+            default:
+                if (!score) { rpcErr(id, new Error('Score not loaded')) }
+                if (DEBUG_RENDER_RPC && (method === 'saveSvg' || method === 'savePng')) {
+                    console.info(`[webmscore-worker] ${method}:start`, { id, params })
+                }
+                if (method === 'saveSvg' && typeof score.saveSvgRaw === 'function') {
+                    const svgBytes = await score.saveSvgRaw.apply(score, params)
+                    if (DEBUG_RENDER_RPC && (method === 'saveSvg' || method === 'savePng')) {
+                        console.info(`[webmscore-worker] ${method}:done`, {
+                            id,
+                            resultType: typeof svgBytes,
+                            resultLength: svgBytes?.length ?? null,
+                        })
+                    }
+                    rpcRes(id, { [SVG_UTF8_RESULT_KEY]: svgBytes }, [svgBytes.buffer])
+                    break
+                }
+                const result = await score[method].apply(score, params)
+                if (DEBUG_RENDER_RPC && (method === 'saveSvg' || method === 'savePng')) {
+                    console.info(`[webmscore-worker] ${method}:done`, {
+                        id,
+                        resultType: typeof result,
+                        resultLength: typeof result === 'string' ? result.length : (result?.length ?? null),
+                    })
+                }
+                if (method === 'saveSvg' && typeof result === 'string') {
+                    // Transfer UTF-8 bytes instead of a giant JS string payload.
+                    // This reduces structured-clone overhead for large pages.
+                    const encoded = new TextEncoder().encode(result)
+                    rpcRes(id, { [SVG_UTF8_RESULT_KEY]: encoded }, [encoded.buffer])
+                } else {
+                    rpcRes(id, result, getTransferable(result))
+                }
+        }
+    } catch (err) {
+        rpcErr(id, err)
+    }
+}

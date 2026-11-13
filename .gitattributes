@@ -1,0 +1,14 @@
+# Preserve pinned upstream bytes and legal notices on every platform.
+vendor/** -text
+licenses/** -text
+tests/fixtures/** -text
+
+# Native assets must never be treated as text diffs or line-normalized.
+*.wasm binary
+*.data binary
+*.sf3 binary
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary
+*.mscz binary

@@ -1,0 +1,2746 @@
+{
+  "repository": "https://github.com/OurTextScores/OTS_WebEditor",
+  "commit": "3ec0452e12952d59308feb3c1da0553ee17fbcbe",
+  "files": [
+    {
+      "path": "vendor/ots-editor/AGENTS.md",
+      "sha256": "2d1ee2a1af56c79d40fb77c4938584cb0179e5e4cdf57a1510bad7f2402d3c31"
+    },
+    {
+      "path": "vendor/ots-editor/LICENSE",
+      "sha256": "258edd17156790f60645806a289d786ddcdf2ad1bde1dd85eaaa284ad2eb8f2c"
+    },
+    {
+      "path": "vendor/ots-editor/THIRD_PARTY_NOTICES.md",
+      "sha256": "4d942c1ce0b77e3748b0166738b934b073513369be3964d6e983a1a4c52564bb"
+    },
+    {
+      "path": "vendor/ots-editor/app/dev/ui/page.tsx",
+      "sha256": "ec1dc245d16402a6058519348b24b3f19bb704b9e3ce262353fa3dc7cc5f1fda"
+    },
+    {
+      "path": "vendor/ots-editor/app/favicon.ico",
+      "sha256": "2b8ad2d33455a8f736fc3a8ebf8f0bdea8848ad4c0db48a2833bd0f9cd775932"
+    },
+    {
+      "path": "vendor/ots-editor/app/globals.css",
+      "sha256": "91f1e9c5a5f3cb7ebbf39bf5d0ebc5ca492c7def0e40d4f50002159326f3508a"
+    },
+    {
+      "path": "vendor/ots-editor/app/help/page.tsx",
+      "sha256": "fde0701b58ae0bf39d3419b2c18920c1c1e1d582e33ea90c7519cdd32d3872c3"
+    },
+    {
+      "path": "vendor/ots-editor/app/icon.svg",
+      "sha256": "7febd30edabbbe358f347509bf796fef8a89f59d78063f21656a07d7e28f716c"
+    },
+    {
+      "path": "vendor/ots-editor/app/layout.tsx",
+      "sha256": "929ce72fbab8050eda4fdedaa0577660105567a66b6c0db835e19e4299e6ebd2"
+    },
+    {
+      "path": "vendor/ots-editor/app/page.tsx",
+      "sha256": "4802f6e4f1c6d86f4556174d6c401ebe9e6d565aad4d34e60b1add46d7396b05"
+    },
+    {
+      "path": "vendor/ots-editor/app/perform/layout.tsx",
+      "sha256": "def14742e82688fb0382090d2da837e04d7c6f6c45dab6a0bedc69f656fdce65"
+    },
+    {
+      "path": "vendor/ots-editor/app/perform/page.tsx",
+      "sha256": "68d1946b677e5cc3c94ba8dc801f116782d4d896f95750138ca3dda783939de9"
+    },
+    {
+      "path": "vendor/ots-editor/app/test-icons/page.tsx",
+      "sha256": "2792f11cdc3693e5f13d6722fbdc411ce6d8e873c76a7f42a07c0c7c3593460e"
+    },
+    {
+      "path": "vendor/ots-editor/components/CodeMirrorEditor.tsx",
+      "sha256": "9cf8f7196fad74b4e20ba5ed223dc7c104bcb2c8dc056aeb472a7d8c90f13662"
+    },
+    {
+      "path": "vendor/ots-editor/components/FloatingPalettes.module.css",
+      "sha256": "4da8f155525fd63ee25e9b9dcfdd5dae4d87b567349bd899a1f576b5736d7bf3"
+    },
+    {
+      "path": "vendor/ots-editor/components/FloatingPalettes.tsx",
+      "sha256": "bcfcc073d33709a97672db9ef5a87bcf0250961fe620bfb907f876853706cc6c"
+    },
+    {
+      "path": "vendor/ots-editor/components/FretboardEditor.tsx",
+      "sha256": "4ed036c0c609fafbb83979de0a1b1f587128644471adf5c0bb7ba5525d46a209"
+    },
+    {
+      "path": "vendor/ots-editor/components/InspectorPanel.tsx",
+      "sha256": "ce7c309576ea629e42032b80bb13c73fcd3ffdda313a5c484b21d61ee60cbad4"
+    },
+    {
+      "path": "vendor/ots-editor/components/PaletteBrowser.tsx",
+      "sha256": "bddc0bafbe44ec23844e3cf378617586fdeb6849ad1539902c3f0837af4b020b"
+    },
+    {
+      "path": "vendor/ots-editor/components/ScoreEditor.tsx",
+      "sha256": "f983d190a7be9b3f3fc30990feb6510fadcef236c406e122113827f9f230310c"
+    },
+    {
+      "path": "vendor/ots-editor/components/modes/buildCompareMode.tsx",
+      "sha256": "c7301e15efe2d59dbdd73a3e296abe88e93564e390514aea7209cdd5bddc1edc"
+    },
+    {
+      "path": "vendor/ots-editor/components/modes/buildHistoryMode.tsx",
+      "sha256": "5734f88f8d98370b514f6faec59ec0cfdf0f29f9e7c8d4f24289532d0f8c72f9"
+    },
+    {
+      "path": "vendor/ots-editor/components/modes/buildWriteMode.tsx",
+      "sha256": "1a6fb092ec2d49779a153bbfed37dbeb106b9b3f7b264785512d1bb016a9d4b2"
+    },
+    {
+      "path": "vendor/ots-editor/components/modes/host/buildHostChangeReviewMode.tsx",
+      "sha256": "34ac3e04c4023c8d27ec6151e85d1fab51ea73d72c35c0999baec54d9e6e0faa"
+    },
+    {
+      "path": "vendor/ots-editor/components/modes/host/buildHostCompareMode.tsx",
+      "sha256": "7d40d1155cf60f923e982e6f5fb8208fd679560d8db14815b7fea0636cd78224"
+    },
+    {
+      "path": "vendor/ots-editor/components/modes/host/buildHostScannerFindingsMode.tsx",
+      "sha256": "879153ffe5a0514a9d96285ba18efab144d98c0d209c48ec024d669f8241bc28"
+    },
+    {
+      "path": "vendor/ots-editor/components/modes/host/buildHostScannerRowsMode.tsx",
+      "sha256": "49befe121b5c5cce20956fd733e263daa1381549c84f4338d1c78975d722cc31"
+    },
+    {
+      "path": "vendor/ots-editor/components/modes/index.ts",
+      "sha256": "5e01f209861087f3ad2e55213b1e56bd3a20287958aea3473238dc36bfda8706"
+    },
+    {
+      "path": "vendor/ots-editor/components/modes/types.ts",
+      "sha256": "75e8af788f8c1ee3105056bf4a4b63a3ac5f8f3cb1fb295bd2ae3ff7bb473ffb"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/AnnotateDialogs.tsx",
+      "sha256": "d1c7da5d6ca50dbeb9eff854883375e260947210648c49833742f6c515f93508"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/AnnotateTools.tsx",
+      "sha256": "6232fd20ccbaa387b9e7ab5ab9924a1a421c814824be5085571a7707709f3eda"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/AnnotationLayer.tsx",
+      "sha256": "c41537a6bc789f8b2cbf9a9c28c9247d9cd277878f149bcec14d71cbbf73cf89"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/ColourPicker.tsx",
+      "sha256": "05204e68c0400d14dd8e75a202d6760b97e75a588f9c6f612ad5b2144ac67531"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/MarksBackup.tsx",
+      "sha256": "13174a279255ee30ff020f5289a9b2094c7b791bceb67e77d46c5de295df8492"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/MarksCheckpoints.tsx",
+      "sha256": "9ef5a229fc8708a602ceaf7d1cc9e77efa92d6d990c53af8b9f3a44fe53457b3"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/MarksHistoryPanel.tsx",
+      "sha256": "da1f52a8814313444a3c585975907bdc12522dc910bc5a79c5bc5111f5e5c8ab"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/StampPalette.tsx",
+      "sha256": "444c1e25ec8223f98420642f738b283162602439b527d2c5135502752d2834e8"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/annotationBackup.ts",
+      "sha256": "98adf602182139a740329b6e8cea743ae6811d491bc58cc1645d2fc083661db8"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/annotationHistory.ts",
+      "sha256": "0ba318be71d726f05d4c1148ed5355c6caa0d52c794cb82f58bb4f5c8356c7bd"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/annotationModel.ts",
+      "sha256": "23b79bf259789ec6a0b1e226760f1a6baeeb3b5d0a9a0dcf33801119d3160b0c"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/annotationPlacement.ts",
+      "sha256": "6892578bd1eeabcac6762fd220fa9bca2f0369276134e2e8cdfb23c6c4378a44"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/annotationStore.ts",
+      "sha256": "25e665c6547073169f52e0e6f990d7dc45e0af707789d29b6e7900526341bb96"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/annotationTools.ts",
+      "sha256": "1dc26fd6d0e8f696a5637f87ada6d7105dc1de158b39bcff187b360299e97f0a"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/barSignatures.ts",
+      "sha256": "dd25bd6e92db16724f2d1bb8ffdbfe723142915390a2b5b5f8f6300f7ff6c277"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/checkpoints.ts",
+      "sha256": "f72ca6dc7b06f23af575d779494c0e27c9a1c68770785887af30d7bb1c3f3d32"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/pageGeometry.ts",
+      "sha256": "dd7351d2d2b453a2b5e90dc4b270f4565cb73d4f5c788a22080b1ac036de4e58"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/stampGlyphs.ts",
+      "sha256": "17607accd7f5fe8db1432f932a3877f7c428feacba515b92c706ca24261f502c"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/useAnnotateMode.ts",
+      "sha256": "f0ac91a69dd147d0687e7ca0b3106c8a603d7bc5a0b6543f0c93942385e6e608"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/useAnnotationInput.ts",
+      "sha256": "50cf746b65a9a0c115385ce4a7320f7462de27a92cd9554fe6de5599dbd8248c"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/useAnnotations.ts",
+      "sha256": "e2279a8a5354bb83455215818745fea32e00fc4d27c076e26440958b98899046"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/useUndoKeys.ts",
+      "sha256": "e985faede4669f3ac9b8debf76ff232117d902fae84449ca69d98bb655d81125"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/annotations/useUnreviewedCount.ts",
+      "sha256": "ce718cf35ee939bc837f3ec0f48bec9a1ccad86b99d1a45afb8b4c695c3d930f"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/diagnostics/DeviceSelfTest.tsx",
+      "sha256": "e97fd5b588ca56b2d11b0554c08a4689a979d6503095c311989f76c5395bf325"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/diagnostics/selfTestChecks.ts",
+      "sha256": "85054a66cc251a6d1f25d8325b339f59340f048e6e58a4ba1534a7160041d751"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/engraving/inkShapes.ts",
+      "sha256": "e8546f3639ad72c6543f41e6450a455bd4780a46b467ea6b1c856e28dc97c786"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/engraving/stampEngraving.ts",
+      "sha256": "9512355b83880fc850b47bc240b8b20846ab3fcb4ef2b330e4f6c761f654f6d1"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/engraving/textWords.ts",
+      "sha256": "8403b985f53453f22edd2a0365786186b122cf8aaa960fbb9039f2790f1150b5"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/guide/PerformerGuide.tsx",
+      "sha256": "a565847d5545a1bb9fdd4d02a0c61e3af20e82bbc4fabc9e5efe1f60696e8c98"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/index.ts",
+      "sha256": "74d2552dd36594928696259a2e6d1543ff789c28aae6712eafa2aba0565c43d4"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/performer.css",
+      "sha256": "fb3faf9ee83d4baacefe7981c6614819a03d8061d89bb19bb8d2d3a882f3cead"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/platform/deviceSettings.ts",
+      "sha256": "f58a74ed9b32d26787a8d76990894fbdb38ea579cee262f75ceffffefca91c7b"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/platform/displayMode.ts",
+      "sha256": "276d3d5e0eba351193935b56c2eea15aa0dcb04327e1be1619af9d1b05591af2"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/platform/editorLink.ts",
+      "sha256": "2fe23fc630c2434f8bd02d778f772b56baaebe83d4e0a22893df363eed6710c7"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/platform/performDb.ts",
+      "sha256": "5f9e9d5bdcf2e13fa2014af0254c562ba807286108572d720dd90c816cf26e42"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/platform/performPath.ts",
+      "sha256": "a367ec10eefb9ddb1022916add6affbbab22fbceaa9022ce21b36bba84774aa7"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/platform/scoreFiles.ts",
+      "sha256": "41b623a6324a1deb96faf5bc086fa9444827a396d15c41e3bbb95d818f216a1e"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/platform/scoreStore.ts",
+      "sha256": "756df1401b7d350ee7b82cfade39d524136d615d841eafd47c89d0ce9ec9199e"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/platform/serviceWorker.ts",
+      "sha256": "b6acb224fec9b52c9e4f8292017641062dc92cb07b4552b1a7192756b17aa5a6"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/platform/wakeLock.ts",
+      "sha256": "1aadeb2d3fb706383190ac16462407d7e962fc9db63faf23e2c2d9e12c658926"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/repeats/repeatJumps.ts",
+      "sha256": "7ee599d43f8b0e3756b23609cad1d846a297cc29c0d1acdb9e0f10e663c7607d"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/repeats/repeatTap.ts",
+      "sha256": "a1f0b230da03f27912e11f3e554212a9ed3a647d146ef6f478f3a276f36d58ec"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/repeats/usePerformerRepeats.ts",
+      "sha256": "dc758eb8cf08baf9eeaf46e712145171b32de5c67fe3cf3dae82017614a3817a"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/session/barBoxes.ts",
+      "sha256": "2645d8adbec2b8247cdf6cf2de43b70659ee9a99188166726bf1b4f97485860b"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/session/cachedBarSignatures.ts",
+      "sha256": "d69a225efc6a7598ace884bd5e5a533861ca07d70ee846a929543170fc3424d0"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/session/devicePageStyle.ts",
+      "sha256": "28c3d191da1e45dadca2b8ce9140be2de26d40a821cae01ed83dd2d546d3e743"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/session/loadPerformerScore.ts",
+      "sha256": "6623d6de6103f709a02c2e970fae929c7f47ef3b530b17d69b4c64498329bc12"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/session/usePerformerScore.ts",
+      "sha256": "9dd27d4fc7632c99629cf976279e96df1ff595b9d10c6a3dda4b1216d82613f6"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/setlists/AddToSetlist.tsx",
+      "sha256": "dbe1403a51151c43a9e149d41dab1e1cd37bcc9a33d32405660e037ff5832b21"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/setlists/OfflineAppNote.tsx",
+      "sha256": "0867156549adc2adc79165bb47b766296fc2c3e5d70206a1d70c5241af53ddab"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/setlists/OnThisDevice.tsx",
+      "sha256": "783f076cc4137558686157cc00d42145405f63ce3adfb89341a5da80e0a1fbaa"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/setlists/PerformerLibrary.tsx",
+      "sha256": "a9f593a44a4e390a628dea1da7789ddfdef74f6427016a099c0c8e497e371896"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/setlists/ScoreFileButton.tsx",
+      "sha256": "542ce1451f8e715c7c23422d780e07634d6b81a74a0a0de826fdbcf6155b5d8c"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/setlists/SetlistCard.tsx",
+      "sha256": "345b0a27f6e2b1091915cdf6b93778fb2f35478fae3b128fc148ff2126652b5f"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/setlists/SetlistEditor.tsx",
+      "sha256": "af1595682295250d8fed95a41bcf91b9e85529b8324a77789c4d7eb242e7ca39"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/setlists/SetlistPerformer.tsx",
+      "sha256": "e685f283a0ff814ef50e265c468c782597007593cfd0062a64021e9cb9e09017"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/setlists/offline.ts",
+      "sha256": "40e524db5ca51c259a245b93aeaf114b3022cc6b33d0e686b6822aa2b8cd6afb"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/setlists/setlistModel.ts",
+      "sha256": "a4f4bf23c2149889ce310671580503b0d4f4740ea82876d38c1953f40d9f1d55"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/setlists/setlistStore.ts",
+      "sha256": "62be3a21c6fd2787b26bb058b7b220ca5589f0e29e77984bbc371dd22f173862"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/setlists/useSetlistEdge.ts",
+      "sha256": "8953b1541593d99f9d0ea71bb255f0bef109b37e272e6c96f84484959ae3d038"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/setlists/useSetlists.ts",
+      "sha256": "8aeade389bcc614a9e49e7fff0469d0421d918232ef494a069e83cdec12c593b"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/turning/PedalSetup.tsx",
+      "sha256": "ef4be9a6dcc07bd5727d521948152d55e44e88a2dcf5124fd3399b191f16c914"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/turning/halfPage.ts",
+      "sha256": "6ef2a8b57862ee354a588abca8b42445d37526bbd56dee0a203b101bb18192dc"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/turning/pedalMapping.ts",
+      "sha256": "b5b27ca3fc03b23798e9cb993bf4a6cb3686db7ace5f0c8b4b9b2f8c78e6df43"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/turning/turnMachine.ts",
+      "sha256": "376957049a0d01421f77d92f8365e3d87240fb1bc000dab394141dfb58dcc6e3"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/view/BarExtras.tsx",
+      "sha256": "8954a3bae9079d93a9ff78ce9bce4c95add2102123568af0f8a568f949890a1a"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/view/PerformerBar.tsx",
+      "sha256": "9b884bedbae08f29edbef3e146c821178cd237d69ac763cc07501241847de873"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/view/PerformerPages.tsx",
+      "sha256": "b00e05f1b3102b88a6b122387b219c703792cacef812c469964a727876a08a4f"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/view/PerformerView.tsx",
+      "sha256": "0dcc90f2c0019431fee619ba88f847559cd31db9fbdf6244e0d09b843ea2101c"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/view/ScreenReaderTurns.tsx",
+      "sha256": "2a6fd9275be81edbd1c56bf77134fefd80f810a62915c7b6e7ffbf6db998b729"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/view/pageSvgHeight.ts",
+      "sha256": "6feaf4c11bc1df2e24d3a18f646bb37b6cf81d2b0f5492b3f10fac885a3e6030"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/view/useAvailableArea.ts",
+      "sha256": "a25823d701aaa034860533d8e12fe00e3958286c613f5f6f32575a99595d45c2"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/view/usePedalKeys.ts",
+      "sha256": "e4a8d8ab7e5d01a32de630f9c1c20c0d4c3ab9662480e2d5dec54b9dc1fce78e"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/view/useSurfacePointer.ts",
+      "sha256": "01f4a5578fe5455cc4b0dba33a7121d179b3abc663ce3577e3fb206b698c8d3b"
+    },
+    {
+      "path": "vendor/ots-editor/components/performer/view/useViewChoices.ts",
+      "sha256": "aff906493d1948691d9935372054deea7017470202465c91e0c4ef63f9279e41"
+    },
+    {
+      "path": "vendor/ots-editor/components/playback-controls/PlayRepeatsToggle.tsx",
+      "sha256": "2d756645b69ffb7ef13915613413c2b1b02ba4463b8dfc20bcfe769dde7c7431"
+    },
+    {
+      "path": "vendor/ots-editor/components/playback-controls/PresentationTimingControl.tsx",
+      "sha256": "e4e2bc4068911e53c0347760d38c852b86469876a37455accbf8ea503dd8ec53"
+    },
+    {
+      "path": "vendor/ots-editor/components/playback-controls/TempoControl.tsx",
+      "sha256": "c65d3d6a8c461cda6d1b725676a48a322799e29cf59b3a247edfa87a83538caa"
+    },
+    {
+      "path": "vendor/ots-editor/components/playback-controls/index.ts",
+      "sha256": "dd96fc8fb87c708bf42998961e2465890c223be6d9d609ebeb5ac8b764380077"
+    },
+    {
+      "path": "vendor/ots-editor/components/playback-controls/useTempoDraft.ts",
+      "sha256": "368e5b9387113e22e4ca10efbe48c5195ba126a700e3e15db5e2379e6044c670"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/AiAssistantPanel.tsx",
+      "sha256": "d5c659c90a0ddeedee95e44d5e960ff19d173d0e33c25dbe39ab6beb766eb11c"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/AiCompareWorkspace.tsx",
+      "sha256": "0898677b781981d927c83d39f790ffb45288f91a008ad3a95f4d3139eae0c1e8"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/AiDiffBlockReview.tsx",
+      "sha256": "9bd41c2833dcc627ba84a3c99956b21e112516a60e1d93ab2dbd0c92dc2895cb"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ChangeReviewScorePanel.tsx",
+      "sha256": "b96ffeb62ed4785ea761350b2164d9513f71ec9f1eb3e8609cb3d7c51f23890c"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ComparePaneEditorControls.tsx",
+      "sha256": "e6e7ff4d5f9abb507e1e767374d82caa6b8b1a8614d4ce4179742e97daea7459"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/CompareScoreLoaderDialog.tsx",
+      "sha256": "d3d99ff76c352e02efc18df8ba7d9eceb221b47531e9d3113822fe55a0ac2217"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/GoogleDriveExportDialog.tsx",
+      "sha256": "35dbdc91fe7a07db172c0f79847e1cb6d6394126f47fe3fce2a8521840572602"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/LeftSidebar.tsx",
+      "sha256": "c4632094b693c1b8db04981572962d6fb67cb750a2d2882ce1d5176a74dcafc5"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/MultitrackVaePanel.tsx",
+      "sha256": "5e97a2dba6d7f3ea9ec9d4d97b9776135204c1a485e8c0018d3062d39330e113"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/MusicXmlPanel.tsx",
+      "sha256": "533a578370d986b92f109c4625d2d3474ecc403139bde287a10850794098c5df"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/NewScoreDialog.tsx",
+      "sha256": "13a096cd5277846b899304a9e6a9e18f372d4d787563ca890c5606c7c0f7e541"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/PngExportDialog.tsx",
+      "sha256": "88c5a6edd6a1158b9e246a4d2b970017db2631faa58babf96eebbd8b5cb7a29c"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ShareLinkDialog.tsx",
+      "sha256": "2a3548fb6a59994d80e9e23e6a503a6f740571d63d468d95facfe988ce1dda6a"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/XmlDiffView.tsx",
+      "sha256": "22d357f1997976773f96df00036fa5c08863b76b529d0371d24d101a687104fc"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ai-assistant-types.ts",
+      "sha256": "c0bce71c4eb07eacaa68288fdc4dc1f201cced74e10f544c806410a9d8835cb4"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ai-chat.ts",
+      "sha256": "b3575ede2b5a1ab83502881f23ecb3593a23efc0d991009a820abaf6cd772c47"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ai-constants.ts",
+      "sha256": "8fa659f2be69e88a86d04d5c9df7b95f7b484011c0ba8c51e63df593df5dcaf3"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ai-diff-feedback.ts",
+      "sha256": "006d35b45043b995b0ba279b117a46ee23fd49faf1ef2ff53210ffce0ec671bc"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ai-patch-request.ts",
+      "sha256": "6ee477aebd7fdb7fe2d705219d81818cc7f5fee951492c80b05b2a0a04a7f52a"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ai-prompts.ts",
+      "sha256": "905cfd63b831012681188bf36fdcc9b18d9301b176103fc95f80444a97ecf06f"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ai-score-bridge.ts",
+      "sha256": "b30a0d4c94a69e89c549adb9f0b8e6532fd3ac064a7dc019eb4dbc4a3fb5ac97"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ai-text-request.ts",
+      "sha256": "c9d6b1e28f0825420a9386f3ae8522a17e30516354fbf6b69efc007bd9759c48"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ai-tools/AmtAccompanyPanel.tsx",
+      "sha256": "91e6a24bd9185a6c72c1581bac46a0bb3d3f7495ff86b67a3b0a3db2f85f5500"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ai-tools/FunctionalHarmonyPanel.tsx",
+      "sha256": "0d0843b071bcd5b1df0a242dc13a035386cc2df7ff66cf7fc63d57d9402c3082"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ai-tools/HarmonyPanel.tsx",
+      "sha256": "d7fefd98e31276cf508793029ff492e6000c406ca356b8e572c473b95070077f"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ai-tools/MmaPanel.tsx",
+      "sha256": "1069c0d66185e2c194315c1ab4c02936b1573b4ffb693638cce10d11f183d579"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ai-tools/NotaGenPanel.tsx",
+      "sha256": "77d462150aab279fea818ad33bc44ac1f344475f72baa57626063413e816432b"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ai-tools/TranscodaPanel.tsx",
+      "sha256": "d28c3753c765878e4709104e5228e433e8a40031e79f061292bb3e1b1b31ace9"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ai-tools/aiToolsTab.ts",
+      "sha256": "7f288944de243857f3c9d5ae8770dbe1b6fe30de1d541e84de7ae41c12ef9f83"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ai-tools/amtAccompanySource.ts",
+      "sha256": "ef6c97c8e22040a139c43bda7b963c7217cc42f7f116c21ee4f2bf50768d0e6a"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ai-tools/midiToMusicXml.ts",
+      "sha256": "31c685aa4325ae6df715d48e828e48dee05e5647d09bef23bc19baf6ce90ecc7"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ai-tools/useAiModelList.ts",
+      "sha256": "b7366431db4eaccab39ecf63e5dcb49ca8e8e1ae9c8b2090f834ae3de167f729"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ai-tools/useAmtAccompanyTool.ts",
+      "sha256": "0b7bc11d5e5f725ce49eed920e6d0d1417dbf899914d1756f7c42cfeffa6ec58"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ai-tools/useChordTools.ts",
+      "sha256": "3e1c147a9e9411cdfb7da3b1f5f16d54d817e9625c49ba104adf528f366516a6"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ai-tools/useNotaGenTool.ts",
+      "sha256": "8fefa954c6f6db0bcc392bc5ba48ddd984e2c4d2b519afc5ded4a72a75e79b6c"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/ai-tools/useTranscodaTool.ts",
+      "sha256": "00fb1b36c8097b86e21e94be288aaef4be235f97fe636ed8f3839483489e90c5"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/alignment/index.ts",
+      "sha256": "e2c3a39e8118ff5c4f2dce54c2a99c7547a383d11ba87c68517d76e494100a3e"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/alignment/measure-alignment.ts",
+      "sha256": "3001b1759d9d53e248942b41b8cbf765202e8270ec44aff00fc8c7137bd999ce"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/async-timeout.ts",
+      "sha256": "567b9fc77d03b4632acc1e01decc65a8e3b91fa6c628d91aecffca448aa447db"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/block-review-status.ts",
+      "sha256": "c1590631bbd476ddd451dfeb113ed1b6ce080230cf47a50afdd1c9f7203d4cc2"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/byte-encoding.ts",
+      "sha256": "5aaeb024a4cd8db702d0aacbdcd6ded4c3ee8aff4419a0bf3d371d84e7e8e6d5"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/canvas/ChangeReviewBarOverlay.tsx",
+      "sha256": "8cc50cc386074d5932b1e19daf0450bd710668954071127d76c1b21ef36771e1"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/canvas/DragFeedbackOverlays.tsx",
+      "sha256": "8d313358abf43fd533f50eb7f1c8be733c6c1d0c8a0b54dd8ae0c87c6b8c437e"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/canvas/EditOverlays.tsx",
+      "sha256": "8995a03686657f0e904a342d961e21ba614484a3f15717d5e2ed2160f07cff84"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/canvas/GripHandles.tsx",
+      "sha256": "cdcf2998b71f3ceef1637f016bef2e518a91b8900a3107b5f4f138c8b80c5ae7"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/canvas/InlineTextEditor.tsx",
+      "sha256": "3f92d5ab915405ae465ad0671b0fa1ef25aa5bad8e90ca098a734ae3badd754d"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/canvas/NoteInputOverlays.tsx",
+      "sha256": "b1c16d70c40712f6154c58f88e3e83f15c6324d1b1dee9cff255aa9827eb7b40"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/canvas/ScoreCanvas.tsx",
+      "sha256": "73de95be4dcd953db077df31ba8c00887ddd4d17bd7c47933078ce3d2576f0f1"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/canvas/SelectionOverlays.tsx",
+      "sha256": "a04a68cde546085cce496cdfb65f3ed5df1c84574285e5d3342661e4ddee61f2"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/canvas/edit-element-pointer.ts",
+      "sha256": "738992e1af1413be5dad35263bf64ac3fc2d997c6c570475ad94027a6e5bfb3e"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/canvas/index.ts",
+      "sha256": "349f1b1a4e4b1e9049fadacc97d16e49b1778bd43e7d3f829126d268dcccd681"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/canvas/marquee-selection.ts",
+      "sha256": "31206365064e0bb86f7a84aa763a3c56ac23f2102dacac6729d1ff52c8406a8c"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/canvas/pointer-gesture.ts",
+      "sha256": "d0cce045bd4ae11c4cecc967ce407ca2345c64c676e90cf8a2bc41e7e57cd49e"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/canvas/score-click.ts",
+      "sha256": "45052af46cc8c2de798c9c6630f2b8476992d2d69f4d8ce107f3cc23c62bd8d3"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/canvas/useCanvasGestures.ts",
+      "sha256": "effd1599e3973e8079c40dac891952767368d5fb5f9632e02eec26892d55c1e1"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/canvas/useGripEdit.ts",
+      "sha256": "2983831fc05aa54fc94568e8c52f54bc078f96141b46cf8ff9876c22b07f5d63"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/canvas/useNoteDrag.ts",
+      "sha256": "0e30237e1b6614bb0983f9ab44fc3a820a4502afdc0416efe566719c8a9d847a"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/checkpoint-labels.ts",
+      "sha256": "9386b88b8f9065ca234bc52cfeebaa81a3e2d296637af8c437aac33870e13620"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/checkpoint-native.ts",
+      "sha256": "8875b71c9b21e3215800f608a6713c95b18665927da10ea6ed9d29b51b875303"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/chord-selection/chordSelection.ts",
+      "sha256": "ba09739b65a81f6d6ec337bb084ecd270163eb9754f68752545e0c686be29541"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/chord-selection/chordSelectionCommands.ts",
+      "sha256": "4f7b5c9fc4ff0ba543ea7261afcab9ee0dbda4b95fe4ea0e3fc0654fbb727ab1"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/chord-selection/index.ts",
+      "sha256": "2a3b5000d120f2837045e230979f161bf2452db1b86740f9b674a1606bc3663b"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/chord-selection/useChordSelection.ts",
+      "sha256": "0eee583ad998be29a2abe7408ac22aed2a722e46396dae52b36316814dc62157"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/commandCatalog.ts",
+      "sha256": "ab8a0bb771ea70b1b742a2c6201b053cbb57f3b7ca3f097665ae2f9ab51edf3d"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/commands/context-menu-edits.ts",
+      "sha256": "7a5ff3423f4f9b8c866820a58e868307ddd7d6809b1ddcf37a9d049b3442bc30"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/commands/export.ts",
+      "sha256": "b6bfdbdd5586a329e04b374517329c103001551703cd6c118ee8aebc18eb0b4f"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/commands/index.ts",
+      "sha256": "d78a317d393157139f7fc3a3e182b6115d75770d86c45623b25bfb396e89ec90"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/commands/marks-and-lines.ts",
+      "sha256": "ee6014f277fc353a3e66a386743287a32634907dc9168d55e0a12b57096286e6"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/commands/measures.ts",
+      "sha256": "6957d6937ef1a5685c2ebe1e6785e89add1bfc6070bf8d42ac8eb429cba7e524"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/commands/perform.ts",
+      "sha256": "c20cf03c41d9b99774bfec3d6f88f9da021fed4830c0620c44e3bc329cb8233d"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/commands/pitch-and-duration.ts",
+      "sha256": "d3393070af39dcac3e74fb4a57cb6960c20fe97faa546ea3e5796989990b70c8"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/commands/score-dialog-apply.ts",
+      "sha256": "361dad43b8ebc63af3936dfe8142ba6a53470e033d3f2fb663df48dc002f7709"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/commands/select-similar.ts",
+      "sha256": "ef6620fcc4e662d7f32ffc4b4bcc6e6db3c288fe9464bbf49543e56b70f6744e"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/commands/text-annotations.ts",
+      "sha256": "5f737c384720ed8cf5380cb73acc52a1555a724ac56ab9672a1caca77edae894"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/ChangeReviewThreadView.tsx",
+      "sha256": "0e70f747a419b506ec62eced5dcc105de4ec6cca4fc6c7643f19345c9e27df80"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/CompareDiffGutter.tsx",
+      "sha256": "30392630b4ffd6d7cc1fe555fe73470a03cbe97ec1c5a7d87fade6ef63d00cc4"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/CompareGutterColumn.tsx",
+      "sha256": "972aff8dc44dcacaecae4b73a8c20e07bf52f09e7e5e689feb5144ce68621c8e"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/CompareMeasureComments.tsx",
+      "sha256": "078df5ffa667f06692514eb53e0ce314de85cac1d60fa175a52822d32ae9850d"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/CompareScorePane.tsx",
+      "sha256": "18c3c2234d5c7edcf3ccabeead641731beb89dbe3ff3091933796b0127ae6724"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/ScannerFindingRows.tsx",
+      "sha256": "d148f8eeb125fb61fef187756dedb66e8348d647ad36bd2bf01b6de717f23494"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/ScannerSystemRows.tsx",
+      "sha256": "c89a9baa47e4e24df14b8c98570a4f5123f0b3e19c4a962682e36e0cc30cd369"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/compare-actions.ts",
+      "sha256": "0b47f207d54027c4b5aa58333c9766ca3038cca2724fa30fcd4a018151bcb770"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/compare-keyboard-policy.ts",
+      "sha256": "c2b5afbd83fcefe562c9c96e76121c5c6899c114e3547730c97c8edebae0c1b2"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/compare-pane-clicks.ts",
+      "sha256": "2be73671b450a29b2eef61539a9b667be92b9c06432237735902f17bbc356db3"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/compare-pane-status.ts",
+      "sha256": "b9d0b7759fb544ecf49050685f3a535466ed304b74a7fc9032f391dc60c763dc"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/compare-reflow-plan.ts",
+      "sha256": "3436b2e6c56f1d8ba2835250bce303ba5d28a5997f220bb62034e1346f41dd96"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/compare-scroll-sync.ts",
+      "sha256": "2d095af53ff1deec65df761408cb7d54320c85a38a94d092cb09f4f4859a0ec2"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/compare-types.ts",
+      "sha256": "b8dc04793ee5baf6a9adc86db3dd9ef44ef4ac1db4a83512ddf394ec71ebc01d"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/comparePlayback.ts",
+      "sha256": "b47bdf0a4bd24052b5a326ab94abc63357cc95dc22def5c9385a221c783c923a"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/scanner-svg-pages.ts",
+      "sha256": "ae0bb0f96970bf676ac22005fdc165fa35e314f0a920659c2413c9f70e96c648"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/useCompareAlignment.ts",
+      "sha256": "fc955f43ee8372b231fbd274c227768d36a66da161a37ee5f48c016862dc9984"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/useCompareClipboard.ts",
+      "sha256": "4b823165c2e7c4be9efd061b47cd8b43a3d55e3dce5e2054026757b7d1932088"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/useCompareEditing.ts",
+      "sha256": "906b197dfc10b0dcf9fc8eebe467cc5fcbc60c5d04eda5c63522df8d9138d0be"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/useCompareOperationCoordinator.ts",
+      "sha256": "4e01c87e54dfbb9d046a996005d12249791bd5719c02735cb359ab3a2b1888d3"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/useComparePersistence.ts",
+      "sha256": "e5a51c3e0eb96d01f5698cf18fe76efcb4603313ec574e084a9cb1999fbbace7"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/useCompareReflow.ts",
+      "sha256": "53dbbe64fe1102b4a45fe35b8f33422003fe8df8389f0c76c9044747d51ed5ee"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/useCompareRightScoreLoading.ts",
+      "sha256": "3862d645a138e3dabf571850e4bd6541fe34197a4f77f492f0a61435d5127bb5"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/useCompareTransport.ts",
+      "sha256": "22a9d05c92c6b5f30862c7858d2c97602194f6b451118c7c2b98d420c02312e6"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/compare/useMergedScoreDocument.ts",
+      "sha256": "fbea04c494228d6f0316fa27bb6210283507c2e443f3ccfb17b7bd85fcb69aa6"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/context-menu/ScoreContextMenu.tsx",
+      "sha256": "6c4c9bdf3d4d155b210aac16a7fa198d73e4a63de03b6fabbb03b4d8bb6d7861"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/context-menu/contextMenus.ts",
+      "sha256": "294596cd2b4baf5e5a96b2d48105450cd5746bdbaa48b5bf361aa1b5fd25b295"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/context-menu/index.ts",
+      "sha256": "fb376904795a9f00a7ce0214755dc6e31952dfcfbe33308ae9c584ead12d1761"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/context-menu/useScoreContextMenu.ts",
+      "sha256": "a556abb8fbc93c1dcbc9384579464c9d2506efe75b0dda6e30ea8f2fa30c2361"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/contextMenuCommands.ts",
+      "sha256": "3d9834c240e2a039117d09d22b2d7775fbbc88e005d7f038a551a0cd1685abac"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/core/index.ts",
+      "sha256": "af7df8f43c489b404d5726f1578fd2f533eb9a8fd5e7d19713823f1c01b44dae"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/core/useEditorCore.ts",
+      "sha256": "2bb73e9b2186c2516bbc109e89e8155a254f169d4e830613d51bdb3238abe336"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/download-blob.ts",
+      "sha256": "db8ea8d58be2398d49ac517d4cbaac961e7743160c3827e082a64ce1e9b82cca"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/dynamic-entry/DynamicEntryPopup.tsx",
+      "sha256": "f6a52c138f42023b76ffba16aa11e4ad123c732340a6b6d3ecfadfbcce771d38"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/dynamic-entry/dynamicEntryCommands.ts",
+      "sha256": "c6a2e0d0c2c3076af796703da972d66cd698fa6a791043bb51f61f9dfe9858a7"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/dynamic-entry/dynamicEntryStore.ts",
+      "sha256": "c9c33b7ef96b79ee2b6fa98ce05eaf9ee5e81b945a4fde927f1eab91cf5cfea6"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/dynamic-entry/dynamicMatch.ts",
+      "sha256": "eebdcf00a9ce8d917b70ae6fbd72284ce9555240f3ecbe589de8a5baf2217300"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/dynamic-entry/index.ts",
+      "sha256": "65d40d2c1ce15f5ed3dbddf865cbdd596e926a5cb0e818f757b719642e656f89"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/editable-target.ts",
+      "sha256": "0fcb9e0a779e32207461080eee470953548de8b74387819ab6115d2d64b0c6b3"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/editor-types.ts",
+      "sha256": "65dd13b78b90c3f90327bad1ac296477cf70e9b6df040e796c23bdafbc752cd4"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/editorCommands.ts",
+      "sha256": "0b8fbbd700e33498aa1e7c400cce4620cb3933cd9cd0925289afb496cea4ba4b"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/editorProps.ts",
+      "sha256": "877bbbc3542bcfdce770768709518e6f7582a319bc33e15e2a1b2a08a42e135d"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/error-messages.ts",
+      "sha256": "1f1ff129714691c0215b139a940c46974d33867d91188198d6676d7149138e57"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/exportCommands.ts",
+      "sha256": "27906c4e6a12c9b137d9d9917f10fca0c802501b682941f0fbe1e8d1c4c6c9fb"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/file-base64.ts",
+      "sha256": "2339e6a6cfe2535bc7cef517c4e07ac947e9a1820f760f529d75bbf59a21580e"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/file-picker.ts",
+      "sha256": "3437053f3a585f756a71cd33af8bf8633cdc87b9f340bd2d842a9ec8d8035360"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/geometry-inspection/ScoreGeometryInspection.tsx",
+      "sha256": "ac0c7c59c38a2f00fc2904e4cd9f3e22fc7e85321484ad88d7bf9f7e8913ab1a"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/geometry-inspection/index.ts",
+      "sha256": "22764c6cc7a86cc04ea815de92ab9b9c1148ecf55c3a56217a95be574789222e"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/geometry-inspection/useScoreGeometryInspection.ts",
+      "sha256": "ae26982eb92aee0d87625ef3a1738a43ecd5f40d6a18810b96e13a532bd5a385"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/harmony-estimates.ts",
+      "sha256": "faa87a5223da8634b7bb90890870686a8f2b2e7d0e4a30788283426dd9459257"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/header-text-metadata.ts",
+      "sha256": "665bb5d36aa67a4a65f52afa66a9994a27b83ae045f63638749190a86df804ce"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/import-warnings.ts",
+      "sha256": "b161baedde5203e7ca119bed092dc38b5935847a984a9a8c89c3b33c6234ccc1"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/layout-constants.ts",
+      "sha256": "e2404331663eaafc72c66b4f10404942d558328f98b627007377722d33ba43e8"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/lyrics/LyricsEntryEditor.tsx",
+      "sha256": "154bd2203e07587cc5812f131667f9bdb64eefbe9fa8bc865a82254dd9f8b66f"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/lyrics/index.ts",
+      "sha256": "d29c92288dd15a63b36dbd71d8015ead9e95c997ae82334f4b4d436c658b2c64"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/lyrics/lyricsKeys.ts",
+      "sha256": "b7cfbba0380cfa9a7aef9217b21e0cdb72a85aac0db7e37554d4c8aa1d9a9b89"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/lyrics/useLyricsEntry.ts",
+      "sha256": "b305eed52d5d6896738ff8466095d9fc654a6de2679fb908f990e2b36593b043"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/marks-review/MarksReview.tsx",
+      "sha256": "fb1fe09a9dee2e327cb59e5dd2e14256e1d1bda297c553bf54c3e50f411a6f8e"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/marks-review/engraveMarks.ts",
+      "sha256": "26e9bcf9eacc4440970642539543b564f4cdcd2d7251a68901a15d3f0c31672d"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/marks-review/index.ts",
+      "sha256": "4bd008dcd1f4c4e260dd198f065454658c8bb20eeca8ad4a1b577688c52916e0"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/marks-review/markImage.ts",
+      "sha256": "b92ef3a1a0b9775b66c74fca1f859ec5285f0399c6d5b52e860b6d5d92f4518c"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/marks-review/marksReviewStore.ts",
+      "sha256": "b4765e0466b8b2db039a12c028bd7cb4a1ce7eb8b63dee803c3e9390a0a240b7"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/marks-review/readMarks.ts",
+      "sha256": "d8773e5108fd8ce49c77c14572a594286ce1d2064af7ad30d22e050db7edf7c7"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/marks-review/reviewItems.ts",
+      "sha256": "d6960ceeaa8e32d29c095b00b973c3aadae54da0a93dcdbab66075a356c16b1f"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/marks-review/useMarksReview.ts",
+      "sha256": "bfa44b474daf7d3c457cc23999be2ac4b127101f4989e26b756d38c1a09a8f2f"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/music-specialists-constants.ts",
+      "sha256": "67ecd49402322ff055318c382386acac013dbe0dc2eeb80118326251e23407f9"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/musicxml/index.ts",
+      "sha256": "cb540a3761957bb07b436659e178c4810c10bda06650e003b03fef23cbc93c22"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/musicxml/musicxml-measures.ts",
+      "sha256": "c6123bb3d2463cf24cc63854be50ead40948711ce7843f8a7a076e54a7b50bfa"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/musicxml/musicxml-patch.ts",
+      "sha256": "1250caa116f8c07f77c39a681bcefdfcaf8c95796bad8714bfe965c5a2d2b21e"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/musicxml/xml-data.ts",
+      "sha256": "85d24a76dab6fc6f7c6d45e72b2776c0b58d216d5a60d90ba3a8d8036dcdfcca"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/musicxml-omissions.ts",
+      "sha256": "710468dd8c7ca28a2d14e2ad64f29a7edb4037405dd996d835f294c05fde663a"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/mutation-api.ts",
+      "sha256": "70541d95878e91f059d53e17934743c374ff2d5888b00377eb415e0d86bba3bf"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/new-score/index.ts",
+      "sha256": "326281cbf6762d6e83fdf0e44db79f0e6897b1d5526346772551ea434860e708"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/new-score/instrument-data.ts",
+      "sha256": "214fd2041d2ea688ca7b7cb0669b448b6edfb403a3ca317a685a1e70587c1cd4"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/new-score/new-score-defaults.ts",
+      "sha256": "f7f012b87b536fb945230874b034a1156afafdec76a2891e8d16d577b4e6ac40"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/new-score/new-score-xml.ts",
+      "sha256": "9ce2583e9009c4e8b2c4433a158422d1608cf42fc0b9b2d1fe7c2bec8d6b4c73"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/notationMarkCommands.ts",
+      "sha256": "aa5ec3e0b83bf4131fda7b96780434e059fb47afb567f0eacaa47285c3f6e8f3"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/note-input-shadow.ts",
+      "sha256": "9357736d51a96da38cc3fe1baae31b0be9a89aa57a88892ef85477af83ca2b7d"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/page-turns/index.ts",
+      "sha256": "929490dd3a0486a7a17179395f00c2adce1a766fd4cf2ac12b517741b13030bc"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/page-turns/pageNavigator.ts",
+      "sha256": "0255ba6e25dbce4dfb1f05f769df0c7baf64952658f778add0da013f5e53899d"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/page-turns/pageSvgCache.ts",
+      "sha256": "b7ca29784b74d4b699b331d626558bdef75fb5826e45d333f36b538a3e623b8e"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/part-metadata.ts",
+      "sha256": "b77c367f8373deed9e0cf7b88a8d0392f2ea5f0349b3fb9b9eed19cbe1357bc4"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/parts/ManagePartsDialog.tsx",
+      "sha256": "b03c729a816077d67eae13739f1bee496689c78e8e0afa3383f10370d5d42ffb"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/parts/exportAllParts.ts",
+      "sha256": "be7610e3c452ad2784b09b3ef187f4021c941d596e31a412a5d9f8b4d584d85a"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/parts/index.ts",
+      "sha256": "4bf352dece285f0075af9ddefad9fad15b4c4a61708500f510ad87522588119c"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/parts/partActions.ts",
+      "sha256": "37feb9438713b31917ec764e4ebbc086ca650d12004ea14dc69d2f41879fc4e0"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/parts/partCommands.ts",
+      "sha256": "516c20621976955cfe434808320000d52399eea4a325a4f5ea09be7a4bbc8642"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/parts/partFileName.ts",
+      "sha256": "03a1d069afe7dcfc0b1b2d4efc1c7e4b28318299d23399acf664c005d0a1bdb4"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/parts/partsStore.ts",
+      "sha256": "162ae29781c2fb0610355b300377ec7a7ec76f892d6063e786938920a3652119"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/parts/useScoreParts.ts",
+      "sha256": "584c2dbf33d7aa192ada3e3da6d914296332371d88771b94c3d1f181509321be"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/playback-constants.ts",
+      "sha256": "7aef3d3e85c74923d660ca08f23f8c59192eda2464b1ea0c3f3858816249b937"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/playback-session/index.ts",
+      "sha256": "8ac377a44d06ef5ad66e14da4cccf11ac664fb0310c875e7394379dc53b638d9"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/playback-session/mutationBoundary.ts",
+      "sha256": "87c3afdfd479f7a4d5af218d253bfc5437411b51fac3f835b0c10e12b6797cd6"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/playback-session/useEditorPlayback.ts",
+      "sha256": "d5035b59229863571f5e827a699ddb02a57edfbcd845fa16c05db51d89bda16b"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/playback-session/useIdlePlaybackWarmup.ts",
+      "sha256": "5c492d17976eb301186940ea21aa725e14aafb1e748fe829f9cd76add1fd8382"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/playback-session/useTransportTimePublisher.ts",
+      "sha256": "4175af827cdc61c0db8cedb3ab4e66b653d62e3826f09d4fb07c5f4702a81324"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/playback.ts",
+      "sha256": "5d0f25b6fded9d8577e4ce27853d257293127cc37696b9cc3b53048a1bbb002b"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/prompt-for-text.ts",
+      "sha256": "6f298b2e78e1c6603c7468463e72481e2a091d108c9766e078831e99e8e34d4b"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/properties/BooleanPropertyControl.tsx",
+      "sha256": "65e5ff4c968a0add9c3a038940f747f10234dd96bcd9eab84aa7deb9f2185786"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/properties/ColorTokenInput.tsx",
+      "sha256": "5fb7a21543801ef6d71e047cfec2153e8ffd69e724adf0873f1a48e6b6f69a8a"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/properties/NotationPropertiesSection.tsx",
+      "sha256": "b41a05da666a166cfc5338c43b34c4fbd5ad8f5bdfabdc5bf0731aad239d8e2d"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/properties/TextPropertyControl.tsx",
+      "sha256": "b969e7ab431689a5a6de915f27188565b2c3fe08573a9af449ce66f4db85f726"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/properties/boolean-property.ts",
+      "sha256": "679342dc0996ecdc5723f8873cecdad4fbad8bb5b26791448665576fe85a2dda"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/properties/index.ts",
+      "sha256": "b16cdbedae2e276b1fbb2c47a9e6951faf49c3a7fd60bc552203f910e7b2bd7f"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/properties/notationProperties.ts",
+      "sha256": "9fa4bc4ef9dbc30a93d2125241e3ae82b473eda70358527ff18c983a69e3794d"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/properties/textControls.ts",
+      "sha256": "a750349ad702666d2489ae57558f5d0021f28acd254191949e1aff18692f4de9"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/properties/useNotationProperties.ts",
+      "sha256": "1902049d2cf94e99c7f3e16273f8a3be9121c149eb6d90bffe22420533fdb684"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/range-drop/RangeDropPreview.tsx",
+      "sha256": "e63143d6fcf0ced3a282c0f600fc13e5c02c6a3c654c5104a803a428b29cff5e"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/range-drop/index.ts",
+      "sha256": "018a8817e6920b8065c9d210e857ae456d9beefbaf5d90e87d3bbd90fb71a6bd"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/range-drop/rangeDrop.ts",
+      "sha256": "9f1b992d740574f025c6e9562b7e222467655fe0c3f4fe324fce4af1c9a5db89"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/range-drop/rangeDropStore.ts",
+      "sha256": "f89e7af611b13e732bd7b01de9a1e86d3c670697766ce6b15d9190dddcaf86e7"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/reload-carry.ts",
+      "sha256": "1e9d8f3721a7025b576c5f15dd07a78801a2c31cadba30d3cb04fde742b8c817"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/rich-text/RichTextToolbar.tsx",
+      "sha256": "dd613d4828573e8fe859a5449ef39dcd382d7c7c900068b72eb0aa3ce07bdb61"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/rich-text/SpecialCharactersPicker.tsx",
+      "sha256": "f880e4a2ef2c9b3a210a9d8c03b458552c6cedd57687b90ed471546eafa5da0e"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/rich-text/index.ts",
+      "sha256": "857375480a3bab6327b301197aff5a151157595c5fac5e5150e91102a63a0b63"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/rich-text/smufl-codes.generated.json",
+      "sha256": "3fc2b989bf480fb0fbf56667fb6a51af392eca65b6b5d238e12bffa18b04b10b"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/rich-text/special-characters.generated.json",
+      "sha256": "cdc35588792fe6c9a7e78fea4b4ce85509e6c9bbfdf733d489dd4030dd09573a"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/rich-text/specialCharacters.ts",
+      "sha256": "aafabdb49ebc5724a83fefe2ceeaf7d2cae01de6beab778086cded283966060f"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/rich-text/textMarkup.ts",
+      "sha256": "8db5659583de572e34bc0f8a4d729e9b4233548c0d439ffd31ec157ddef09231"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/rich-text/useInlineTextContent.ts",
+      "sha256": "78f5cbcbd248ad0bc1e2d92ba9ddbf2a3e63621e6b2cefea7fe32b54c4301ee9"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-dialogs/ScoreDialog.tsx",
+      "sha256": "fd79c55df3decb1f1a5fb00f421ccd870418bea3bcbef486541a758b51c9dab8"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-dialogs/dialogEngine.ts",
+      "sha256": "f5b3c50b7c42b12bf22e59c2c14c33fb9e6f533804a0890058620bd674446d61"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-dialogs/dialogSpecs.ts",
+      "sha256": "725b731927a44f4f1f0ce04cba62d9431a3c5db92c98210da63df3ba5c480990"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-dialogs/index.ts",
+      "sha256": "67a7754ecc1cc6aa6b8de3df703f536fa3566a5711d10d26316992809d684c1c"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-dialogs/scoreDialogStore.ts",
+      "sha256": "3f754232afa08434f2dbfb0cc3972dc4978e3f11a4416560ac5ae07f1a4b83ce"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-dialogs/staffTextDialog.ts",
+      "sha256": "eb82b7bf39f7b228789d2ad9805a96bb9deffec472df53e7aff3fdd1b64202b0"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-dialogs/style-pages.generated.json",
+      "sha256": "66ea2ec163bd7c622a4b4526316f60157d7732d906fcb0ac863ba57772b05b6a"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-dialogs/styleDialog.ts",
+      "sha256": "88403e6a34a457cab1e0362dbe3909fdf8e84b5b251d67aad88c6310259bf0df"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-dialogs/textStylePages.ts",
+      "sha256": "fa769ff1a7efacfd0aa2be430cfade058fa6caa775e3914c78d2ed15a81936cb"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-dialogs/timeSigDialog.ts",
+      "sha256": "21830aae194bde7dbce212b051afe4e5827e39d09d02ba6e8f3f5350eca1dcf6"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-following/PlaybackFollowLayer.tsx",
+      "sha256": "469164c281f7d6565829922d1591f94680df94b2d9326ad5b60a2211352f1ab1"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-following/PlaybackHighlightControls.tsx",
+      "sha256": "7f5d30a8e7e90cec9e99f61bf611b609eb5e766f9046d932d513fdb9821b6c60"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-following/PlaybackHighlightLayer.tsx",
+      "sha256": "3af6c50910201f67189ac418a90c1a06219a7ee652fa7aad1613b5951847212d"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-following/index.ts",
+      "sha256": "641ece3239754b803977bf4a7a6560cc162cccfe6a7f9cf7934533ff15ee16f3"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-following/useAudioFirstTurn.ts",
+      "sha256": "55289a78caec9107fdc91daa5cdbdb302d42659d1c8637d6f9f9e36fde1c1a90"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-following/useManualScrollSuspension.ts",
+      "sha256": "040b577d04464e8496409e40d243e826cd8ff1917b1915c87b215266f0715543"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-following/usePlaybackFollowLayer.ts",
+      "sha256": "01664d70c154918e8d9fd815b64a11f03fcb08db95e8046bbb77861de3922ef9"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-following/usePlaybackFollowing.ts",
+      "sha256": "9cd27d783f41fd87a0ccd86268999205d500ddefa2df4346c822872baf857f4a"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-following/usePlaybackHighlights.ts",
+      "sha256": "1d32841520a5e937d17c587c5a396b6f3177ce4e434ef2d5876584ae628eb275"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-id.ts",
+      "sha256": "c680808344fa6eba47ab6193c24aa6390806f70f8dcd830ea0b5a2a5775cde98"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-measures.ts",
+      "sha256": "d7b911b24058e3c0517c584e7e104681fc509b18a0f823bfbf51975cf044e3d4"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-session.ts",
+      "sha256": "831d053a2ab4de95bcc133d53bc135dacd6d3d3ea26abf4f03149eb93e8566b7"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/score-url.ts",
+      "sha256": "c402475241fb67cd2aa7232e462f21b014f94afee59d6e5daf459a17978922fc"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/selection-classes.ts",
+      "sha256": "7d81723f9d4371642b4f534443c561b9be35c0ae1bb4ddb1c8f44afd58b2539c"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/selection-types.ts",
+      "sha256": "906b1083fe2d45f5e46dbfc2665161b64ea0a8886589e36e3d2f0e49126ce16a"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/shellCommands.ts",
+      "sha256": "09006c296a90061f78b5ebbfb9047e9fdcfc512f777be59671556610cc6304d7"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/staffMoveCommands.ts",
+      "sha256": "cf34b1cac649258e87e521f1a3bfdc3b939d941c573e4b49f05d3c2ec4e97a8e"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/svg-size.ts",
+      "sha256": "94baf0bed512bae281a6887859d3653a6f4c43a2f2768a7052fd6b80bc44810a"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/system-locks/SystemLocksPanel.tsx",
+      "sha256": "b16158fd5df231515ee8d43a9f42435a2e77d9a2efdce6e0a04d1939d296522f"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/system-locks/index.ts",
+      "sha256": "b04ca6bf79b28e31ab78c8fc830fd75532986006a55a215b43cd2946ad4a45f3"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/system-locks/system-lock-property.ts",
+      "sha256": "b61108b1238806b87d6b2b3045eb25a24e1588b778fa932f9153473ed3d1bd0c"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/system-locks/useSystemLocks.ts",
+      "sha256": "619a428c2dfd4fb21fccab1e9f080ef15cd0f4849fc9aadc22ab2b6f3a73633d"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/undoHistory.ts",
+      "sha256": "7255b8cf875570c104d1b2d77f52af2f9a767da40ba0aeafc7c3896d81ceb399"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/useAiAssistantController.ts",
+      "sha256": "fe2b512f4cf3ef999248fb0032b6f7099f5cb565800c04fe12239dded83b2106"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/useAiEditController.ts",
+      "sha256": "20298b327a3db699341820ede932e521023a916003c2e909efe367afcb42f195"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/useAiProposalController.ts",
+      "sha256": "86ba5c2c0717dcc69264368c40f543a31d0cbaf1f854fdfd8c9600dc58c36085"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/useEditorCommands.ts",
+      "sha256": "5cad4572f9209e2593d23f776c82cc82a8d438d9f4d261963d9a313f18aa2e39"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/useEmbeddedContentHeight.ts",
+      "sha256": "687c37926e5b688908a12ce45a246d72dc9deba50c9c8a6639a1699404f35489"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/useShellCommands.ts",
+      "sha256": "96d94c466749c23cfaf14f4c0f852a46f799673f383b71c803955fe5d7da606f"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/useUndoHistory.ts",
+      "sha256": "2ea59990145a34ccf77c4691643af8a9ad39cac5bd81b35ef2e90ba0fdaff698"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-editor/versions.ts",
+      "sha256": "5d9845841824653fbdece776e1875e10fd31beb9a6e7dd19be4a7020be3efdde"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-player/DismissibleNotice.tsx",
+      "sha256": "e613afb8c98381cb02528b493a2a85a066efae311fab8b794b7b2fa4fdb48fc5"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-player/EmbedPanel.tsx",
+      "sha256": "5d09dbc6153fa14ae7fcb14c4b6836c67187dee7fe24afb9db43480af0e33c53"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-player/EmbedSnippetControl.tsx",
+      "sha256": "4da5f9316e8f96fc79408659f3c148efa6be8f95f7cb95ce42655c7176af7dd5"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-player/EmbeddedScorePlayer.tsx",
+      "sha256": "dc9fb0bbffa636c775c4b4217b1ba340042c7f6aaa3a2d3574fcc5d797c1d598"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-player/ExportVideoControl.tsx",
+      "sha256": "ca9869e4e2f4df212c4103971e1e41eeea169c388e47e581e05b3cc66bd65f9d"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-player/PlayerControls.tsx",
+      "sha256": "3be60fb83dd0caca2846bc88ff5bb14d12cc7e786bdcae1d3dcec1205bd68f06"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-player/PlayerOverlay.tsx",
+      "sha256": "2d0aba549b1d72bd6d0e2e8d7259c999e1197826064f9361ea886483d96bc9e5"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-player/useNoteHighlight.ts",
+      "sha256": "5d31a18a26512ae68cf51a3b650a2a2709b2d8ec6cc99153af14a7d15a725f20"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-player/useNoteheadColor.ts",
+      "sha256": "143afd9d681a86e78bf2b18b891584fc41ee541b4b53e2f3da1538c36d519c7f"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-player/usePlaybackOptionsRefresh.ts",
+      "sha256": "a58168a8fa8dfc45f443f259147227ae62f048dc2b8373a570661652a15d1a74"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-player/usePlayerFollowScroll.ts",
+      "sha256": "042189bc0a26c370cfefa97c64d59dd16dce63cdffa02ad2f418c1bf2ef08bae"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-player/useVideoExport.ts",
+      "sha256": "4d535859ede232298dbdb2e070067d8c5fdc484e210a9ac76ed943930b30da74"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-player/view-effects/index.ts",
+      "sha256": "1a23f65f81fcd64221037572fcd54bed7f68dd6a4557ed09c6ee15297a2720e5"
+    },
+    {
+      "path": "vendor/ots-editor/components/score-player/view-effects/noteColorEffects.ts",
+      "sha256": "4e19d7ce35724f2c36b03348ee6f0b94c9460dbba87ee6e13d2d7a7a96a42a0f"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/ActivityBar.tsx",
+      "sha256": "a3dce4bad8e8e0a782f1f5a0a22026ce09ffe20675b35c116aec405144d749d9"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/AiToolPicker.tsx",
+      "sha256": "fb8bd48670dc8cf9a5ee737cadd183cf4df12836c7f153d25ad18465baede062"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/CommandFormDialog.tsx",
+      "sha256": "8c0c5467bef0d888772c8ecf1d331b2dd8738da844300fb94a1dbe04b2dc704d"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/CommandFormFields.tsx",
+      "sha256": "6c3f647aefcba00e8d96fc3cf3a7f3b1ce3565b019fbc7b0b670bd62d748e629"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/CommandPalette.tsx",
+      "sha256": "807003877d1c915a892c75c43cac149a3aaf575eff81cd910b2bd8d69953ca56"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/DockShell.tsx",
+      "sha256": "b01e100f5c06bfdf61c751364c84e12a98c26b082c040c277e2f6b6bcca6b292"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/EditorWorkspace.tsx",
+      "sha256": "e55e0bc87a68dcc2bc155121fddc41e8899438986bebf9c109ae598533ee367f"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/EditsPanel.tsx",
+      "sha256": "74abd32f9bd5665b3b5bab54eddee6914e90a851e1cfcca78b341251a2072030"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/EmbedDialog.tsx",
+      "sha256": "aa5d32963bc34f893bb800e6565660f9480d45e92fccdfdb55494c3cc1a76e0d"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/HistoryWorkspace.tsx",
+      "sha256": "157664dfb6b3248800f2d4928e30fb554f3e4f04875b66fd9913ef455bdf0459"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/InstrumentsPanel.tsx",
+      "sha256": "5e47ce75b4fa7db3b1fa6e139ad1439414d00fa912fae8eec8b234c48af55a0f"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/LeftDock.tsx",
+      "sha256": "bb2eac9a2fb2fe140822d409c8fb89632e8bc1be1a854b6a6a688ff6d55516e6"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/MenuBar.tsx",
+      "sha256": "1d373e89bb85969c3ad18639479bc58c11eea62baa2ee44913ecd7f807ad9e62"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/MenuNodes.tsx",
+      "sha256": "f87ecffa80f4e75c5e7ed232def70bced390692d1fc816374f5abfc21b4c037a"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/PartSelect.tsx",
+      "sha256": "3dd30204362e1c79eccda4debb13597dc0d8b0305df504e8e672d913ad85e68d"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/RightPanels.tsx",
+      "sha256": "71ae47be3260ef95f6703cba44b6e24f0ba04ee3adf6dc91894bf90e079ddeb2"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/ShellHeader.tsx",
+      "sha256": "86bfa8872636ae815b04919a9b4cf9896b4c0a7591ebdb4bca1042b44eb843d3"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/ShortcutsDialog.tsx",
+      "sha256": "4636e81c7859d1d14f8bb8ad1323aa0fdbd7434f7bccee259b4fdec9b1c5b7f6"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/StatusBar.tsx",
+      "sha256": "9688aae46f52d0529b1dec3e57c10503a4903be2503b932ab764a3f8a36c9e14"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/Transport.tsx",
+      "sha256": "cbc462c3e0a1090e9d74deebaaec27dbb14b5c0244ff39184b8f8a169962981a"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/WriteWorkspace.tsx",
+      "sha256": "30fba43f54edfd912ca206e01b1e5d596168af711fd5dbb3b45e63ab06086ef3"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/activities.ts",
+      "sha256": "a6c2025418af715e08eda6a68480b5bf54337ba061b30b0894a709207b0b1292"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/announcer/Announcer.tsx",
+      "sha256": "caf39509e39883fe210c5fd6366d56e2173ce5328059bf1416e00825171f2e0a"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/announcer/announcerStore.ts",
+      "sha256": "2e16f08b3cce88431df34b052a210768549eaa841330a24d767ebeb6e84717b5"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/announcer/index.ts",
+      "sha256": "7c9b86ee2f7c153908ccfa4cd6d82b9d8c0189faae6c326605c2bc516ba042c6"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/announcer/selectionAnnouncement.ts",
+      "sha256": "d51173896d0176b6658c0a976f08be53d8caefe1e1258d3f5b4349182941fdee"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/announcer/useSelectionAnnouncer.ts",
+      "sha256": "140331b4a48b8e8765f2524d665cda618a1ca41d73e3d8100c854512a9f15126"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/commandForms.ts",
+      "sha256": "5cc33073725d8b4d960d6c6e739c28215a1ba59f4ff499cdcc8135bd1441907a"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/filePickers.ts",
+      "sha256": "aeeb509d44662a707e92266e8d653c83e822c38c8f5777b35df9b085019d0c5a"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/icons/performIcon.ts",
+      "sha256": "44caa9b1c4bd63c41f4bcad08dabe3e42edca3b64da186c1f46553a4607f31af"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/invokeCommand.ts",
+      "sha256": "cc8e9ff4d36951a14d7e0443732c6006c1383ddaaa6ce7c40d2cd55204e92b9d"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/keyboard/KeyboardRouter.ts",
+      "sha256": "740d967beab3fb0838905a4b788a5a47859d65c3295d8822ea02cd983f940bb6"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/keyboard/escapeLayers.ts",
+      "sha256": "5295215bb37c2113f6fd5216d9b16d5bb9b39096d50a9136b012bd26f6cd6edc"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/keyboard/useEscapeLayer.ts",
+      "sha256": "ef7d0b80fa41ab3d50ea2ca62d0567451be54b8fab536e04f679295b1ed1a523"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/keyboard/useKeyboardRouter.ts",
+      "sha256": "6ec398c6b606333f8f68aa1be6c3dac4dad6a9f8bae0cec2d28b18f154f74a71"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/menuRender.ts",
+      "sha256": "f2d5f657ddefecc986deeaea97b6f225d23d656fd8bdc965d77ed66826182aab"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/menuTree.ts",
+      "sha256": "64ac42f7623de23985c993959d45e591ddf5ceff956f2a41faf0875e8b534857"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/menus.ts",
+      "sha256": "180a114b129930e3759b9c77b7534e0e2c005468e7e076522a856411a2596e58"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/navigationQuery.ts",
+      "sha256": "5ce17f61d49610315c36b0811c2a9b5ceda1046a409e1d26e46c8bc1e58cbe89"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/notices/NoticeHost.tsx",
+      "sha256": "c5f9e6de65cda0283994a504987bf58b7155ece1e0f8a1a5a2ba0a68b975f91a"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/notices/dialogStore.ts",
+      "sha256": "08c3946f5faabbccc8d80f7bafa1113881177da5fcf95dc19f70afe26ab638c8"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/notices/index.ts",
+      "sha256": "751813c1a91ed4d8ee8e3df0708a17098475e2bc7e65eef241117dc3dea14c04"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/notices/noticeStore.ts",
+      "sha256": "f29a4bf836efe9ac1efdac2fc1f3405857600ae4531efa1d9eb5ec661080adb8"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/openScoreFromLink.ts",
+      "sha256": "86444329935224b4e4c46489222132c0dae93c700ea5a4b29df944c675afd7fc"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/paletteSearch.ts",
+      "sha256": "ff8343b1eed8db952523ea610e94eb3156d42ad02377645866a2a8f64d58765e"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/ribbonMigration.ts",
+      "sha256": "a66a3c5d60f61510c4c2940a343a9a1fb048f16fb0908b6bd571c5f24b397c1a"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/selectWorkspaceMode.ts",
+      "sha256": "96954216247a59bb88be22e06b25c6f4c7e5b4776f388d78765509a1ae5a267b"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/shellCommands.ts",
+      "sha256": "bd2206aa410337094e3bc5bb940a033a8251e265bb23e08e0623e2cbdb600f52"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/shellStore.ts",
+      "sha256": "62c108998d012d71323a53af7e834188dd773e81797e00ea6b1e98e84b615bfd"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/shortcutDisplay.ts",
+      "sha256": "5bed8e6fedad2608840004c581cc401c2e3b1c0cbbb5485778131f6d1409e8bc"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/shortcutDocument.ts",
+      "sha256": "a3c397608c487f7fcb19c21ac0126aa193e1ccada77dc8d3e7f59c4e604eb483"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/shortcutList.ts",
+      "sha256": "09ee5b7b4dd61f97fd86ec66866d476514018761cdcabfdf584246e110b53745"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/CompareToolbar.tsx",
+      "sha256": "7011968132c5d8ea61e6446923f8029e8381b4dc7971c7d8ec38433c6a7d5529"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/HistoryToolbar.tsx",
+      "sha256": "e6842bb0dd6133882f25ddb88f266bf5dc9a160418dea9c6cd5cc6ae7c2eac04"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/WriteToolbar.module.css",
+      "sha256": "a399402ae3f4b697e09c119bfc7000c33995ab37b651b98b5f49ea22b5e3423b"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/WriteToolbar.tsx",
+      "sha256": "66a3ac2b4beb12bcff1b9a75754e4d44c32326dc1bf8b0870955b523e5bbe4b1"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/WriteToolbars.tsx",
+      "sha256": "e90e5325bc075ba1d3503a2603d00c6064cef92fb7ce0236e8c9067095881803"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/strip/ControlButton.tsx",
+      "sha256": "a160246c0aaf98fc9baf6bdb41ccc4b27cade1767703a410609140d1ba73149f"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/strip/FormButton.tsx",
+      "sha256": "54ee4e2a870184f041ff75936e79b7418f95d6090cbdf171b15d8ca0e46d63a6"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/strip/MenuButton.tsx",
+      "sha256": "4ac5d46f16f9bc247d46ea0852b5f77c753003e49fefefbd9c05308a7f4b9bd2"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/strip/MenuItems.tsx",
+      "sha256": "e9282f042dbd120f8295dd19f646e72907c92cccf776868a09f9ed8c835d9ecb"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/strip/ToolStrip.tsx",
+      "sha256": "2a2f8e46971693e184a12e742082491de7ec0ab2b76cf4df24678690b803bf0a"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/strip/icons/ControlIcon.tsx",
+      "sha256": "e472111e3b579f6d06d13c5519ad080b43d842c247abcbe21448f977b2e8d4c9"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/strip/icons/StripIcon.tsx",
+      "sha256": "7adad8a5dd32afb6ddf097e14511543967e0a3dcbc3c81b401fc37967e9f958a"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/strip/icons/glyphPaths.generated.ts",
+      "sha256": "b57a30e8cef587b55de9521373f6f962ab04e9f6b333cb5d57c91aad288064d3"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/strip/icons/stripIconSpecs.ts",
+      "sha256": "db7d67295f4f4baef01393b22ce440f65e87a33c52c947e35847834520dfac32"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/strip/index.ts",
+      "sha256": "5f93451bac81e41ab56c51d30a25d80afc075cee4418e75b8e4081e4e8515f41"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/strip/layoutGroups.ts",
+      "sha256": "3f87e540b10c731d39c9e82952a8b1fc676983c0ba01987a2f3b6bbc7cbbedff"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/strip/paletteReferences.ts",
+      "sha256": "c44421a4f212a16abbb25ca5010fd6fcd26a46e73fab4bb53c59b618d3d096ff"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/strip/quickRowGroups.ts",
+      "sha256": "b864c0c1b0d3f1c2f1d101d06b9120d37807e82975e82082a18c00671ea60b44"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/strip/scoreGroups.ts",
+      "sha256": "b1ee1f02d6bd001ec0a9aebc0f6651bb8decebd28053379b202e9866a6d739ef"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/strip/stripPersistence.ts",
+      "sha256": "cee92643a3c1847304b6218cb98fdf0e2996c1bdd09c9f4cf6083f99e7e29394"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/strip/stripSections.ts",
+      "sha256": "1b6bf08a7f072b5a27b770a6d92d92dbb7ccdce0531efa6dc1f45ff5c93239b4"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/strip/toolbarLayout.ts",
+      "sha256": "2e406c3513cddfee0c075c8f9b4949d98d79175d3c78d4adf3d7c87c88c10d0c"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/toolbar/useToolbarCommands.ts",
+      "sha256": "976231ae5a3995cb27334e0f2cda6b632a4b9ebc39586cd736a225af0b6d96ba"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/usePersistedActivity.ts",
+      "sha256": "94dc9ad88ca0b78fcc41f75769605e7713e25ec5ea922c7ad5c0501bd6217e7c"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/useShellPanels.ts",
+      "sha256": "6e9407915af0276ffc96372636676a7b7abfac79aaf9cf6fe8cb4f37b55c53c8"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/useWorkspaceDock.ts",
+      "sha256": "1e4cc6b282de1b01e66096dbd7e23a506ca8712627f4cc00c47fcfe6d0b752b6"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/vendor/viritura/Panel.module.css",
+      "sha256": "6c80c6935b8ccd89ebe141bae4215ff416784cef3c64e5c6656a852c869f7bfa"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/vendor/viritura/Panel.tsx",
+      "sha256": "1e78762cec5b87a01c0abfff81577c3f35aad0630078d58281c017db969f39ef"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/vendor/viritura/WorkspaceShell.module.css",
+      "sha256": "73eac7d01a68a8ea4824980e6b81eaabc4a28fbe2d09c4b2e2fa73faa7d85178"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/vendor/viritura/WorkspaceShell.tsx",
+      "sha256": "f4e34ca839ecddd06ec8473ce4158fc6164a520f37a3e4c2011bb37532b75b3d"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/vendor/viritura/index.ts",
+      "sha256": "128a0013afb4d8e19aed1989c7decb27d6647c2efc43500c5aff3328ee9a4fb9"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/vendor/viritura/shellMetrics.ts",
+      "sha256": "fa55892437db948205ee5bd4c74b0956a3fa6ac5231f89f3059d31bfac5a49da"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/vendor/viritura/usePanelState.ts",
+      "sha256": "dd274a09b815bc21843364946b7c1413827978233dafefbaaa0d56079818c44c"
+    },
+    {
+      "path": "vendor/ots-editor/components/shell/workspaceMode.ts",
+      "sha256": "d7deaccae7ba0a537e46f4f8a347674850f50fc00d52559031fe16ecc5168e7c"
+    },
+    {
+      "path": "vendor/ots-editor/components/toolbar/BeamIcon.tsx",
+      "sha256": "df5b67944cc532080915f39abbbfbb68463ecf34cf416879280c60ffd4de5411"
+    },
+    {
+      "path": "vendor/ots-editor/components/toolbar/CustomIcons.tsx",
+      "sha256": "18d836b78da6d305411414cb35dc770c2a6710b009b96ffbf4943e6d9b09d67b"
+    },
+    {
+      "path": "vendor/ots-editor/components/toolbar/IconInspection.tsx",
+      "sha256": "5f167eb90c7fd46b703e46ea20fef4166ce75cf3e240e4b867543a26623ed0ed"
+    },
+    {
+      "path": "vendor/ots-editor/components/toolbar/TransposeDialog.tsx",
+      "sha256": "c1dc967c6c8b47e5c8d51ee27ae275310e8913eb461b90d15f6c2230892834e9"
+    },
+    {
+      "path": "vendor/ots-editor/components/toolbar/VoltaIcon.tsx",
+      "sha256": "3c6ca5054ea9814e88ae9bcc2b4de64f368a72f4c08d7de62b3a1f487dba8ee2"
+    },
+    {
+      "path": "vendor/ots-editor/components/toolbar/constants.ts",
+      "sha256": "135676e0507691afea6a7e36fb7199a30dbf01caa2df3db2449972ed6f7785b2"
+    },
+    {
+      "path": "vendor/ots-editor/components/toolbar/instrumentChoices.ts",
+      "sha256": "ec7fd7f3517dce6349c054949f0a736cf2843935e36e6b47ca06d900dbbc750c"
+    },
+    {
+      "path": "vendor/ots-editor/components/toolbar/palette.ts",
+      "sha256": "c42cdded59222f348406eb10d168569439da72238726bfff4db33f3c6e1bf132"
+    },
+    {
+      "path": "vendor/ots-editor/components/ui/Badge.tsx",
+      "sha256": "d870003877afc535bd3fce7eece482a3d6430675cd90e63fff46c993646f8f41"
+    },
+    {
+      "path": "vendor/ots-editor/components/ui/Button.tsx",
+      "sha256": "cef35349eb954b91e7b14b4544db95660d6e8a58c09099a6f957a3e6607f441d"
+    },
+    {
+      "path": "vendor/ots-editor/components/ui/Checkbox.tsx",
+      "sha256": "9bb0bac7dc37bce3e98a6936f5d8600416cdf597272b13c4850788235ce95ab2"
+    },
+    {
+      "path": "vendor/ots-editor/components/ui/Collapsible.tsx",
+      "sha256": "d4f388e9ff2403b018b75d05f4ae3fd93887e2a0f417cd41e7c970b5f5100f36"
+    },
+    {
+      "path": "vendor/ots-editor/components/ui/Dialog.tsx",
+      "sha256": "3c1fc5c6da80061548347a992aedb1def216ae69473b2e294e3c2ce2b18e9956"
+    },
+    {
+      "path": "vendor/ots-editor/components/ui/DropdownMenu.tsx",
+      "sha256": "8cbe2b1059c52eda0cf07eff92d2e0ed5324e93115757d2488a4287338428729"
+    },
+    {
+      "path": "vendor/ots-editor/components/ui/Field.tsx",
+      "sha256": "af913ce249ad1a39fc1b62f57bbf3d1949e1503aac1aa6f2052a2ed0aad0b116"
+    },
+    {
+      "path": "vendor/ots-editor/components/ui/IconButton.tsx",
+      "sha256": "586925c1646d32013454ad05d9adab237910eb07ce45daeff8816108da63d535"
+    },
+    {
+      "path": "vendor/ots-editor/components/ui/Input.tsx",
+      "sha256": "42a6c2ad016c07f40127fef95e5c472f9185eb295f4fb961a9af16d83bc5c8b7"
+    },
+    {
+      "path": "vendor/ots-editor/components/ui/Popover.tsx",
+      "sha256": "2a8eaf5285664add32eb0f0ac5daf9f2e9f48bf0d0dd40fd8b76a73eb462d785"
+    },
+    {
+      "path": "vendor/ots-editor/components/ui/Select.tsx",
+      "sha256": "f111f85a73736196a34eeb828605b63831aa034f0ff8465d83faf4753fba875c"
+    },
+    {
+      "path": "vendor/ots-editor/components/ui/Tabs.tsx",
+      "sha256": "4f6e661537738730999b49a60388147b2cc1472a432ed842a99fe2d2fe958fd8"
+    },
+    {
+      "path": "vendor/ots-editor/components/ui/Tooltip.tsx",
+      "sha256": "3b219c22b69cb75712f1f24a808f7296c70090bd134b24eda1034e1852d801f9"
+    },
+    {
+      "path": "vendor/ots-editor/lib/ai-edit-effort.ts",
+      "sha256": "049ec01a6977f0763610ee0faf74288f2e2fd1e9ac2ded666a33994adab80ec2"
+    },
+    {
+      "path": "vendor/ots-editor/lib/ai-edit-progress-client.ts",
+      "sha256": "4adf116ab6f727cfbcfe8391c89888456f211c0c2194ee7d785a75adde81aa6c"
+    },
+    {
+      "path": "vendor/ots-editor/lib/ai-edit-progress-stream.ts",
+      "sha256": "3a4fdbc1701542ae6a1cccbad6ddf09bb962094cbcc33c31ed79871067281aeb"
+    },
+    {
+      "path": "vendor/ots-editor/lib/ai-edit-progress.ts",
+      "sha256": "d25e7e776a0fc5fc7c8c6046df7fa9a929ef923e87e73d70d225830ae0ab4a90"
+    },
+    {
+      "path": "vendor/ots-editor/lib/ai-edit-proposal-client.ts",
+      "sha256": "e69873742f506dd02c557ebeb59fc0d19c6fa94b46728153a151ba4793bce104"
+    },
+    {
+      "path": "vendor/ots-editor/lib/ai-edit-proposal.ts",
+      "sha256": "a1fae2f4b057818307448ab0e1430ddd53a7befd30c650264389f1da193e61ca"
+    },
+    {
+      "path": "vendor/ots-editor/lib/ai-model-capabilities/cache.ts",
+      "sha256": "31276229773279c4b13e704bf0f741c7ad5a11e3bf237c3f57773d937eb8ba0f"
+    },
+    {
+      "path": "vendor/ots-editor/lib/ai-model-capabilities/index.ts",
+      "sha256": "b0b8e2caac8b91ad76bfda339ca6c770fb0ef9cf848fe63cf1f04ee91b5c90e8"
+    },
+    {
+      "path": "vendor/ots-editor/lib/ai-model-capabilities/provider-metadata.ts",
+      "sha256": "02bef8f808b765346f56523e0e6ea3c6e453177ebbc20e5609cc292f0f5d1cc5"
+    },
+    {
+      "path": "vendor/ots-editor/lib/ai-model-capabilities/registry.json",
+      "sha256": "9367079a06d81532891e84116be696c01b041edda502cd22d869ac2d0844fd38"
+    },
+    {
+      "path": "vendor/ots-editor/lib/ai-model-capabilities/resolve.ts",
+      "sha256": "98046365e9af83649d1b17c2fc6dca2ea52b348d4b8702e8d779c8b75642d32a"
+    },
+    {
+      "path": "vendor/ots-editor/lib/ai-model-capabilities/types.ts",
+      "sha256": "5054c3ee7861a0d99d726db700c0b586c128d7b1cdcd930405a4568c7778b694"
+    },
+    {
+      "path": "vendor/ots-editor/lib/ai-model-capabilities/unsupported-parameter.ts",
+      "sha256": "a822eee0057a0c30898976bd64dd3a9eb83fcdc04f13564af82f6b28fd2dec76"
+    },
+    {
+      "path": "vendor/ots-editor/lib/ai-provider-adapters.ts",
+      "sha256": "ca8d5181c6f43042e5781bf6d952e5aa7366c9db49dec37dab156e7f9334faf5"
+    },
+    {
+      "path": "vendor/ots-editor/lib/api-access-control.ts",
+      "sha256": "be15a6a77ad117743808f6ee1dff0511c036b75d61763d62dde1689722ab40f0"
+    },
+    {
+      "path": "vendor/ots-editor/lib/api-route-logging.ts",
+      "sha256": "9e0ddab1bfd56cced5267b3bfa7913a8e87d697d194b274400bb992e746b3fd8"
+    },
+    {
+      "path": "vendor/ots-editor/lib/as-record.ts",
+      "sha256": "50735889518a65a6951d780fae0d115dc79185124164e00a2c685ec170d04570"
+    },
+    {
+      "path": "vendor/ots-editor/lib/checkpoints.ts",
+      "sha256": "6fb70031b887bca02fd8e40f179134a52310f5f8aa0bf2e4b1a5cb4a44b5d85a"
+    },
+    {
+      "path": "vendor/ots-editor/lib/commands/bindings.ts",
+      "sha256": "4ae2d2f71176313c24c32aceaba8a0a41416ccd9876e050b877bb84d86d32340"
+    },
+    {
+      "path": "vendor/ots-editor/lib/commands/dynamicLabels.ts",
+      "sha256": "bf1c21e295fd95e076427e050854187e937f5252db3b9b64267f9f8d3665531e"
+    },
+    {
+      "path": "vendor/ots-editor/lib/commands/index.ts",
+      "sha256": "04bc7f475593457de0848f7e6de2a49706e8c2a00a1a3d83c02281067bbcf02a"
+    },
+    {
+      "path": "vendor/ots-editor/lib/commands/registry.ts",
+      "sha256": "5c3e38c432b115b672dd637f529c6c693d6c778c16824d70bc08772ae89230f9"
+    },
+    {
+      "path": "vendor/ots-editor/lib/commands/selectionGates.ts",
+      "sha256": "13cec46ddfa6396c39926b7aee5ded0bbbc96dfd05c542e05a5652f083ae0b30"
+    },
+    {
+      "path": "vendor/ots-editor/lib/commands/testHook.ts",
+      "sha256": "0ef82a2604b339da6800fa8f36d237bb323bc795f0fd37117b4b5b67602c577e"
+    },
+    {
+      "path": "vendor/ots-editor/lib/commands/types.ts",
+      "sha256": "4fae1020094cf7e4b9963075f8a9489e9266016d73c0e596bcdcf3b16e548f79"
+    },
+    {
+      "path": "vendor/ots-editor/lib/commands/useRegisterCommands.ts",
+      "sha256": "c8d65e24fbe2eb8cb9750fa6dcac5355333abd2f317a86b04a64bcd6a8f6b7b9"
+    },
+    {
+      "path": "vendor/ots-editor/lib/compare-highlights.ts",
+      "sha256": "e68e8d47861d42643f6d15d2f04f7a273e5279c9b40ce17dbca0aa00bf177eb7"
+    },
+    {
+      "path": "vendor/ots-editor/lib/compare-score-file.ts",
+      "sha256": "4ddf703fa5102a8669c1e7ebf06a6bcb14fadabd4d9ea873a83006c5a8a77538"
+    },
+    {
+      "path": "vendor/ots-editor/lib/compare-staff-bands.ts",
+      "sha256": "8d49a92c797e2a1a434a50a1d28f3a71860cc62823b2530347ac2987ad78df63"
+    },
+    {
+      "path": "vendor/ots-editor/lib/compare-user-edit-diff.ts",
+      "sha256": "2487515fec2273ab59c26f7cd0d06aba1c80b7c3ec997c307297d024cb0fce23"
+    },
+    {
+      "path": "vendor/ots-editor/lib/editor-analytics.ts",
+      "sha256": "3891b13c0c7df8822dee9f21fa5c95e29c025d02faf030f091d1dfd141d62a9b"
+    },
+    {
+      "path": "vendor/ots-editor/lib/editor-launch-context.ts",
+      "sha256": "c9f3c5aa79e61e11311ce39f4b49ae07fd8726c980fa81833c1e09305e3ab83e"
+    },
+    {
+      "path": "vendor/ots-editor/lib/embedded-parent-origin.ts",
+      "sha256": "7dcff0199f9e8ef9ee44e0922459efcbf0aa6d193157bf9f2c3d37302b3f20e2"
+    },
+    {
+      "path": "vendor/ots-editor/lib/fetch-json.ts",
+      "sha256": "cfe8109ad70e48dde30181099147d8ee02c7b815b6002fac43b205ae3928c260"
+    },
+    {
+      "path": "vendor/ots-editor/lib/layout-oracle.ts",
+      "sha256": "aadc6e48ecffd88189037678b7342887f1ca51f7d747c9a27583acb42a9e2bd2"
+    },
+    {
+      "path": "vendor/ots-editor/lib/midi-range-slice.ts",
+      "sha256": "4187bc8c630d8b0744cd8e1de5713f09988188c5885152facdfe67c26fe332bc"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-agents/midi-specialists.ts",
+      "sha256": "b83a47b4f92ee233d9f94c843db11cd176981344882c434482360f95ce84b980"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-agents/router.ts",
+      "sha256": "1b8d9066b5727af2da18cb0e28f453cc84f9917e82e4018707c401ac107ec597"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-conversion.ts",
+      "sha256": "03d66ffc2afc45e47441e831bf101dbaa01d55b2793b589ed1f1b079ac6f71d2"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-invariants.ts",
+      "sha256": "e8a91a871ec114d0017755558ad67f80007148c0da2c969b5fab510e2eb2aaeb"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-mma-grooves.ts",
+      "sha256": "caf230f1afbf1292db05792cf40820f6dab98330e0997f0755a0a0359ebdf633"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-mma-presets.ts",
+      "sha256": "b8788e47f377424f8a4ed19978c208162396597d46bf8e1a9a9be13678da5c8b"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-mma.ts",
+      "sha256": "7bcd0001c2d8a2e97f5d2d96b0f158f40e49beded71fee7cf3964b8263ea36df"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/ai-edit-proposal.ts",
+      "sha256": "6bcbdb55b7b2357271135860ab97785cbbd5c3c4c1d54f3663bbb7c555318ca5"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/amt-engine.ts",
+      "sha256": "31fd2984ebca4586239a345f2096136a693a947cfb1eb1610d49dee14c10052f"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/amt-infill-service.ts",
+      "sha256": "48b9343381413070db61dbcfbc35402beaf62803df927a617f22cb10b470f19e"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/amt-midi.ts",
+      "sha256": "4a2baec78adf276a06a541601bccf1c95b1645cc546e330f2105671b39964c8c"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/context-service.ts",
+      "sha256": "b196b048604e795b60390cfd7bd197e17f76b01e2b1c8648c7eaae1885643e7b"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/contracts/index.ts",
+      "sha256": "d658f573abba66fff711f92a534ab92fc31fadca665f9552b4715a3e639f4b0c"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/contracts/music-context-contract.ts",
+      "sha256": "123c974165fe07d80a4046815183cb86b62b8fb30ed9b75c2c0da79f634d9a68"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/contracts/music-convert-contract.ts",
+      "sha256": "2d43030f8d8e3cc49c35604db722e805b68157e4c38baa1b61bee3a3d6913c3e"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/contracts/music-diff-feedback-contract.ts",
+      "sha256": "0333333a92385b285c0aa178220a96f83c9cd5e1e5f61abfb650e83149d99c27"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/contracts/music-functional-harmony-analyze-contract.ts",
+      "sha256": "ef66f787128bd7cc8c3c2ed52926dd0e71b1c6bf1b9e067f9bb1df062a252539"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/contracts/music-generate-contract.ts",
+      "sha256": "ae4dd5f82c9426a221106ff06263698e857c5c8ff629efa5a5bac7382f5185a1"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/contracts/music-harmony-analyze-contract.ts",
+      "sha256": "8519419250cc9d7bbf82f813d378bfaca16cf4e12cedde7d49a52dc75d4d703d"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/contracts/music-infill-contract.ts",
+      "sha256": "b9b9206645d048fc6d483b60c80f863ff32f96fff097d262d47b7d1763e1cf4f"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/contracts/music-mma-render-contract.ts",
+      "sha256": "cde00484cccccca4ab22aca29ff3725be6831da5306dee302f8594fbb46684b7"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/contracts/music-mma-template-contract.ts",
+      "sha256": "304a696fe7274fe6e70362a692468b16a7c62933a865285c00acbf9911e3d88d"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/contracts/music-multitrack-vae-contract.ts",
+      "sha256": "cabd8dcd990dba2f762c6901b31a3980393e61ca388732855882653162fcc590"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/contracts/music-omr-transcribe-contract.ts",
+      "sha256": "30488c16eeef22d9ef68517db07688f636a8fb0d4e3229a27dd83ec5d831aaf5"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/contracts/music-patch-contract.ts",
+      "sha256": "83c4eb4c1389058398477e112a8d4a4ffbc486b61343179ad6862ed622cdcc26"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/contracts/music-render-contract.ts",
+      "sha256": "d4dfdfa1e25b3ba34c6c1784a5b50709da2feee6beb181e4120cbc9fabfa1d31"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/contracts/music-scoreops-contract.ts",
+      "sha256": "27119ae2230140bbcba1562bff6232456cd551566c86f0e384f02b297ab35be1"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/contracts/types.ts",
+      "sha256": "7a81650baa3e91f2a76c16847b087a65c98c8ed004a52bfeabbc067a9f22565e"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/convert-service.ts",
+      "sha256": "7b54708ce06337c4dc97215ac1c05e099b71b2da133f9282d738c4a1785f043b"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/deep-edit-capability.ts",
+      "sha256": "1aaaf6adb9cc5ac46dd83c4eb99d8b7689c6a8b77c21c15e60d34387eb5f94ed"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/deep-edit-service.ts",
+      "sha256": "936cc6f55753d6736a228e7cbab5e085e682a3a56a204550f441be1e22fdc264"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/diff-feedback-service.ts",
+      "sha256": "bb9f331914fc594476e71c93ef07cc4fbb9ae103a20e6d8964880f1eb5a61e8b"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/errors.ts",
+      "sha256": "386b27ecc1d086cbf385162f148e6eae3feac5e1f84f7391bbf7789e2188d2a5"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/functional-harmony-service.ts",
+      "sha256": "62cfbcc491bbaaf67d38e00e7d9c34535cc650f1d69c5af48437a5bc286cb54a"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/generate-service.ts",
+      "sha256": "f29a0dfe25f6cdd6c612fdd16d28ef8555a0a6725ccbd6f0c12376dc9a73db39"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/harmony-service.ts",
+      "sha256": "0a7d91113a2020ebe493e7abcef6ea34ef41bb8ca2622e0270b8501331bd5e60"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/mma-service.ts",
+      "sha256": "85f2c1efd243d6b22a87cd724d4a5cf1c95684d410623545399bd73a74dc002e"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/multitrack-vae-engine.ts",
+      "sha256": "45f35714938795a260ec709a59d4163846885a0ed0162b64eb3104ef37dcf2f5"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/multitrack-vae-service.ts",
+      "sha256": "d7f955397c0a25b42dc33a77b8c47eda6eb7c0c200176c71a37bedb2fbf4dee6"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/omr-service.ts",
+      "sha256": "823d20cd22778d7bbe4c5e6c517d098b7a854e318b5742a1bcb238f898ae8796"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/patch-service.ts",
+      "sha256": "130ef6e37f455fb9125ba9ef83acd56add81691d3e5701629a850ca337f55919"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/proposal-session-context.ts",
+      "sha256": "3f5cc182db2192005fde40eff98a96f60a652017f9cacc659838f53f79dd4b28"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/render-service.ts",
+      "sha256": "b97e28d164d4d8bd519bed65351a28c58a8d7d82417a23f1013d7129ca0ca7d7"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/score-request.ts",
+      "sha256": "20c9e5f1eff9bb858954d54746a8b9861685daa995a1e7c6fb2a7a5d08684070"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/scoreops-service.ts",
+      "sha256": "c5099e37c0b4448d7e3d581aa33acff639f30844f65d71476f360af515b1856e"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-services/scoreops-session-store.ts",
+      "sha256": "8d6121060f544568680fa36d1c200156386e3c8ff58c26b43866594f4a562ad8"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-shape-checks.ts",
+      "sha256": "3d68210745d8ac23bb71f1576407b0a3f7092b55a716eca8894f9f7123b0de4d"
+    },
+    {
+      "path": "vendor/ots-editor/lib/music-specialists-tool.ts",
+      "sha256": "f9efe11e09a2eb15017baa5a74e94ded23371fe3d339d3b308867fdd5fe53aba"
+    },
+    {
+      "path": "vendor/ots-editor/lib/musicxml-append-parts.ts",
+      "sha256": "7b87206effc6819c17e9723df7af40fb6ff4a41407e2bd65f9df594f6789b717"
+    },
+    {
+      "path": "vendor/ots-editor/lib/musicxml-identity-server.ts",
+      "sha256": "53141f3b46bc81587c0539e09eb25c2755016d81ad540f386fbd0b1d25da8e0b"
+    },
+    {
+      "path": "vendor/ots-editor/lib/musicxml-identity.ts",
+      "sha256": "978deef405227dee2ee8fffb5f3aa8b89cb6ad41969170016dd615efc8d088f9"
+    },
+    {
+      "path": "vendor/ots-editor/lib/musicxml-part-placement.ts",
+      "sha256": "490a85a6c36de2eccca9257d9ac6ac222b4f096da52c7000236d28c767ffee7b"
+    },
+    {
+      "path": "vendor/ots-editor/lib/musicxml-structural-validation.ts",
+      "sha256": "7809aa883c198774b04ff47cd8b86ce2ea7479925716c7e54f64315361f3d540"
+    },
+    {
+      "path": "vendor/ots-editor/lib/ourtextscores-api-client.ts",
+      "sha256": "87b4d995962066d36a405046fb30b6fbde120ed510ab36f487f3dce29f7ac04b"
+    },
+    {
+      "path": "vendor/ots-editor/lib/patch-annotations.ts",
+      "sha256": "b0644a514e4d48593e4cf8737768c32f40e657d5b53c3b7984d70b9e0956a13e"
+    },
+    {
+      "path": "vendor/ots-editor/lib/perf-trace.ts",
+      "sha256": "0b9e3b751897e1b2e4695e09e4583be6c5ce04475b837dfcd12a5f8d33cdb257"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/click-preferences.ts",
+      "sha256": "32af69cb50d63b1812fb166239d3e21b78bb36a6ae74b9ec23c83dbf4f196793"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/click-track.ts",
+      "sha256": "752e02d5ff1566af7be56c86b0600d2d4c9274f2c0effc22a6f6a27eafa86156"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/embed-snippet.ts",
+      "sha256": "54847591dde6d90c509288229510617d50fe4bc3075ec351e86d2edf01423db0"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/note-box-match.ts",
+      "sha256": "8f8ad4813d2813220c62f7749e39614195ae1cf2deaf98f6ce8d6fbc3f4dbf9f"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/note-tracking.ts",
+      "sha256": "a2ef4aa891bd108ebde4bdb23b6856dbaf3057e9def67abd728c59d7cb081bfc"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/notehead-geometry.ts",
+      "sha256": "fc109a84f9da5784db80311f125644e944eb3e251d37327948ef823f4320b39f"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/options-transaction.ts",
+      "sha256": "be64be0ee3fab14c0d69ea1bb97d11e35305cbb0765c9d65087d3890a60f0c8e"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/playback-options-preferences.ts",
+      "sha256": "ef29672b182bce839aa136386a9da6f5287cbf63ab9215b83a40f829d03a3abb"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/player-message-api.ts",
+      "sha256": "544164ec52f77093d8a08c94ef83a61a80a494cc3601d595974a73546e9a4aed"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/player-preferences.ts",
+      "sha256": "28404b1b6f98da85a9cda4192aec20dbd466fc690875d26f18a52891e7772bd7"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/presentation-preferences.ts",
+      "sha256": "0f9c6eb4db4a15274c828fb00b878f8eb5ef7e87072b96939752dae0a3822c21"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/release-gates.ts",
+      "sha256": "ac836195ef96ba6237789df6cae69436ea9dcea45d9f57e314814a20c935daec"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/score-following/cursor-model.ts",
+      "sha256": "b8582cddc800570bf5a5547499fe251af05c68306237ff76065cf68000d4acac"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/score-following/follow-map.ts",
+      "sha256": "cb573948b45e7fefe23b8cb7c66ab4014558dad7ecef490178d0e779a9343f3a"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/score-following/follow-preferences.ts",
+      "sha256": "c2c1712adb2fcd98e6c0e1a4bb2a3df9142753abd18b4fea1ecfc6c1ac2579c6"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/score-following/follow-viewport.ts",
+      "sha256": "c3dc1ddbe4a1c6a2cda6fe385f9ce03cb3f360b1246ba57aaf4df7b90148fe88"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/score-following/highlight-preferences.ts",
+      "sha256": "3801bbeaae326b5a50fc4f5bc68c3cbf9ee8b9d9728f0cff3c2601e11523dca2"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/score-following/index.ts",
+      "sha256": "e476463919eda6a8d7ad8454d2cd16254b19af06ed18dc8514dbdd9e94dd15ab"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/session-owner.ts",
+      "sha256": "e0e6200d3c14151f9508584c06e89597428600b293d80611a943ca3d62c2e3e8"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/soundfont-manager.ts",
+      "sha256": "285c6fef0ecb6f5f6e02aebdea700b5562c574f26da445fc7bf43fd6c733b1c2"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/soundfont.ts",
+      "sha256": "505487be3d6a60f40df2e19030d4ea761219b699149e596ff49b32ae891eed37"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/stream-frontier.ts",
+      "sha256": "4d046cf75cbba70661fe5281981d1baa707bfa959002167a2ab5dbd700c069e0"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/stream-scheduler.ts",
+      "sha256": "424ef8a0a85faf618110faa2ecbc0bdfa10d3ee5c64264acfdbca218fb9bbdfd"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/timeline.ts",
+      "sha256": "c0d3d23bf20a2a53545b8b3c113dea62b2e1319b2ba3944cde5c4a3c9c45c577"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/transport-clock.ts",
+      "sha256": "fc487f79ae401803995c0ff86590b3205527bcb185503828a24e5d3eaea62fe8"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/transport-time.ts",
+      "sha256": "9126965f00bf734d44e0e73e15c6229efbd1b47ca63a8aebbbe339a1afa2d70f"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/use-click-preferences.ts",
+      "sha256": "7a179e9b562b90f0d4f201b50a8183ea3baaed9971031856e38981ddc1f11232"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/use-follow-state.ts",
+      "sha256": "85749655ebe8fa3e87bbfe54ecadf1ce4cf934dde114a147da83957e68a908a3"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/use-playback-options.ts",
+      "sha256": "759fd7bfc25ae55106f1ee6b43b1e33c97652e87ed9bd3a700ac14c4890f4ad9"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/use-presentation-preferences.ts",
+      "sha256": "98f6787117da4b204e7c25504142c313ba2f36baa5d7db593ea4cbaeeaf212ca"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/use-score-transport.ts",
+      "sha256": "7c18a9092fcacf7235bec68ceae876ac3755f5205587d512df7cb97935f8209d"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/use-volume-preference.ts",
+      "sha256": "0ccc1285835002cc30a1e5c65e2fd79d8ef36e28663075652ca2de06e29257f3"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/useTransportPresentation.ts",
+      "sha256": "f021a88a32b61ec3694290ab2ed5c16461673fef872e3fad6096695357757b8e"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback/volume-preference.ts",
+      "sha256": "993a96492182c6dbce7ca04c6b34bd34f379f6cdf5d22d6989121e9834efa435"
+    },
+    {
+      "path": "vendor/ots-editor/lib/playback-window.ts",
+      "sha256": "41d62a3a800c5d558d05bcbdf2b72307302f661600abac4a7d05da374ba8b8bf"
+    },
+    {
+      "path": "vendor/ots-editor/lib/proposal-session-client.ts",
+      "sha256": "33d3451d61849a7e9680ba1260fb8194010f0cca3e95ce8d0a9a069af1acc9d4"
+    },
+    {
+      "path": "vendor/ots-editor/lib/public-score-url.ts",
+      "sha256": "8f88d1536c84547187d9acde2cb54140817f8727c9c281adad8023b0d35a65fc"
+    },
+    {
+      "path": "vendor/ots-editor/lib/sanitize-svg.ts",
+      "sha256": "f2e35e45ff5cede057f7d688e7c6c5b15b4464c50ad4055a2d744c668b58617d"
+    },
+    {
+      "path": "vendor/ots-editor/lib/score-artifacts.ts",
+      "sha256": "88d75bf7e955691054ba47a08158c808cdd279584de10f1720019de17930123b"
+    },
+    {
+      "path": "vendor/ots-editor/lib/score-conversion-tool.ts",
+      "sha256": "4be82ec05d2293f2b3819c887a9489e150f6ed206ac257288cd5e11f85226189"
+    },
+    {
+      "path": "vendor/ots-editor/lib/score-editor-api-client.ts",
+      "sha256": "7405ac49b8759f846f7829f691e329ed4e86a07135a7951cabdd1d807bb0768b"
+    },
+    {
+      "path": "vendor/ots-editor/lib/score-loader.ts",
+      "sha256": "a52f0a5080df7e0b9cbed7722d77954045759362eb77766cfeb28b1198a4b24a"
+    },
+    {
+      "path": "vendor/ots-editor/lib/selection-clipboard.ts",
+      "sha256": "8ad3730fd0b75e1af9f519b63310705bd96ce13dd2f0418112b905c3a2edb59c"
+    },
+    {
+      "path": "vendor/ots-editor/lib/svg-screen-matrix.ts",
+      "sha256": "f6d82e0d7a126c892800276439a69bdc1797b5d70df5d90b4401825775197fb0"
+    },
+    {
+      "path": "vendor/ots-editor/lib/trace-http.ts",
+      "sha256": "98abee04d3f059ea81ebdbd4ddba39e72da68d0856dd489c0603e968d75a9969"
+    },
+    {
+      "path": "vendor/ots-editor/lib/ui.ts",
+      "sha256": "928b8e90525b2290a880f0223c6e86bc6fb310bd333be74845c43dca57ea77a4"
+    },
+    {
+      "path": "vendor/ots-editor/lib/use-latest-callback-facade.ts",
+      "sha256": "088f6bab0fc4d92dd7d53f29373619d3431220bd5b7ab52e2339cff34523ee8b"
+    },
+    {
+      "path": "vendor/ots-editor/lib/video-export/audioFeed.ts",
+      "sha256": "d4865b11f3674a09c2de382f0feaa507266436e6e066d13116dfac5ec40cb3b3"
+    },
+    {
+      "path": "vendor/ots-editor/lib/video-export/capabilities.ts",
+      "sha256": "1862ca683331a6f1ad1d7449fa58192b41966275b9fca073de42926ed2abb004"
+    },
+    {
+      "path": "vendor/ots-editor/lib/video-export/compositor.ts",
+      "sha256": "72c5320d2289c361415371475077c183c5a67abaa9e52c01087b5b6f21097c28"
+    },
+    {
+      "path": "vendor/ots-editor/lib/video-export/exportVideo.ts",
+      "sha256": "87010e63928437488bd802529a68db6368f87c46f7d4b2d1968c885eba768956"
+    },
+    {
+      "path": "vendor/ots-editor/lib/video-export/framePlan.ts",
+      "sha256": "f7642d33affc3ba85550d56c00fc4033b5fdca5521ff7632ebeac7be8443c84c"
+    },
+    {
+      "path": "vendor/ots-editor/lib/video-export/i420.ts",
+      "sha256": "6cb1e30a436a4853cf8347d24fa651ab9af70f1003d1f8ffd16e01979e287143"
+    },
+    {
+      "path": "vendor/ots-editor/lib/video-export/layout.ts",
+      "sha256": "e1e6eadbe3b8a4a56cdaf959f0ae6712141a56d5be2eeeae0afe121882ad045d"
+    },
+    {
+      "path": "vendor/ots-editor/lib/video-export/mediabunnySink.ts",
+      "sha256": "9c53f9bdfb6ff186ae75fc05c0411576d538051549f981b8e52fed605c422c8f"
+    },
+    {
+      "path": "vendor/ots-editor/lib/video-export/noteShapes.ts",
+      "sha256": "a4776e69299828e79c2b6e26c337c0e31573f750fcbcaef8ea7bb66ca3afbd34"
+    },
+    {
+      "path": "vendor/ots-editor/lib/video-export/options.ts",
+      "sha256": "1eb31d2b469131a21d27f8d87cd9839e3e85dfbfec8a8bb59f3385b5e32e3e42"
+    },
+    {
+      "path": "vendor/ots-editor/lib/video-export/pageRaster.ts",
+      "sha256": "eba880d4c525727abf65a3138fc9e1ffed7d760989cd0231bb29877e87f8becc"
+    },
+    {
+      "path": "vendor/ots-editor/lib/video-export/runVideoExport.ts",
+      "sha256": "5e12a9dda8f8438e9dbb9906c8f903a8c223ecece040f5846aaa9e398cda8e2b"
+    },
+    {
+      "path": "vendor/ots-editor/lib/video-export/saveTarget.ts",
+      "sha256": "ef36964fe01f0907fe431098de3b8b886c569f6582b3afdcdce049e675e55b33"
+    },
+    {
+      "path": "vendor/ots-editor/lib/video-export/sink.ts",
+      "sha256": "a33e2dda54e36fe07bdfa771c411f82328a60f7ef56afc1c340e6255747a3825"
+    },
+    {
+      "path": "vendor/ots-editor/lib/webmscore-in-process-browser-runtime.d.ts",
+      "sha256": "2e84bda924b41ea80bcbf428ae84d459849462acef35f7296497d5846d5ca426"
+    },
+    {
+      "path": "vendor/ots-editor/lib/webmscore-in-process-browser-runtime.js",
+      "sha256": "f78c229888a8539d458525c0b2f0a3cfdf9de4eff8a0cc14f51163e9511a9bd6"
+    },
+    {
+      "path": "vendor/ots-editor/lib/webmscore-in-process-node-runtime.d.ts",
+      "sha256": "673c901a26cb5ef2efee04f921e5a50fedcdad82577851d0aa927716393c4a71"
+    },
+    {
+      "path": "vendor/ots-editor/lib/webmscore-in-process-node-runtime.js",
+      "sha256": "eec40bb9c0e6265a116b7911205c5ead6092587f42280ec81d843d31b72256b2"
+    },
+    {
+      "path": "vendor/ots-editor/lib/webmscore-loader.ts",
+      "sha256": "9969859ea78a8c95986582bc70276cd99830467a2c388dd07b34d66bf31724c6"
+    },
+    {
+      "path": "vendor/ots-editor/lib/webmscore-score-settings-types.ts",
+      "sha256": "c8f0f11f73db4b971ddcd4654088fe2faf6c76853cf67024f4e86a043081c15c"
+    },
+    {
+      "path": "vendor/ots-editor/lib/webmscore-worker-runtime.d.ts",
+      "sha256": "20f49fd210cc5d4ca141dc4fde49da23d1b622601a969242c517725be093a958"
+    },
+    {
+      "path": "vendor/ots-editor/lib/webmscore-worker-runtime.js",
+      "sha256": "d715cf197d9ae4c4658762137d77eb9426369f5c18487f44d653f19a5a1cd87d"
+    },
+    {
+      "path": "vendor/ots-editor/lib/zip-central-directory.ts",
+      "sha256": "49c06ad944142719faf5cd4a778d8b9015c6d6315e86ba76d291650fe0feed5c"
+    },
+    {
+      "path": "vendor/ots-editor/lib/zip-store-writer.ts",
+      "sha256": "f0f4f6943f526089c50e683cb25c28c1f80cca2046012e30b909f2d4bc0f232e"
+    },
+    {
+      "path": "vendor/ots-editor/package-lock.json",
+      "sha256": "9d73ace706d6bb839f2cc64d7097331613e9a0f48270ceaae21f5124239a1099"
+    },
+    {
+      "path": "vendor/ots-editor/package.json",
+      "sha256": "6a03464653487b7edbac0cdac40f0e152ecbb8444e5903fbc72228ba1bfaa460"
+    },
+    {
+      "path": "vendor/ots-editor/public/data/clefs.json",
+      "sha256": "17c64d5598bfddf75a6cae466d63243e7cfd443879f425979d28c666b0a08f07"
+    },
+    {
+      "path": "vendor/ots-editor/public/data/templates.json",
+      "sha256": "ac3292f41cd26c359eb9d2051595d79853c1587f87834b27b0472eb15353ff65"
+    },
+    {
+      "path": "vendor/ots-editor/public/file.svg",
+      "sha256": "2b67812c325c199a02536cdbeea0c593a72f707d323b72ee3e08dbab06753bd4"
+    },
+    {
+      "path": "vendor/ots-editor/public/globe.svg",
+      "sha256": "b614b9bf183925957661ac851498fe1d8029fd43a62fbfed86f9e2624a57e7cf"
+    },
+    {
+      "path": "vendor/ots-editor/public/next.svg",
+      "sha256": "55995dfad6ecb4945a1e856ddca03c5e16aa5bf13fd21b4df6a74ae79357bcfc"
+    },
+    {
+      "path": "vendor/ots-editor/public/perform/apple-touch-icon.png",
+      "sha256": "69c883ff9004f7a7d38d99eb7155161d72427b5f70d1a8bf3dfa7d55c8d61ab4"
+    },
+    {
+      "path": "vendor/ots-editor/public/perform/icon-192.png",
+      "sha256": "f5e541419d522d15ccdac6e76e04c0bd852b1c96fb7dddd2c52168e23a52a355"
+    },
+    {
+      "path": "vendor/ots-editor/public/perform/icon-512.png",
+      "sha256": "2ab9fd96846ef6dc0e9133a3a7adf971cfcfe874e4cfa9047fbd45e03ba5713f"
+    },
+    {
+      "path": "vendor/ots-editor/public/perform/manifest.webmanifest",
+      "sha256": "325a1040b9d29c309bba0ecca7695ec897e1128ace68ca74dda2bef1e71caaf0"
+    },
+    {
+      "path": "vendor/ots-editor/public/perform-sw.js",
+      "sha256": "f3e1df3b6c65845bca552edca01bc8e35daf9d451fc7d0a0e9e306a1bf43fd9f"
+    },
+    {
+      "path": "vendor/ots-editor/public/sample-left.xml",
+      "sha256": "f088cda554bd04eb9954031919a5bdc9f26c3eff3df3ea3a661887cc0d3f797d"
+    },
+    {
+      "path": "vendor/ots-editor/public/sample-right.xml",
+      "sha256": "e79ff74e1ae538872fba7de908cbe199a7a1a7356df1d5b540e6eea9f5e51ad0"
+    },
+    {
+      "path": "vendor/ots-editor/public/test-embed.html",
+      "sha256": "7afc16b25a50bb1433292b5f99f893c5ea525be6295de56bbb62d28347cd2120"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/bach_orig.mscz",
+      "sha256": "85cd76159274fe4ae9f2bdfb82faa5d2a9ad2f62dac2630718c908d791d7ceb3"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/batch4_controls.musicxml",
+      "sha256": "f39479738c52056e6618c2e1e25ea7c55e8f14b29086b1cb634c9d38cb39278f"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/batch5_inspector.musicxml",
+      "sha256": "4733e17c1aea174d3ffa7070e74a86f0c55c3b5ebbfe918e1e2603e57ac718f1"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/batch6_tools.musicxml",
+      "sha256": "1cedfffb66903a1c6fa2a51490d620a8e4acb6e4d99d28833227db6d3811ea48"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/credits_small_staff.musicxml",
+      "sha256": "26d57cc780e1584fc9216f9a9b7e20bebd7a207dce37535e28c642ee6e424fd2"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/eight_bars_line_breaks.mscz",
+      "sha256": "68381e4afc421e8740a594883b1190e0fdcb6382e6e93c5c6f06b8176c5990ea"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/eight_bars_one_voice.musicxml",
+      "sha256": "f8863f76c664088ce797ac87c2bb10ad0069fdc87791f75199a31690ab18b7c1"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/four_measures.musicxml",
+      "sha256": "2edf600e855a68ac35f1fb25e19c5522ec6275efb56c1a84976255482b27b37a"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/images/square.png",
+      "sha256": "d0065f26c387f387410b9d5fc3189b8d5516ed18f416a7996e6ea33668a4cecc"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/lyrics_repeat_volta.musicxml",
+      "sha256": "99b95b4462a3fef099bcdcc22c218a795dd587c2dfd67bac88a818ca428c1466"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/men-base.musicxml",
+      "sha256": "6da7574aad589ef93ec1e2d29f3999557b7fb8ec53e9bb0e33c8ce0eed82c329"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/men-head.musicxml",
+      "sha256": "e1fca14b578cfcae9dbb1d33321286a7c2a6d2172b94d269a480d0c74842804f"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/playback_timeline.musicxml",
+      "sha256": "21b0f61d21ce5a48a6173beed5de5891b838b307d6caa42785d4d43b5fddc655"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/single_note_c4.musicxml",
+      "sha256": "575c0c01ab385a06619ed8dcd9a0758e31dc15daa5491ac4c26c14d8641e9230"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/styles/MuseJazz.mss",
+      "sha256": "214923b67e72fb572d070c9341fa51892399f7165f1d1cb7c9358f1e9fd32985"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/three_notes_cde.musicxml",
+      "sha256": "a4c361893debcdf562d1663694e4f975d2a4947b6ccd1677b27f5a0952dc4e09"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/three_notes_slur.musicxml",
+      "sha256": "1bcff6ce3c96eee2e2ffa3d46c7f7410206034f0825f67b2ac150a258f0c6a02"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/tied_c4_half_notes.musicxml",
+      "sha256": "61aaa1be58eefda247cd8f43e305961ea2c39c2ab4ea4c8509c88a2ef73e08e5"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/two_chords.musicxml",
+      "sha256": "260e4f7a6273347553b8f6fce91fe8df25d8af6718c084b6e6a9ae6745eef1bb"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/two_notes_cc.musicxml",
+      "sha256": "32547bebc4ed5e61393325ff39052a5dae0df9cacca35f586c60a6c069c83815"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/two_staves_four_bars.musicxml",
+      "sha256": "89cf07cb99e933c7477bcc34a2c487a0481d7e557b849b7d3664bdac79320672"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/two_staves_four_bars_inserted.musicxml",
+      "sha256": "a7e1f733019c049db3722f4654f9c2f778d587f2f156c876b714929473db530e"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/two_staves_four_bars_lower_edit.musicxml",
+      "sha256": "c894d18f61ce47e3d1551ed0ef1df5a3cf8c6cb3132b689eeedf85d2258a176b"
+    },
+    {
+      "path": "vendor/ots-editor/public/test_scores/two_staves_parts.mscz",
+      "sha256": "1f69d6dc5593cbf01ecbf97c101661fbe0eab277ff9d14c354501ca7aa3428bf"
+    },
+    {
+      "path": "vendor/ots-editor/public/vercel.svg",
+      "sha256": "f081337b2fee635b455b63275406a3e7f39d6a014e25ad90dab5a67e62a12ac4"
+    },
+    {
+      "path": "vendor/ots-editor/public/webmscore.lib.d.ts",
+      "sha256": "b31efa096de58ee071c546cd47e27df86cce54d86d4c462fb23aeefca42f527b"
+    },
+    {
+      "path": "vendor/ots-editor/public/window.svg",
+      "sha256": "644768c4aaeb4767bce293344eeb0c125fb804a94d801440424072202d85e3a1"
+    },
+    {
+      "path": "vendor/ots-editor/tsconfig.base.json",
+      "sha256": "271d3332b696bfa495d86ecb29f9740d002cd46ed65207bb05d20128dfd8b9cd"
+    },
+    {
+      "path": "vendor/ots-editor/types/typecheck-webmscore.d.ts",
+      "sha256": "48d1b1b2699563668065dbcbcfaa5a528bb89f54bdfeaefc07935625ea410a98"
+    },
+    {
+      "path": "vendor/ots-editor/webmscore-fork/fonts/bravura/Bravura.woff2",
+      "sha256": "f1207c511526c40f97b04bf68801c6b4214fcb8042bdd2824aba55745ab50ef2"
+    },
+    {
+      "path": "vendor/ots-editor/webmscore-fork/fonts/leland/Leland.woff2",
+      "sha256": "3fe628eb424b322153f9a2ec17bba3d2ddc7acd7f170b393485086db9f83ade8"
+    },
+    {
+      "path": "vendor/ots-editor/webmscore-fork/web-public/package.json",
+      "sha256": "e9a37f800116a7aaf73f89d7df5f7dfd527ac46b3d29c72549fe94e2a3660923"
+    },
+    {
+      "path": "vendor/ots-editor/webmscore-fork/web-public/schemas.ts",
+      "sha256": "e62c38473043cb79888b6eb2bccb0cf9ecdbddd9d727c88438bb56ea306581ba"
+    },
+    {
+      "path": "vendor/ots-editor/webmscore-fork/web-public/src/helper.js",
+      "sha256": "6c78ef2b50f5512774259ec22dbb9168f213850505f61d4d4d5c04da10ea4b2d"
+    },
+    {
+      "path": "vendor/ots-editor/webmscore-fork/web-public/src/index.js",
+      "sha256": "ebae9f73208208523c2e0f5dc2cf1ecc59d0d603df33f3b52e0e0b04a70d3c60"
+    },
+    {
+      "path": "vendor/ots-editor/webmscore-fork/web-public/src/nodejs.js",
+      "sha256": "964e17bee44bce57d390ff7f814adcb58faf5db893064c809f2614ea04013e8f"
+    },
+    {
+      "path": "vendor/ots-editor/webmscore-fork/web-public/src/nodejs_shim.js",
+      "sha256": "287a91527c00e6adbbea47cd19efe0e6e364813bc83e9cf1bd6e321280c0670d"
+    },
+    {
+      "path": "vendor/ots-editor/webmscore-fork/web-public/src/resource-base-url.ts",
+      "sha256": "d7f3128d50d1cdc5338eaa762ab84a7ba0e947658f8858d945b30fbd004c4460"
+    },
+    {
+      "path": "vendor/ots-editor/webmscore-fork/web-public/src/utils.js",
+      "sha256": "a89318d8ef30659b71ddab7cc66fa1e098a7648873f55da8028833433a3e7eaa"
+    },
+    {
+      "path": "vendor/ots-editor/webmscore-fork/web-public/src/worker-helper.js",
+      "sha256": "a4de7c51f14980c6f090b1065acfe9cbcb0f039f4d3755c80f5918bc55b20ec0"
+    },
+    {
+      "path": "vendor/ots-editor/webmscore-fork/web-public/src/worker-rpc.js",
+      "sha256": "ba245ee99338720733e0313485b908328735328446cc5e4d56ef24aeaf9134ed"
+    },
+    {
+      "path": "vendor/ots-editor/webmscore-fork/web-public/src/worker.js",
+      "sha256": "90f5f40686a4815f885d1291dc505a03054820aad61e17475b3f68da1a01febb"
+    }
+  ]
+}

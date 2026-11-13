@@ -1,0 +1,9 @@
+{
+  "id": "MuseScorer",
+  "name": "MuseScorer",
+  "version": "0.2.0",
+  "minAppVersion": "1.7.2",
+  "description": "Embed, edit and play native MuseScore scores locally with the full notation editor.",
+  "author": "Kornelius Paede",
+  "isDesktopOnly": true
+}

@@ -1,0 +1,142 @@
+{
+  "otsRepository": "https://github.com/OurTextScores/OTS_WebEditor",
+  "otsCommit": "3ec0452e12952d59308feb3c1da0553ee17fbcbe",
+  "museScoreCommit": "7688c005ad963ba09ee715aae53dbc7e8c9d5ef8",
+  "museScoreVersion": "4.7.4",
+  "emscripten": "4.0.7",
+  "sampleCommit": "07ceb81d1fb3384af611ebf665a1ec42a7e5926d",
+  "files": [
+    {
+      "path": "vendor/webmscore/LICENSE.GPL",
+      "sha256": "258edd17156790f60645806a289d786ddcdf2ad1bde1dd85eaaa284ad2eb8f2c"
+    },
+    {
+      "path": "vendor/webmscore/resources/fonts/FreeSans.ttf",
+      "sha256": "c80858440d8fb618e0ac5ff6f16251dbfa6b3316f00f3cdd17d477297dd87b04"
+    },
+    {
+      "path": "vendor/webmscore/resources/fonts/FreeSerifBold.ttf",
+      "sha256": "973791e2bb5ef4ba7ac9e7423f8a8d8441468da3a37c7e38ab38256011f5f261"
+    },
+    {
+      "path": "vendor/webmscore/resources/fonts/FreeSerifBoldItalic.ttf",
+      "sha256": "38e39596c9daec677633761324216ffda969c65b9515cf273b001521f22cb2b3"
+    },
+    {
+      "path": "vendor/webmscore/resources/fonts/FreeSerifItalic.ttf",
+      "sha256": "1cef05c1ea5d88f0e06b212bdb0510edf65c5456523dd81ddccfe9847a77284f"
+    },
+    {
+      "path": "vendor/webmscore/resources/fonts/campania/Campania.otf",
+      "sha256": "71856a9ef9351a0e3fca2dbe817cda826bdad64073b7b26232267e347f4d1780"
+    },
+    {
+      "path": "vendor/webmscore/resources/fonts/finalebroadway/FinaleBroadway.otf",
+      "sha256": "f8c325518258fa621ac9de80d9068b702c876687b807da94889bc0aa85b282e0"
+    },
+    {
+      "path": "vendor/webmscore/resources/fonts/finalebroadway/FinaleBroadwayText.otf",
+      "sha256": "9d861522cf6832349b81b5a6663d6e9788d33503791e3cce772a8f76c63372db"
+    },
+    {
+      "path": "vendor/webmscore/resources/fonts/finalemaestro/FinaleMaestro.otf",
+      "sha256": "cdc6db8f7549df8b78014c2657f228b3f0e90666c1b8282f205a1ee907c7d60b"
+    },
+    {
+      "path": "vendor/webmscore/resources/fonts/finalemaestro/FinaleMaestroText.otf",
+      "sha256": "b67d182a7583940322ebe8997875d2d8526bb8d0d082c11187a7d82e4bc32621"
+    },
+    {
+      "path": "vendor/webmscore/resources/fonts/gootville/Gootville.otf",
+      "sha256": "43fac30a9607ad3d6bc7501c351c763fa9c0a9ed3f5a5fc5c3a09213c56263b0"
+    },
+    {
+      "path": "vendor/webmscore/resources/fonts/gootville/GootvilleText.otf",
+      "sha256": "cf76ddc77b211e4c6c7008edce37a5c886699f8e96d55084036343b2462ea49a"
+    },
+    {
+      "path": "vendor/webmscore/resources/fonts/mscore/MScore.otf",
+      "sha256": "15233615956e93f9f5295b8a6602a5add1216f462c03a6b6852255e135f16336"
+    },
+    {
+      "path": "vendor/webmscore/resources/fonts/mscore/MScoreText.otf",
+      "sha256": "0ac6614b1e2deba2107f120a23509840df61688f13275fe9d604c9cf1f9fb830"
+    },
+    {
+      "path": "vendor/webmscore/resources/fonts/musejazz/MuseJazz.otf",
+      "sha256": "8cae35be929e6a61e9519887af7f1ff8b80d1d8b882814e5fbf910f008bd4c2b"
+    },
+    {
+      "path": "vendor/webmscore/resources/fonts/musejazz/MuseJazzText.otf",
+      "sha256": "fd465faeb8df396327ad6d1f30d4deca1a0b079db757617d207aa61b85e7c3a7"
+    },
+    {
+      "path": "vendor/webmscore/resources/fonts/petaluma/Petaluma.otf",
+      "sha256": "33e43610a2a753985b19a9e7bd83dd93aa789f749db7dbed84d3b7f75348d993"
+    },
+    {
+      "path": "vendor/webmscore/resources/fonts/petaluma/PetalumaText.otf",
+      "sha256": "d856bd3d0a78adada85d7d08a201cf506057577fe58f54fa30a941327c5be9ea"
+    },
+    {
+      "path": "vendor/webmscore/resources.json",
+      "sha256": "6bec74d1cb3fecd0fda6b4555c3b62b5b2515d9a1ed0359cc900bb897c64a507"
+    },
+    {
+      "path": "vendor/webmscore/schemas.ts",
+      "sha256": "e62c38473043cb79888b6eb2bccb0cf9ecdbddd9d727c88438bb56ea306581ba"
+    },
+    {
+      "path": "vendor/webmscore/src/helper.js",
+      "sha256": "6c78ef2b50f5512774259ec22dbb9168f213850505f61d4d4d5c04da10ea4b2d"
+    },
+    {
+      "path": "vendor/webmscore/src/index.js",
+      "sha256": "ebae9f73208208523c2e0f5dc2cf1ecc59d0d603df33f3b52e0e0b04a70d3c60"
+    },
+    {
+      "path": "vendor/webmscore/src/nodejs.js",
+      "sha256": "964e17bee44bce57d390ff7f814adcb58faf5db893064c809f2614ea04013e8f"
+    },
+    {
+      "path": "vendor/webmscore/src/nodejs_shim.js",
+      "sha256": "287a91527c00e6adbbea47cd19efe0e6e364813bc83e9cf1bd6e321280c0670d"
+    },
+    {
+      "path": "vendor/webmscore/src/resource-base-url.ts",
+      "sha256": "d7f3128d50d1cdc5338eaa762ab84a7ba0e947658f8858d945b30fbd004c4460"
+    },
+    {
+      "path": "vendor/webmscore/src/utils.js",
+      "sha256": "a89318d8ef30659b71ddab7cc66fa1e098a7648873f55da8028833433a3e7eaa"
+    },
+    {
+      "path": "vendor/webmscore/src/worker-helper.js",
+      "sha256": "a4de7c51f14980c6f090b1065acfe9cbcb0f039f4d3755c80f5918bc55b20ec0"
+    },
+    {
+      "path": "vendor/webmscore/src/worker-rpc.js",
+      "sha256": "ba245ee99338720733e0313485b908328735328446cc5e4d56ef24aeaf9134ed"
+    },
+    {
+      "path": "vendor/webmscore/src/worker.js",
+      "sha256": "90f5f40686a4815f885d1291dc505a03054820aad61e17475b3f68da1a01febb"
+    },
+    {
+      "path": "vendor/webmscore/webmscore.lib.data",
+      "sha256": "ee4213e9bc985f0dce6d43b418c66cd6a717a416899872c1a8dda40f5722a206"
+    },
+    {
+      "path": "vendor/webmscore/webmscore.lib.js",
+      "sha256": "69798ff895bfddf348ab75fed8aadfb8d3de4670403a9e842d4838da62da8a1c"
+    },
+    {
+      "path": "vendor/webmscore/webmscore.lib.wasm",
+      "sha256": "bc2ada322c188c9f4ba76297e571377821fe7fcd60a5d2eef6b32914d4c549de"
+    },
+    {
+      "path": "vendor/webmscore/soundfont.sf3",
+      "sha256": "2aacd036d7058d40a371846ef2f5dc5f130d648ab3837fe2626591ba49a71254"
+    }
+  ]
+}
