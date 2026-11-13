@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 const vault = process.env.OBSIDIAN_TEST_VAULT || 'KP_entwicklungskopie';
-const pluginId = process.env.OBSIDIAN_TEST_PLUGIN_ID || 'MuseScorer';
+const pluginId = process.env.OBSIDIAN_TEST_PLUGIN_ID || 'musescorer';
 const returnNote = '_MuseScorer-Test/MuseScorer-Ansichten.md';
 const comparisonStamp = Date.now();
 const note = `_MuseScorer-Test/Features-${comparisonStamp}.md`;

@@ -25,7 +25,7 @@ async function until(code, accept, timeout = 90000) {
  throw new Error('Obsidian integration check timed out');
 }
 await mkdir('test-results', { recursive: true });
-const state = await evaluate('JSON.stringify({vault:app.vault.getName(),plugin:!!app.plugins.getPlugin("MuseScorer"),file:app.workspace.getMostRecentLeaf().view.getState().file,dark:document.body.classList.contains("theme-dark")})');
+const state = await evaluate('JSON.stringify({vault:app.vault.getName(),plugin:!!app.plugins.getPlugin("musescorer"),file:app.workspace.getMostRecentLeaf().view.getState().file,dark:document.body.classList.contains("theme-dark")})');
 assert.equal(state.vault, vault);
 assert.equal(state.plugin, true, 'Enable the built MuseScorer plugin first.');
 assert.equal(state.file, '_MuseScorer-Test/MuseScorer-Test.md', 'Open the dedicated test note before running this test.');

@@ -100,11 +100,11 @@ npm run test:install
 
 `npm run test:obsidian` requires a running Obsidian instance with its CLI enabled. It creates its own temporary fixture notes and scores in the development vault, leaving user examples unchanged. It checks hover controls, both modes, page gaps, real audio buffers, pause/resume with a frozen audio clock and retained highlighting, native page following in both modes, the disabled Performance command, the complete editor in a leaf, edits, native copy saving and draft recovery. Temporary test files are removed and focus emulation is restored. Reports and screenshots are written to `test-results/`.
 
-For a manual installation, copy the **three files** from `dist/MuseScorer/` into `<Vault>/.obsidian/plugins/MuseScorer/`, or extract `dist/MuseScorer.zip` there. The archive contains exactly those three files. The GitHub release workflow attaches the same standard assets.
+For a manual installation, copy the **three files** from `dist/musescorer/` into `<Vault>/.obsidian/plugins/musescorer/`, or extract `dist/MuseScorer.zip` there. The archive contains exactly those three files. The GitHub release workflow attaches the same standard assets.
 
 `npm run test:install` installs a byte-identical copy of `main.js` and `styles.css` into a fresh temporary plugin folder in the same development vault. Only the test manifest identity changes to avoid registration conflicts. It checks offline licenses and runs the real viewer, playback, full-editor and page-following tests, then removes the test installation and restores the development plugin. Recovery drafts remain user data; no engine/editor files are created at runtime.
 
-The local ID matches the existing `MuseScorer` folder. Choose a permanent lowercase ID and rename the folder before a first community release.
+The permanent plugin ID is `musescorer`, matching the installed folder name. The display name remains MuseScorer. If upgrading from the preliminary beta with ID `MuseScorer`, disable that installation, rename its folder to `musescorer` and replace the three program files; keep existing recovery drafts.
 
 ## Upstream updates
 

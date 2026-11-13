@@ -52,7 +52,17 @@ jobs:
               run: |
                   tag="${GITHUB_REF#refs/tags/}"
 
-                  gh release create "$tag" \
-                    --title="$tag" \
-                    --draft \
-                    dist/MuseScorer.zip main.js manifest.json ${{ steps.styles.outputs.exists == 'true' && 'styles.css' || '' }}
+                  if gh release view "$tag" >/dev/null 2>&1; then
+                    is_draft="$(gh release view "$tag" --json isDraft --jq '.isDraft')"
+                    if [ "$is_draft" != "true" ]; then
+                      echo "Refusing to replace assets of a published release. Prepare a draft first."
+                      exit 1
+                    fi
+                    gh release upload "$tag" --clobber \
+                      dist/MuseScorer.zip main.js manifest.json ${{ steps.styles.outputs.exists == 'true' && 'styles.css' || '' }}
+                  else
+                    gh release create "$tag" \
+                      --title="$tag" \
+                      --draft \
+                      dist/MuseScorer.zip main.js manifest.json ${{ steps.styles.outputs.exists == 'true' && 'styles.css' || '' }}
+                  fi

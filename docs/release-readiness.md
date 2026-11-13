@@ -6,7 +6,7 @@ Updated: 2026-11-13. The distribution now uses exactly **main.js, manifest.json 
 
 The main bundle embeds the native WASM, native data, optional fonts, complete original OTS editor, worker/glue code, soundfont and legal notices. Assets are compressed with Brotli at build time, encoded into the bundle and decoded in memory only on demand. Their decoded size and SHA-256 are verified. No executable dependency installer, CDN loader or cache of extracted program files is used.
 
-`engine/`, `engine.js`, `renderer-worker.js` and `full-editor/` in the source checkout are build/test intermediates. The package script never copies them to the installation. `dist/MuseScorer/` and its ZIP contain only the three standard files. The original soundfont and font coverage are preserved.
+`engine/`, `engine.js`, `renderer-worker.js` and `full-editor/` in the source checkout are build/test intermediates. The package script never copies them to the installation. `dist/musescorer/` and its ZIP contain only the three standard files. The original soundfont and font coverage are preserved.
 
 Use `npm run package` to build the candidate and `npm run test:install` to exercise an isolated three-file installation in the designated development vault. The test checks that main.js/styles.css match the package hashes, reads bundled legal notices offline, and runs the real rendering, editor, native copy/recovery, audio, pause/highlighting and page-following tests. It restores the original plugin and removes the temporary installation. Only the test manifest ID is changed to prevent conflicting registrations.
 
@@ -34,4 +34,4 @@ Only the explicitly invoked developer/upstream checker contacts GitHub; build-ti
 
 ## Remaining publication work
 
-Choose the permanent lowercase plugin ID before the first public Community release, review real startup/size measurements, provide corresponding source and attribution, and use the directory's [Review branch](https://docs.obsidian.md/community-directory/faq) feature on the actual candidate. A working three-file installation is not a claim of Community approval or of compatibility with every historical desktop version.
+The permanent lowercase plugin ID is `musescorer`. Review real startup/size measurements, provide corresponding source and attribution, and use the directory's [Review branch](https://docs.obsidian.md/community-directory/faq) feature on the actual candidate. A working three-file installation is not a claim of Community approval or of compatibility with every historical desktop version.

@@ -6,8 +6,11 @@ import assert from 'node:assert/strict';
 import { obsidianCli } from './obsidian-cli.mjs';
 
 const vault = process.env.OBSIDIAN_TEST_VAULT || 'KP_entwicklungskopie';
-const originalId = 'MuseScorer';
-const testId = `musescorer-three-file-test-${Date.now()}`;
+const releaseManifest = JSON.parse(await readFile('manifest.json', 'utf8'));
+const originalId = releaseManifest.id;
+const distribution = path.join('dist', releaseManifest.id);
+const suffix = Array.from(String(Date.now()), digit => String.fromCharCode(97 + Number(digit))).join('');
+const testId = `musescorer-three-file-test-${suffix}`;
 const files = ['main.js', 'manifest.json', 'styles.css'];
 const cli = (command, ...args) => obsidianCli(vault, command, ...args);
 async function evaluate(code) {
@@ -38,14 +41,14 @@ const report = { distributionFiles: files, codeHashes: {}, installedFolder: test
 let created = false;
 try {
  await mkdir(directory); created = true;
- for (const file of files) await cp(path.join('dist/MuseScorer', file), path.join(directory, file));
+ for (const file of files) await cp(path.join(distribution, file), path.join(directory, file));
  // Only the identity is changed so the candidate and development plugin cannot register views simultaneously.
  const manifest = JSON.parse(await readFile(path.join(directory, 'manifest.json'), 'utf8'));
  manifest.id = testId; manifest.name += ' (three-file test)';
  await writeFile(path.join(directory, 'manifest.json'), JSON.stringify(manifest));
  assert.deepEqual((await readdir(directory)).sort(), [...files].sort());
  for (const file of ['main.js', 'styles.css']) {
-  const expected = createHash('sha256').update(await readFile(path.join('dist/MuseScorer', file))).digest('hex');
+  const expected = createHash('sha256').update(await readFile(path.join(distribution, file))).digest('hex');
   const actual = createHash('sha256').update(await readFile(path.join(directory, file))).digest('hex');
   assert.equal(actual, expected); report.codeHashes[file] = actual;
  }

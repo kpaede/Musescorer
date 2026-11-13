@@ -4,8 +4,10 @@ import { builtinModules } from 'node:module';
 import { cp, mkdir, readFile, rm } from 'node:fs/promises';
 import { verifyEngine } from './scripts/verify-engine.mjs';
 import { embeddedAssetPlugin, runtimeInputs } from './scripts/embedded-assets.mjs';
+import { validateReleaseIdentity } from './scripts/manifest.mjs';
 
 const prod = process.argv[2] === 'production';
+validateReleaseIdentity(JSON.parse(await readFile('manifest.json', 'utf8')));
 await verifyEngine();
 // These folders are build/test intermediates only. Installed plugins never read them.
 await rm('engine', { recursive: true, force: true });
