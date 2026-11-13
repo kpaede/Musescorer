@@ -1,6 +1,6 @@
 {
   "name": "musescorer",
-  "version": "0.2.0",
+  "version": "0.0.1",
   "description": "Local native MuseScore embeds, playback and the complete OTS notation editor for Obsidian.",
   "main": "main.js",
   "type": "module",
