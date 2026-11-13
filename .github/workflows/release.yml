@@ -44,6 +44,7 @@ jobs:
                   subject-path: |
                       dist/MuseScorer.zip
                       main.js
+                      manifest.json
                       ${{ steps.styles.outputs.exists == 'true' && 'styles.css' || '' }}
 
             - name: Create release

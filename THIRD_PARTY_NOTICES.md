@@ -14,7 +14,7 @@ Local adaptation: the build injects caller-supplied `wasmBinary` and `getPreload
 
 A redistributed binary package must be accompanied by corresponding source, including these wrappers, patches/build instructions for the engine, and its applicable licenses. The pinned public repositories identify the source used here; when publishing a release, provide a matching source archive alongside the plugin archive rather than relying solely on upstream availability.
 
-## Playback asset (0.2.0)
+## Playback soundfont
 
 `vendor/webmscore/soundfont.sf3` (embedded under the logical key `engine/soundfont.sf3`) is `webmscore-fork/share/sound/FluidR3Mono_GM.sf3` from the same pinned OTS commit. SHA-256: `2aacd036d7058d40a371846ef2f5dc5f130d648ab3837fe2626591ba49a71254`; size: 23,712,790 bytes. The MIT license and complete upstream acknowledgements are preserved in `licenses/FluidR3Mono_License.md`. It is decoded in memory from the bundled local asset when playback is requested; no CDN or soundfont download occurs during plugin use.
 

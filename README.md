@@ -2,9 +2,9 @@
 
 Bring your MuseScore sheet music into your notes. Embed `.mscz` and `.mscx` files, listen with highlighted notes, and open the complete notation editor in an Obsidian tab. Rendering, editing and playback work locally, without an account or runtime downloads.
 
-**Desktop · Obsidian 1.7.2+ · Beta 0.0.1**
+**Desktop · Obsidian 1.7.2+ · Version 0.0.1**
 
-[Install the beta](#install-the-beta) · [Embed a score](#embed-a-score) · [Playback](#playback-and-controls) · [Editor](#edit-a-score) · [Troubleshooting](#troubleshooting)
+[Install](#install) · [Embed a score](#embed-a-score) · [Playback](#playback-and-controls) · [Editor](#edit-a-score) · [Troubleshooting](#troubleshooting)
 
 ![An Obsidian practice journal with a piano score embedded below a short practice note. The score has no visible border or toolbar.](docs/images/embed.png)
 
@@ -17,11 +17,11 @@ Bring your MuseScore sheet music into your notes. Embed `.mscz` and `.mscx` file
 
 Explore the [original repository](https://github.com/OurTextScores/OTS_WebEditor) and [OurTextScores editor](https://www.ourtextscores.com/score-editor). MuseScorer adds Obsidian note embeds, local editor hosting, vault saving, draft recovery and embed playback controls. The engraving and synthesis engine comes from [MuseScore](https://github.com/musescore/MuseScore); the plugin started from the [official Obsidian sample plugin](https://github.com/obsidianmd/obsidian-sample-plugin).
 
-## Install the beta
+## Install
 
-This beta is available through GitHub and is **not yet listed in Obsidian’s Community plugins directory**. MuseScore itself does not need to be installed to render, edit or play scores in Obsidian.
+Download the release from GitHub using the steps below. Availability in Obsidian’s Community plugins directory depends on its separate review and publication. MuseScore itself does not need to be installed to render, edit or play scores in Obsidian.
 
-1. Download **MuseScorer.zip** from the [0.0.1 beta release](https://github.com/kpaede/Musescorer/releases/tag/0.0.1). Choose this asset, rather than GitHub’s **Source code** archive.
+1. Download **MuseScorer.zip** from the [0.0.1 release](https://github.com/kpaede/Musescorer/releases/tag/0.0.1). Choose this asset, rather than GitHub’s **Source code** archive.
 2. Extract the ZIP. Place its **musescorer** folder inside your vault’s `.obsidian/plugins/` folder. Create `plugins/` if it does not exist.
 3. Check that the files are directly inside `musescorer/`, as shown below. Avoid an extra nested folder.
 4. Restart Obsidian. In **Settings → Community plugins**, enable community plugins if prompted, then enable **MuseScorer**.
@@ -153,7 +153,7 @@ This action uses your operating system’s file association. Install MuseScore a
 | Playback takes a moment to start | The first playback loads the local soundfont. Wait for it to finish and check your system volume and audio output. |
 | **Could not read the MuseScore file** | Try opening the file in MuseScore, then save a fresh `.mscz` copy. Damaged or unsupported files cannot be rendered. |
 
-### Current beta limits
+### Current limits
 
 - **Desktop only.** Obsidian 1.7.2 or newer is required; mobile is not supported.
 - **Large local engine.** The bundle is about 40 MB. The engine starts with a 512 MiB WASM heap and needs more memory for scores, fonts and audio. Large scores or several editor tabs can use substantially more.
