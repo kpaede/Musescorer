@@ -2,6 +2,9 @@
 
 Embed native MuseScore scores in Obsidian, with local rendering, playback and the complete OTS notation editor. Uses the real MuseScore Studio **4.7.4** engine from [OTS_WebEditor](https://github.com/OurTextScores/OTS_WebEditor), built on the [official Obsidian sample plugin](https://github.com/obsidianmd/obsidian-sample-plugin). Native files load directly without intermediate MusicXML conversion. Requires Obsidian Desktop **1.7.2+**. Runtime operation is offline.
 
+> [!WARNING]
+> **Development / manual installation only.** The current build requires additional local engine/editor files. Obsidian's Community installer downloads only `main.js`, `manifest.json` and optional `styles.css`; it does not install our ZIP or those additional files. Community release packaging is not ready. See [release readiness](docs/release-readiness.md) for the verified constraints and next steps.
+
 ## Credits — built on OTS_WebEditor
 
 > [!IMPORTANT]
