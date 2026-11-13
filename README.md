@@ -1,133 +1,172 @@
-# MuseScorer for Obsidian Desktop
+# MuseScorer for Obsidian
 
-Embed native MuseScore scores in Obsidian, with local rendering, playback and the complete OTS notation editor. Uses the real MuseScore Studio **4.7.4** engine from [OTS_WebEditor](https://github.com/OurTextScores/OTS_WebEditor), built on the [official Obsidian sample plugin](https://github.com/obsidianmd/obsidian-sample-plugin). Native files load directly without intermediate MusicXML conversion. Requires Obsidian Desktop **1.7.2+**. Runtime operation is offline.
+Bring your MuseScore sheet music into your notes. Embed `.mscz` and `.mscx` files, listen with highlighted notes, and open the complete notation editor in an Obsidian tab. Rendering, editing and playback work locally, without an account or runtime downloads.
 
-> [!WARNING]
-> **Three-file offline distribution.** Install only `main.js`, `manifest.json` and `styles.css`. All engine/editor resources and licenses are bundled inside `main.js`; no additional runtime folders or downloads are required. The bundle is approximately 40 MB and exceeds Sync Standard's per-file limit. Community listing/review is still pending; see [release readiness](docs/release-readiness.md).
+**Desktop · Obsidian 1.7.2+ · Beta 0.0.1**
 
-## Credits — built on OTS_WebEditor
+[Install the beta](#install-the-beta) · [Embed a score](#embed-a-score) · [Playback](#playback-and-controls) · [Editor](#edit-a-score) · [Troubleshooting](#troubleshooting)
+
+![An Obsidian practice journal with a piano score embedded below a short practice note. The score has no visible border or toolbar.](docs/images/embed.png)
+
+*Your note stays a note: the score appears as sheet music, and controls appear when you hover over it or move keyboard focus into it.*
+
+## Built on OTS_WebEditor
 
 > [!IMPORTANT]
 > **MuseScorer is an Obsidian adaptation of [OTS_WebEditor by OurTextScores and its contributors](https://github.com/OurTextScores/OTS_WebEditor).** The complete notation editor, its interaction tools, native engine bridge and original playback/following systems come from that project. This plugin would not exist without their work.
 
-Please visit the [original OTS_WebEditor repository](https://github.com/OurTextScores/OTS_WebEditor) and [OurTextScores editor](https://www.ourtextscores.com/score-editor). Credit for the original editor and its continued development belongs to the upstream authors and contributors. MuseScorer adds Obsidian integration: note embeds, local hosting, vault saving/recovery and embed playback controls.
+Explore the [original repository](https://github.com/OurTextScores/OTS_WebEditor) and [OurTextScores editor](https://www.ourtextscores.com/score-editor). MuseScorer adds Obsidian note embeds, local editor hosting, vault saving, draft recovery and embed playback controls. The engraving and synthesis engine comes from [MuseScore](https://github.com/musescore/MuseScore); the plugin started from the [official Obsidian sample plugin](https://github.com/obsidianmd/obsidian-sample-plugin).
 
-The underlying engraving and synthesis engine is the work of the [MuseScore project and its contributors](https://github.com/musescore/MuseScore). The Obsidian scaffold comes from the [official sample plugin](https://github.com/obsidianmd/obsidian-sample-plugin). Original licenses and attribution are preserved in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and `licenses/`.
+## Install the beta
 
-## Runtime files and offline operation
+This beta is available through GitHub and is **not yet listed in Obsidian’s Community plugins directory**. MuseScore itself does not need to be installed to render, edit or play scores in Obsidian.
 
-`main.js` contains the complete original editor, worker code, native engine, resource data, fonts, soundfont and legal notices. Each resource is Brotli-compressed and Base64-encoded at build time. A lazy reader decodes it in memory using the desktop runtime's built-in Brotli support and checks its size and SHA-256 before use. Nothing is extracted or installed as additional program files.
+1. Download **MuseScorer.zip** from the [0.0.1 beta release](https://github.com/kpaede/Musescorer/releases/tag/0.0.1). Choose this asset, rather than GitHub’s **Source code** archive.
+2. Extract the ZIP. Place its **musescorer** folder inside your vault’s `.obsidian/plugins/` folder. Create `plugins/` if it does not exist.
+3. Check that the files are directly inside `musescorer/`, as shown below. Avoid an extra nested folder.
+4. Restart Obsidian. In **Settings → Community plugins**, enable community plugins if prompted, then enable **MuseScorer**.
 
-The three-file installation is approximately **40 MB**. Decoded resources still include about 13.6 MB of native WASM, 13.8 MB of engine data, 6.6 MB of additional fonts, a 23.7 MB soundfont and 3.3 MB of editor assets. The original soundfont and font coverage are preserved. Compression reduces the distribution size; it does not remove those capabilities.
+```text
+Your vault/
+└── .obsidian/
+    └── plugins/
+        └── musescorer/
+            ├── main.js
+            ├── manifest.json
+            └── styles.css
+```
 
-Rendering and playback never download assets from a CDN. Engine resources come from the installed `main.js`; the editor runs in a local iframe whose content policy blocks remote asset requests. The engine, soundfont and editor are decoded only when requested. Loading the larger JavaScript file itself still has a startup/memory cost; this is not a 37-KB loader anymore.
+`.obsidian` is a hidden folder; show hidden files in your file manager if needed. Alternatively, download the three individual release assets into the same `musescorer/` folder.
 
-Use **Show credits and licenses** in the command palette to read the bundled attribution, GPL and individual font/soundfont licenses offline. Original license bytes are preserved inside the distribution. Source and build inputs are available in this repository.
+> [!NOTE]
+> The complete engine, editor, fonts, soundfont and licenses are bundled into the approximately **40 MB** `main.js`. No extra WASM or editor folders are needed. This exceeds **Obsidian Sync Standard’s per-file limit**; install the plugin separately on each desktop device.
 
-The separate developer/upstream check contacts GitHub, and initial development dependency installation uses npm. Neither is part of score rendering or playback. Disk size is different from RAM use: the native wrapper requests an initial 512 MiB WASM heap, with additional memory for scores, audio and fonts. Sync Standard cannot synchronize this large `main.js`; install the plugin separately on each desktop device.
+### Update an existing installation
 
-## Embed scores
+Disable **MuseScorer**, replace the three program files with those from the release, and enable it again. Keep the `drafts/` folder if it exists: it contains editor recovery snapshots.
 
-The default view starts on the first page and lets you scroll through the score inside the embed:
+If you installed the preliminary beta with the uppercase ID `MuseScorer`, disable it first, rename its plugin folder to `musescorer`, and replace the three files. The permanent plugin ID is **musescorer**; the displayed name is **MuseScorer**.
+
+## Embed a score
+
+1. Put a MuseScore `.mscz` or `.mscx` file anywhere inside your vault. To try the example shown here, [download Morning practice.mscx](https://raw.githubusercontent.com/kpaede/Musescorer/main/docs/examples/Morning%20practice.mscx) and save it in a vault folder named `Scores`.
+2. Paste this code block into an Obsidian note:
 
 ````markdown
 ```musescore
-path: "Scores/Chopin/Nocturne.mscz"
+path: "Scores/Morning practice.mscx"
 ```
 ````
 
-The short form also works:
+3. Switch to **Reading view**, or move the cursor outside the code block in **Live Preview**. The score will render inside the note. The first score may take a moment to load.
+
+Replace the example path with your own file’s path **from the vault root**. For example, a file in `Music/Quartet/Score.mscz` uses exactly that path, regardless of which folder contains the note. Use `/` between folders. Spaces and Unicode filenames work; keep paths in quotes.
+
+For a quick embed, a single path also works:
 
 ````markdown
 ```musescore
-Scores/Nocturne.mscx
+Scores/Morning practice.mscx
 ```
 ````
 
-To show every page vertically, with a **12 px gap** between pages and no inner vertical scroll window:
+### Choose how pages appear
+
+| Mode | Add to the code block | How you read the score |
+| --- | --- | --- |
+| Scrollable page view — default | Omit `view`, or use `view: page` | Starts on page one. Scroll inside the embed or use its page arrows. |
+| All pages | `view: full` | Pages appear vertically with a small gap. Scroll the Obsidian note. |
+
+To embed the entire score:
 
 ````markdown
 ```musescore
-path: "Scores/Chopin/Nocturne.mscz"
+path: "Scores/Morning practice.mscx"
 view: full
 ```
 ````
 
-`view: page` explicitly selects the default. Its height is limited to one page or 85% of the window height, whichever is smaller. The toolbar view switch temporarily changes the current embed; change `view` in the code block to keep that choice.
+![The end of page one and the beginning of page two in an all-pages embed, separated by a narrow gray gap.](docs/images/full-score.png)
 
-At rest, the embed shows only the white score paper, without an outer border, persistent toolbar, filename or visible scrollbar. Hover or keyboard focus reveals floating controls for page navigation, playback, zoom, fit to width, view mode, editing, opening in MuseScore and reloading. The hover controls stay within reach while scrolling through a full score. The paper stays white in dark themes. In full view, the gap uses a subtly tinted theme background so that page boundaries are visible in light themes too.
+*In `view: full`, the gap makes page boundaries visible. The score keeps its white paper in both light and dark themes.*
 
-Paths are relative to the vault root and use `/`. Spaces and Unicode are supported. Double quotes use JSON escaping; single quotes support `''`. The long form accepts only `path` and `view`; duplicate or unknown options show an error. Embeds work in Reading view and in Live Preview outside the active code block. Source file changes refresh the embed automatically.
+The toolbar’s **Show all pages** / **Show scrollable page view** button lets you try either layout. To keep the choice when reopening the note, change `view` in the code block.
 
-## Playback and note highlighting
+## Playback and controls
 
-Play uses native MuseScore/FluidSynth synthesis and the bundled **FluidR3Mono GM** soundfont. Web Audio schedules stereo PCM at 44.1 kHz. While playing, the Play button becomes **Pause playback**. Pause freezes audio and note highlighting; **Resume playback** continues the same stream at the same position. Stop clears queued audio and native synthesis; the next Play starts from the beginning. Only one score plays at a time, across embeds and editors.
+Hover over an embedded score to reveal its toolbar. Hover over an icon to read its label. Keyboard focus inside the score also reveals the controls.
 
-The first playback loads the approximately 24 MB local soundfont and may take a moment. Sounds come from this free soundfont. Muse Sounds and MuseSampler are not included. Colored noteheads follow the audible notes using the engine's repeat- and tempo-aware segment positions and the audio output clock. Stop clears the highlights. In `view: page`, the embed scrolls to the audible notes and turns to the next page automatically. In `view: full`, the surrounding Obsidian note scrolls as needed to keep the playing notes visible. The original editor also provides tempo, selection playback and follow controls.
+![An embedded piano score during playback: the toolbar shows a Pause button and the sounding noteheads are highlighted red.](docs/images/playback.png)
 
-## Complete OTS editor in an Obsidian tab
+*During playback, Play becomes Pause and the sounding notes are highlighted. Pause holds your place; Resume continues from there.*
 
-The pencil opens the score in its own Obsidian tab with the **original OTS_WebEditor interface**, bundled locally. An existing editor for the same file is reused. You can also use **Open score editor** in the command palette or **Open in score editor** in a file's context menu.
+| Control | What it does |
+| --- | --- |
+| **Previous page** / **Next page** | Move between pages in the default scrollable view. |
+| **Play score** → **Pause playback** → **Resume playback** | Start, pause and continue at the same position. |
+| **Stop playback** | Stop and clear the highlights. The next Play starts at the beginning. |
+| **Zoom out** / **Zoom in** / **Fit to width** | Adjust the size of the notation inside the embed. |
+| **Show all pages** / **Show scrollable page view** | Switch the current embed’s layout. |
+| Pencil · **Open in score editor** | Open this score in an editor tab. |
+| External-link arrow · **Open in MuseScore** | Open the source file in the associated desktop application. |
+| **Reload score** | Render the source file again. Source file changes also refresh the embed automatically. |
 
-The original interface includes File/Edit/View/Add/Format/Tools/Help, note input, palettes, voices, articulations, dynamics, formatting, parts/instruments, inspectors, native undo/redo, playback with note highlighting and the available local export tools. The native MuseScore session runs in the shared worker. The original editor and engine supply notation commands, musical semantics and SVG interaction.
+Playback follows the score automatically. In page view, the embed scrolls and turns pages; in full view, the surrounding note scrolls to keep the playing notes visible. Only one score plays at a time across embeds and editors.
 
-The Obsidian toolbar adds **Save a new score copy to the vault**, **Open in MuseScore** and **Reload original**. Ctrl/⌘ S opens the dialog to save a native `.mscz` copy. Existing files are not overwritten. The original embed continues to reference its source file. External open hands that original file to the associated desktop application; associate `.mscz`/`.mscx` with MuseScore in your operating system.
+The first playback loads the bundled soundfont and may take a moment. Audio uses **FluidR3Mono GM**, not Muse Sounds or MuseSampler. No online audio service is used.
 
-Changes are stored as native recovery snapshots in the plugin's `drafts/` folder. Reopening the editor restores its draft with a fresh undo history. **Reload original** asks before discarding the draft. Source files are preserved.
+## Edit a score
 
-The website's server-dependent AI, cloud/catalog and specialized server conversion features need OTS infrastructure and are unavailable locally. Their API calls receive a local explanatory response. Scores and telemetry are not sent to a server.
+Select the **pencil** on an embed. The score opens in a new Obsidian tab using the complete original **OTS_WebEditor** interface. Opening the same file again returns to its existing editor tab.
 
-**Performance mode is disabled in the Obsidian editor.** The upstream command opens a separate `/perform` web application that is not bundled here. Its menu entry is marked **Performance mode (unavailable in Obsidian)** and cannot open a broken page. Normal editing, playback and following remain available.
+You can also right-click a `.mscz` or `.mscx` file in Obsidian’s file explorer and select **Open in score editor**, or open the command palette and run **MuseScorer: Open score editor**.
 
-## Build and install
+![The complete score editor inside an Obsidian tab, showing its menus, notation tools, piano score and editing panel.](docs/images/editor.png)
 
-Use Node.js 22+ and npm:
+*The upper Obsidian toolbar saves a copy, opens the original in MuseScore, or reloads the original. The notation menus and tools below belong to OTS_WebEditor.*
 
-```sh
-npm ci
-npm run build
-npm test
-npm run lint
-npm run test:engine
-npm run test:obsidian
-npm run package
-npm run test:install
-```
+Use the original editor’s **File**, **Edit**, **View**, **Add**, **Format**, **Tools** and **Help** menus, note input, palettes, inspector, undo/redo and playback controls. Select notes on the page to edit them. The editor also provides tempo and selection playback controls.
 
-`npm run dev` watches plugin source changes. The build checks both plugin and original editor with strict TypeScript and verifies SHA-256 checksums for the editor and engine inputs, including the soundfont. Original UI sources live in `vendor/ots-editor`; Obsidian adapters live in `editor-app` and `src/full-editor`. On first build, `setup:editor` installs the original editor's dependencies from its separate lockfile. WASM, data, music fonts and soundfont are included in the source tree; no C++ build is needed to start. `scripts/embedded-assets.mjs` packs the runtime and legal notices into the main bundle. `engine/`, `engine.js`, `renderer-worker.js` and `full-editor/` are build/test intermediates, not installation requirements.
+### Save your work
 
-`npm run test:engine` uses the installed Chrome app on macOS. Set `CHROME_PATH=/path/to/chromium` elsewhere. It checks actual SVG output, native edits and saving, undo/redo and nonzero synthesized PCM without HTTP requests from the engine.
+1. In the toolbar **above** the notation editor, select **Save a new score copy to the vault**. You can also use **Ctrl+S** on Windows/Linux or **⌘S** on macOS.
+2. Enter a vault-relative path ending in `.mscz`, such as `Scores/Morning practice (edited).mscz`. Choose an existing folder and a filename that is not already in use.
+3. Select **Save copy**.
+4. To display that saved version in a note, update the embed’s `path` to the new file.
 
-`npm run test:obsidian` requires a running Obsidian instance with its CLI enabled. It creates its own temporary fixture notes and scores in the development vault, leaving user examples unchanged. It checks hover controls, both modes, page gaps, real audio buffers, pause/resume with a frozen audio clock and retained highlighting, native page following in both modes, the disabled Performance command, the complete editor in a leaf, edits, native copy saving and draft recovery. Temporary test files are removed and focus emulation is restored. Reports and screenshots are written to `test-results/`.
+The original source file is preserved. Editor changes are also kept as local recovery drafts; reopening the score restores its draft with a fresh undo history. To discard the draft, select **Reload original** and confirm **Discard draft**. Saved copies are kept.
 
-For a manual installation, copy the **three files** from `dist/musescorer/` into `<Vault>/.obsidian/plugins/musescorer/`, or extract `dist/MuseScorer.zip` there. The archive contains exactly those three files. The GitHub release workflow attaches the same standard assets.
+### Open the file in MuseScore
 
-`npm run test:install` installs a byte-identical copy of `main.js` and `styles.css` into a fresh temporary plugin folder in the same development vault. Only the test manifest identity changes to avoid registration conflicts. It checks offline licenses and runs the real viewer, playback, full-editor and page-following tests, then removes the test installation and restores the development plugin. Recovery drafts remain user data; no engine/editor files are created at runtime.
+Select **Open in MuseScore** on an embed or in the editor’s upper toolbar. This opens the **original source file**, so save a copy first if you want to take your editor changes with you. Open that saved copy from its own embed or editor tab.
 
-The permanent plugin ID is `musescorer`, matching the installed folder name. The display name remains MuseScorer. If upgrading from the preliminary beta with ID `MuseScorer`, disable that installation, rename its folder to `musescorer` and replace the three program files; keep existing recovery drafts.
+This action uses your operating system’s file association. Install MuseScore and associate `.mscz` and `.mscx` files with it if another application opens instead.
 
-## Upstream updates
+## Troubleshooting
 
-The OTS editor and engine are pinned to reviewed commits in `editor-lock.json` and `engine-lock.json`. Two small frontend adaptations are recorded in `patches/ots-editor-obsidian.patch`; Obsidian integration stays outside the vendored source.
+| What you see | What to check |
+| --- | --- |
+| MuseScorer does not appear in the plugin list | Check the folder name `musescorer` and the three files directly inside it. Restart Obsidian and check **Settings → Community plugins**. |
+| The note shows the code instead of the score | Use a fenced `musescore` block, enable the plugin, and switch to Reading view or leave the block in Live Preview. |
+| **File not found** | Use the exact filename and a path from the vault root, including `.mscz` or `.mscx`. The file must be inside this vault. |
+| The embed still shows the old score after editing | Save a new copy, then change the embed’s `path` to that copy. A recovery draft does not replace the source file. |
+| Playback takes a moment to start | The first playback loads the local soundfont. Wait for it to finish and check your system volume and audio output. |
+| **Could not read the MuseScore file** | Try opening the file in MuseScore, then save a fresh `.mscz` copy. Damaged or unsupported files cannot be rendered. |
 
-```sh
-npm run check:upstream
-```
+### Current beta limits
 
-This developer command checks GitHub for changes to OTS, the Obsidian sample template and the latest MuseScore release. It reports review links without changing any dependency. The [plugin repository](https://github.com/kpaede/Musescorer) includes a weekly/manual GitHub Actions check. A separate [OTS fork](https://github.com/kpaede/OTS_WebEditor) preserves the connection to the original [OurTextScores/OTS_WebEditor](https://github.com/OurTextScores/OTS_WebEditor) repository for source review and contributions. See [the upstream maintenance guide](docs/upstream.md) for the Git remotes and update procedure.
+- **Desktop only.** Obsidian 1.7.2 or newer is required; mobile is not supported.
+- **Large local engine.** The bundle is about 40 MB. The engine starts with a 512 MiB WASM heap and needs more memory for scores, fonts and audio. Large scores or several editor tabs can use substantially more.
+- **Local editor features.** Website-only AI, cloud/catalog and server conversion features are unavailable. **Performance mode** is disabled in Obsidian. Normal editing and playback remain available.
+- **Layout differences.** The bundled MuseScore Studio 4.7.4 engine recalculates layout. Other MuseScore versions or unavailable custom fonts can produce differences.
 
-Available upstream changes appear as warning annotations and a comparison summary. A new release is not a workflow failure; network/API errors or inconsistent pins still fail the check. No dependency is upgraded automatically.
+## Privacy, licenses and development
 
-## Development vault
+Scores are processed locally. The plugin has no telemetry, account requirement or runtime downloads. Recovery snapshots are stored in the plugin’s `drafts/` folder. Rendering, editing and playback do not send scores to a server.
 
-The plugin is enabled in `KP_entwicklungskopie`. The existing comparison note is `_MuseScorer-Test/MuseScorer-Ansichten.md`, with default/full embeds and a short score for playback and editing. `_MuseScorer-Test/MuseScorer-Test.md` also covers missing and damaged files. These existing user paths are preserved.
+MuseScorer is licensed under [GPL-3.0-only](LICENSE). Use **MuseScorer: Show credits and licenses** in Obsidian’s command palette to read the bundled notices offline. See [third-party notices](THIRD_PARTY_NOTICES.md) for the engine, editor, fonts and soundfont attribution.
 
-## Architecture and limits
-
-One lazily started WASM engine processes previews, editor sessions and synthesis sequentially in a shared worker. Preview scores are destroyed after SVG export. Editor sessions persist until closed; an editor or active playback prevents idle worker termination. The SVG cache is limited to 32 MiB. Without persistent sessions, the worker is recycled after 60 seconds idle or 16 preview jobs. Each request has a two-minute timeout.
-
-The OTS wrapper starts with a 512 MiB WASM heap, plus scores and soundfont memory. Large scores or many editor tabs may use substantially more. The plugin has no telemetry, running web service or online synchronization.
-
-Native page breaks, empty pages and text-frame pages are preserved. MuseScore recalculates layout when opening a file. Other desktop versions, custom system fonts and missing CJK fallback fonts can produce rendering differences. Unicode filenames are supported independently. A legacy fixture does not establish compatibility with every old format. Mobile is not supported.
-
-Engine API/build details: [docs/engine.md](docs/engine.md). Validation: [docs/validation.md](docs/validation.md). Third-party licenses: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+- [Development guide](docs/development.md): building, tests, offline bundling and runtime architecture.
+- [Upstream maintenance](docs/upstream.md): pinned dependencies, the OTS fork and update checks.
+- [Engine integration](docs/engine.md), [validation](docs/validation.md) and [release notes](docs/releases/0.0.1.md).
+- [Report a bug](https://github.com/kpaede/Musescorer/issues): include your Obsidian version, operating system and reproduction steps. Share a score only if you are comfortable making it public.
