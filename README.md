@@ -1,14 +1,14 @@
 # MuseScorer for Obsidian
 
-Bring your MuseScore sheet music into your notes. Embed `.mscz` and `.mscx` files, listen with highlighted notes, and open the complete notation editor in an Obsidian tab. Rendering, editing and playback work locally, without an account or runtime downloads.
+Embed native MuseScore `.mscz` and `.mscx` scores in Obsidian, play them with note highlighting, and edit them in a dedicated tab. Rendering, editing and playback work locally, without an account or runtime downloads.
 
 **Desktop · Obsidian 1.7.2+ · Version 0.0.1**
 
 [Install](#install) · [Embed a score](#embed-a-score) · [Playback](#playback-and-controls) · [Editor](#edit-a-score) · [Troubleshooting](#troubleshooting)
 
-![An Obsidian practice journal with a piano score embedded below a short practice note. The score has no visible border or toolbar.](docs/images/embed.png)
+![Schubert/Liszt’s Ständchen embedded in an Obsidian note, with playback controls hidden.](docs/images/schubert-embed.png)
 
-*Your note stays a note: the score appears as sheet music, and controls appear when you hover over it or move keyboard focus into it.*
+*Schubert/Liszt: Ständchen, embedded in an Obsidian note. Controls appear on hover or keyboard focus.*
 
 ## Built on OTS_WebEditor
 
@@ -62,12 +62,12 @@ If you installed the preliminary beta with the uppercase ID `MuseScorer`, disabl
 
 ## Embed a score
 
-1. Put a MuseScore `.mscz` or `.mscx` file anywhere inside your vault. To try the example shown here, [download Morning practice.mscx](https://raw.githubusercontent.com/kpaede/Musescorer/main/docs/examples/Morning%20practice.mscx) and save it in a vault folder named `Scores`.
+1. Put a MuseScore `.mscz` or `.mscx` file anywhere inside your vault. The examples below assume your score is saved as `Scores/Ständchen.mscz`.
 2. Paste this code block into an Obsidian note:
 
 ````markdown
 ```musescore
-path: "Scores/Morning practice.mscx"
+path: "Scores/Ständchen.mscz"
 ```
 ````
 
@@ -79,7 +79,7 @@ For a quick embed, a single path also works:
 
 ````markdown
 ```musescore
-Scores/Morning practice.mscx
+Scores/Ständchen.mscz
 ```
 ````
 
@@ -94,14 +94,12 @@ To embed the entire score:
 
 ````markdown
 ```musescore
-path: "Scores/Morning practice.mscx"
+path: "Scores/Ständchen.mscz"
 view: full
 ```
 ````
 
-![The end of page one and the beginning of page two in an all-pages embed, separated by a narrow gray gap.](docs/images/full-score.png)
-
-*In `view: full`, the gap makes page boundaries visible. The score keeps its white paper in both light and dark themes.*
+In `view: full`, a small gap separates pages. Score paper stays white in both light and dark themes.
 
 The toolbar’s **Show all pages** / **Show scrollable page view** button lets you try either layout. To keep the choice when reopening the note, change `view` in the code block.
 
@@ -109,7 +107,7 @@ The toolbar’s **Show all pages** / **Show scrollable page view** button lets y
 
 Hover over an embedded score to reveal its toolbar. Hover over an icon to read its label. Keyboard focus inside the score also reveals the controls.
 
-![An embedded piano score during playback: the toolbar shows a Pause button and the sounding noteheads are highlighted red.](docs/images/playback.png)
+![Playback of Ständchen in an embed, with the Pause control visible and sounding notes highlighted red.](docs/images/schubert-playback.png)
 
 *During playback, Play becomes Pause and the sounding notes are highlighted. Pause holds your place; Resume continues from there.*
 
@@ -134,16 +132,16 @@ Select the **pencil** on an embed. The score opens in a new Obsidian tab using t
 
 You can also right-click a `.mscz` or `.mscx` file in Obsidian’s file explorer and select **Open in score editor**, or open the command palette and run **MuseScorer: Open score editor**.
 
-![The complete score editor inside an Obsidian tab, showing its menus, notation tools, piano score and editing panel.](docs/images/editor.png)
+![Ständchen in the OTS editor within an Obsidian tab, with palettes, notation tools and a blue playback cursor.](docs/images/schubert-editor.png)
 
-*The upper Obsidian toolbar saves a copy, opens the original in MuseScore, or reloads the original. The notation menus and tools below belong to OTS_WebEditor.*
+*Ständchen during playback in the OTS editor, with a blue playhead and highlighted notes.*
 
 Use the original editor’s **File**, **Edit**, **View**, **Add**, **Format**, **Tools** and **Help** menus, note input, palettes, inspector, undo/redo and playback controls. Select notes on the page to edit them. The editor also provides tempo and selection playback controls.
 
 ### Save your work
 
 1. In the toolbar **above** the notation editor, select **Save a new score copy to the vault**. You can also use **Ctrl+S** on Windows/Linux or **⌘S** on macOS.
-2. Enter a vault-relative path ending in `.mscz`, such as `Scores/Morning practice (edited).mscz`. Choose an existing folder and a filename that is not already in use.
+2. Enter a vault-relative path ending in `.mscz`, such as `Scores/Ständchen (edited).mscz`. Choose an existing folder and a filename that is not already in use.
 3. Select **Save copy**.
 4. To display that saved version in a note, update the embed’s `path` to the new file.
 
