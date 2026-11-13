@@ -13,7 +13,7 @@
     "test:engine": "node scripts/smoke-engine.mjs",
     "verify:engine": "node scripts/verify-engine.mjs",
     "package": "npm run build && node scripts/package.mjs",
-    "test:obsidian": "node scripts/test-features.mjs",
+    "test:obsidian": "node scripts/test-features.mjs && node scripts/test-embed-follow.mjs",
     "build:editor": "node scripts/ensure-editor.mjs && node scripts/verify-editor.mjs && tsc -p editor-app/tsconfig.json --noEmit && node scripts/build-full-editor.mjs",
     "setup:editor": "node scripts/ensure-editor.mjs",
     "verify:editor": "node scripts/verify-editor.mjs",

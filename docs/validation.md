@@ -48,3 +48,15 @@ The complete local notation UI is present. Website AI/cloud/API features remain 
 The plugin uses the existing public [kpaede/Musescorer](https://github.com/kpaede/Musescorer) repository. The separate [kpaede/OTS_WebEditor](https://github.com/kpaede/OTS_WebEditor) fork was created through GitHub and its `parent` and `source` were verified as `OurTextScores/OTS_WebEditor`. Local remotes identify the plugin, fork and original explicitly. GitHub Actions is enabled for the plugin repository. The weekly/manual workflow checks the original upstream rather than relying on the fork being synchronized.
 
 The initial source inventory contains all inputs required by both checksum locks. Generated runtime bundles, installed dependencies, test output, native recovery drafts and local credentials are excluded. Git attributes preserve vendored asset and license bytes across platforms. Local strict build, lint and all seven tests passed before the initial push.
+
+## Embed playback corrections on 2026-11-13
+
+Strict build, lint and all nine tests pass. The real development-vault integration run also passes; it now creates its own temporary comparison notes instead of depending on user-edited examples.
+
+- The embed button changes from Play to Pause, then Resume. Pausing the actual AudioContext held its clock and exact active notehead paths unchanged over a 350 ms observation. Resuming advanced that same clock. Unit coverage additionally verifies that the native stream and queued buffers are retained, and that Stop works while paused.
+- A native three-page MSCX fixture follows from page 1 to page 2 during audible synthesis. Page view scrolled its inner viewport by 903 px with the outer document stationary. Full view scrolled the surrounding document by 1,088 px with inner vertical scrolling at zero. The active notehead was visible in both cases.
+- The full-view hover toolbar remained within the visible document after following to page 2. A real CDP mouse click on Pause switched it to Resume. The toolbar's zero-height sticky wrapper preserves the unframed, quiet paper layout.
+- The original editor's File menu displays **Performance mode (unavailable in Obsidian)** as disabled. The remaining original menus, note selection, pitch edit, undo/redo, audible playback/highlighting, native copy saving and draft recovery passed. Source bytes retained their original SHA-256.
+- All 685 vendored editor inputs remain unchanged. The unavailable Performance command is gated only at bundle time. The README prominently credits OurTextScores/OTS_WebEditor, with separate attribution to MuseScore and the Obsidian template.
+
+Evidence: `test-results/features-report.json`, `test-results/embed-follow-report.json`, `embed-page-follow.png` and `embed-full-follow.png`. Temporary files, audio instrumentation and focus emulation were removed/restored. The CLI harness accepts complete replies even when an Electron CLI client retains a process handle; it only terminates its own completed client, never the running Obsidian application.

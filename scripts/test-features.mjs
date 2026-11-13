@@ -1,16 +1,16 @@
-import { execFile } from 'node:child_process';
-import { promisify } from 'node:util';
+import { obsidianCli } from './obsidian-cli.mjs';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import path from 'node:path';
 import assert from 'node:assert/strict';
-const exec = promisify(execFile);
 const vault = process.env.OBSIDIAN_TEST_VAULT || 'KP_entwicklungskopie';
-const note = '_MuseScorer-Test/MuseScorer-Ansichten.md';
-async function cli(command, ...args) {
- const { stdout } = await exec('obsidian', [`vault=${vault}`, command, ...args], { timeout: 30000, maxBuffer: 4 * 1024 * 1024 });
- return stdout.trim();
-}
+const returnNote = '_MuseScorer-Test/MuseScorer-Ansichten.md';
+const comparisonStamp = Date.now();
+const note = `_MuseScorer-Test/Features-${comparisonStamp}.md`;
+const comparisonScore = `_MuseScorer-Test/Features-${comparisonStamp}.mscz`;
+const comparisonData = await readFile('tests/fixtures/bach_orig.mscz');
+const comparisonText = ['# Embed comparison', '', '```musescore', comparisonScore, '```', '', '```musescore', `path: "${comparisonScore}"`, 'view: full', '```', ''].join('\n');
+const cli = (command, ...args) => obsidianCli(vault, command, ...args);
 async function evaluate(code) {
  const output = await cli('eval', `code=${code}`);
  if (!output.startsWith('=> ')) throw new Error(output);
@@ -32,6 +32,7 @@ const first = `${preview}.querySelector('.musescorer')`;
 await mkdir('test-results', { recursive: true });
 await cli('dev:cdp', 'method=Emulation.setFocusEmulationEnabled', 'params={"enabled":true}');
 try {
+await statement(`if(!app.vault.getAbstractFileByPath('_MuseScorer-Test'))await app.vault.createFolder('_MuseScorer-Test');const data=Uint8Array.from(atob(${JSON.stringify(comparisonData.toString('base64'))}),c=>c.charCodeAt(0));await app.vault.createBinary(${JSON.stringify(comparisonScore)},data.buffer);await app.vault.create(${JSON.stringify(note)},${JSON.stringify(comparisonText)});return JSON.stringify(true);`);
 await statement(`const leaf=app.workspace.getMostRecentLeaf(); await leaf.setViewState({type:'markdown',state:{file:${JSON.stringify(note)},mode:'preview'}}); app.workspace.setActiveLeaf(leaf,{focus:true});await app.workspace.revealLeaf(leaf); ${preview}.scrollTop=0; return JSON.stringify(true);`);
 await until(`JSON.stringify(${first}?.querySelectorAll('.musescorer-page').length)`, count => count === 3);
 await until(`JSON.stringify(${first}?.clientWidth)`, width => width > 0);
@@ -86,19 +87,33 @@ try {
  await statement(`window.__musescorerShell=require('electron').shell;window.__musescorerOriginalOpen=window.__musescorerShell.openPath;window.__musescorerExternalPath=null;window.__musescorerShell.openPath=async path=>{window.__musescorerExternalPath=path;return ''};${first}.querySelector('button[aria-label="Open in MuseScore"]').click();return JSON.stringify(true);`);
  await until('JSON.stringify(window.__musescorerExternalPath)', value => typeof value==='string'&&value.endsWith(scorePath));
  console.log('Native file handoff: passed.');
- await statement(`window.__musescorerTestAudio={starts:0,frames:0,peak:0};window.__musescorerOriginalSource=AudioContext.prototype.createBufferSource;AudioContext.prototype.createBufferSource=function(...args){const source=window.__musescorerOriginalSource.apply(this,args);const start=source.start;source.start=function(...args){const data=source.buffer?.getChannelData(0);window.__musescorerTestAudio.starts++;window.__musescorerTestAudio.frames+=data?.length??0;if(data)for(const sample of data)window.__musescorerTestAudio.peak=Math.max(window.__musescorerTestAudio.peak,Math.abs(sample));return start.apply(this,args)};return source};${first}.querySelector('button[aria-label="Play score"]').click();return JSON.stringify(true);`);
+ await statement(`window.__musescorerTestAudio={starts:0,frames:0,peak:0};window.__musescorerOriginalSource=AudioContext.prototype.createBufferSource;AudioContext.prototype.createBufferSource=function(...args){window.__musescorerEmbedContext=this;const source=window.__musescorerOriginalSource.apply(this,args);const start=source.start;source.start=function(...args){const data=source.buffer?.getChannelData(0);window.__musescorerTestAudio.starts++;window.__musescorerTestAudio.frames+=data?.length??0;if(data)for(const sample of data)window.__musescorerTestAudio.peak=Math.max(window.__musescorerTestAudio.peak,Math.abs(sample));return start.apply(this,args)};return source};${first}.querySelector('button[aria-label="Play score"]').click();return JSON.stringify(true);`);
  const audio = await until('JSON.stringify(window.__musescorerTestAudio)', value => value.starts > 0 && value.peak > 0.0001);
  const highlightedNotes = await until(`JSON.stringify(${first}.querySelectorAll('.musescorer-playing-note.is-active').length)`, count=>count>0);
  await cli('dev:screenshot', `path=${path.resolve('test-results/embed-note-highlighting.png')}`);
+ await statement(`${first}.querySelector('button[aria-label="Pause playback"]').click();return JSON.stringify(true);`);
+ await until('JSON.stringify(window.__musescorerEmbedContext.state)', state=>state==='suspended');
+ const paused = await statement(`return JSON.stringify({time:window.__musescorerEmbedContext.currentTime,notes:[...${first}.querySelectorAll('.musescorer-playing-note.is-active')].map(el=>el.getAttribute('d'))});`);
+ await new Promise(resolve=>setTimeout(resolve,350));
+ const held = await statement(`return JSON.stringify({time:window.__musescorerEmbedContext.currentTime,notes:[...${first}.querySelectorAll('.musescorer-playing-note.is-active')].map(el=>el.getAttribute('d'))});`);
+ assert.deepEqual(held,paused,'Pause must freeze the audio clock and retain the current note highlights.');
+ await statement(`${first}.querySelector('button[aria-label="Resume playback"]').click();return JSON.stringify(true);`);
+ await until('JSON.stringify(window.__musescorerEmbedContext.currentTime)', time=>time>paused.time+0.1);
+ assert.equal(await evaluate(`JSON.stringify(!!${first}.querySelector('button[aria-label="Pause playback"]'))`),true);
  await statement(`${first}.querySelector('button[aria-label="Stop playback"]').click();return JSON.stringify(true);`);
  await until(`JSON.stringify(${first}.querySelectorAll('.musescorer-playing-note.is-active').length)`, count=>count===0);
- console.log('Embed audio/highlighting: passed.');
+ console.log('Embed audio, pause/resume and highlighting: passed.');
  await statement(`${first}.querySelector('button[aria-label="Open in score editor"]').click();return JSON.stringify(true);`);
  await until(`JSON.stringify({type:${view}.getViewType(),notes:${doc}?.querySelectorAll('svg .Note').length})`, value => value.type==='musescorer-editor'&&value.notes>0);
  console.log('Full original editor loaded.');
  const menus = await evaluate(`JSON.stringify([...${doc}.querySelectorAll('button[data-testid^="menu-"]')].map(el=>el.textContent))`);
  for (const name of ['File','Edit','View','Add','Format','Tools','Help']) assert.ok(menus.includes(name), `Missing original menu ${name}`);
  assert.equal(await evaluate(`JSON.stringify(!!${doc}.querySelector('[data-testid="btn-note-input"]'))`), true);
+ await clickAt(`${doc}.querySelector('[data-testid="menu-file"]')`);
+ const performanceMode = await until(`JSON.stringify((()=>{const item=${doc}.querySelector('[data-testid*="file.perform"]');return item?{label:item.textContent,disabled:item.getAttribute('aria-disabled')==='true'||item.hasAttribute('data-disabled')}:null})())`,Boolean);
+ assert.match(performanceMode.label,/unavailable in Obsidian/u); assert.equal(performanceMode.disabled,true);
+ for(const type of ['keyDown','keyUp'])await cli('dev:cdp','method=Input.dispatchKeyEvent',`params=${JSON.stringify({type,key:'Escape',code:'Escape',windowsVirtualKeyCode:27})}`);
+
  await clickAt(`${doc}.querySelector('svg .Note')`);
  await until(`(async()=>JSON.stringify(await ${view}.host.native(${view}.host.active,'getSelectedElementProperties')))()`, result => result.selectionCount>0);
  await cli('dev:cdp','method=Input.dispatchKeyEvent',`params=${JSON.stringify({type:'keyDown',key:'ArrowUp',code:'ArrowUp',windowsVirtualKeyCode:38})}`);
@@ -136,11 +151,14 @@ try {
  await until(`JSON.stringify(${doc}?.querySelectorAll('svg .Note').length)`, count=>count>0);
  const original=await statement(`const data=new Uint8Array(await app.vault.readBinary(app.vault.getAbstractFileByPath(${JSON.stringify(scorePath)})));let s='';for(let i=0;i<data.length;i+=8192)s+=String.fromCharCode(...data.subarray(i,i+8192));return JSON.stringify(btoa(s));`);
  assert.equal(createHash('sha256').update(Buffer.from(original,'base64')).digest('hex'),sourceHash);
- output={...output,audio,highlightedNotes,menus,editorAudio,editorHighlights,editor:'complete original OTS editor',nativeCopy:'saved',draftRecovery:'passed',originalUnchanged:true,externalOpen:'native file path verified without launching the external app'};
+ output={...output,audio,highlightedNotes,pauseResume:'audio clock and highlight frozen, then continued',performanceMode,menus,editorAudio,editorHighlights,editor:'complete original OTS editor',nativeCopy:'saved',draftRecovery:'passed',originalUnchanged:true,externalOpen:'native file path verified without launching the external app'};
 } finally {
- await statement(`if(window.__musescorerOriginalSource)AudioContext.prototype.createBufferSource=window.__musescorerOriginalSource;if(window.__musescorerFrameWindow&&window.__musescorerFrameSource)window.__musescorerFrameWindow.AudioContext.prototype.createBufferSource=window.__musescorerFrameSource;if(window.__musescorerOriginalOpen)window.__musescorerShell.openPath=window.__musescorerOriginalOpen;for(const leaf of app.workspace.getLeavesOfType('musescorer-editor'))if(leaf.view.getState().path===${JSON.stringify(scorePath)}){await leaf.view.onClose();leaf.detach();}delete window.__musescorerTestAudio;delete window.__musescorerFrameAudio;delete window.__musescorerFrameWindow;delete window.__musescorerFrameSource;delete window.__musescorerOriginalSource;delete window.__musescorerOriginalOpen;delete window.__musescorerExternalPath;delete window.__musescorerShell;return JSON.stringify(true);`).catch(()=>{});
+ await statement(`if(window.__musescorerOriginalSource)AudioContext.prototype.createBufferSource=window.__musescorerOriginalSource;if(window.__musescorerFrameWindow&&window.__musescorerFrameSource)window.__musescorerFrameWindow.AudioContext.prototype.createBufferSource=window.__musescorerFrameSource;if(window.__musescorerOriginalOpen)window.__musescorerShell.openPath=window.__musescorerOriginalOpen;for(const leaf of app.workspace.getLeavesOfType('musescorer-editor'))if(leaf.view.getState().path===${JSON.stringify(scorePath)}){await leaf.view.onClose();leaf.detach();}delete window.__musescorerEmbedContext;delete window.__musescorerTestAudio;delete window.__musescorerFrameAudio;delete window.__musescorerFrameWindow;delete window.__musescorerFrameSource;delete window.__musescorerOriginalSource;delete window.__musescorerOriginalOpen;delete window.__musescorerExternalPath;delete window.__musescorerShell;return JSON.stringify(true);`).catch(()=>{});
  await statement(`if(await app.vault.adapter.exists(${JSON.stringify(draftPath)}))await app.vault.adapter.remove(${JSON.stringify(draftPath)});for(const path of ${JSON.stringify([copyPath,automationNote,scorePath])}){const file=app.vault.getAbstractFileByPath(path);if(file)await app.vault.delete(file);}const file=app.vault.getAbstractFileByPath(${JSON.stringify(note)});const leaf=app.workspace.getLeaf(false);await leaf.openFile(file,{state:{mode:'preview'}});app.workspace.setActiveLeaf(leaf,{focus:true});await app.workspace.revealLeaf(leaf);return JSON.stringify(true);`).catch(()=>{});
 }
 await writeFile('test-results/features-report.json',JSON.stringify(output,null,2));
 console.log(JSON.stringify(output,null,2));
-} finally { await cli('dev:cdp','method=Emulation.setFocusEmulationEnabled','params={"enabled":false}').catch(()=>{}); }
+} finally {
+ await statement(`for(const leaf of app.workspace.getLeavesOfType('markdown'))if(leaf.view.getState().file===${JSON.stringify(note)})leaf.detach();for(const path of ${JSON.stringify([note,comparisonScore])}){const file=app.vault.getAbstractFileByPath(path);if(file)await app.vault.delete(file);}const file=app.vault.getAbstractFileByPath(${JSON.stringify(returnNote)});if(file){const leaf=app.workspace.getLeaf(false);await leaf.openFile(file,{state:{mode:'preview'}});app.workspace.setActiveLeaf(leaf,{focus:true});}return JSON.stringify(true);`).catch(()=>{});
+ await cli('dev:cdp','method=Emulation.setFocusEmulationEnabled','params={"enabled":false}').catch(()=>{});
+}

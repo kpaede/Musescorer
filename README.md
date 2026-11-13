@@ -2,6 +2,15 @@
 
 Embed native MuseScore scores in Obsidian, with local rendering, playback and the complete OTS notation editor. Uses the real MuseScore Studio **4.7.4** engine from [OTS_WebEditor](https://github.com/OurTextScores/OTS_WebEditor), built on the [official Obsidian sample plugin](https://github.com/obsidianmd/obsidian-sample-plugin). Native files load directly without intermediate MusicXML conversion. Requires Obsidian Desktop **1.7.2+**. Runtime operation is offline.
 
+## Credits — built on OTS_WebEditor
+
+> [!IMPORTANT]
+> **MuseScorer is an Obsidian adaptation of [OTS_WebEditor by OurTextScores and its contributors](https://github.com/OurTextScores/OTS_WebEditor).** The complete notation editor, its interaction tools, native engine bridge and original playback/following systems come from that project. This plugin would not exist without their work.
+
+Please visit the [original OTS_WebEditor repository](https://github.com/OurTextScores/OTS_WebEditor) and [OurTextScores editor](https://www.ourtextscores.com/score-editor). Credit for the original editor and its continued development belongs to the upstream authors and contributors. MuseScorer adds Obsidian integration: note embeds, local hosting, vault saving/recovery and embed playback controls.
+
+The underlying engraving and synthesis engine is the work of the [MuseScore project and its contributors](https://github.com/musescore/MuseScore). The Obsidian scaffold comes from the [official sample plugin](https://github.com/obsidianmd/obsidian-sample-plugin). Original licenses and attribution are preserved in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and `licenses/`.
+
 ## Embed scores
 
 The default view starts on the first page and lets you scroll through the score inside the embed:
@@ -31,15 +40,15 @@ view: full
 
 `view: page` explicitly selects the default. Its height is limited to one page or 85% of the window height, whichever is smaller. The toolbar view switch temporarily changes the current embed; change `view` in the code block to keep that choice.
 
-At rest, the embed shows only the white score paper, without an outer border, persistent toolbar, filename or visible scrollbar. Hover or keyboard focus reveals floating controls for page navigation, playback, zoom, fit to width, view mode, editing, opening in MuseScore and reloading. The paper stays white in dark themes. In full view, the gap uses a subtly tinted theme background so that page boundaries are visible in light themes too.
+At rest, the embed shows only the white score paper, without an outer border, persistent toolbar, filename or visible scrollbar. Hover or keyboard focus reveals floating controls for page navigation, playback, zoom, fit to width, view mode, editing, opening in MuseScore and reloading. The hover controls stay within reach while scrolling through a full score. The paper stays white in dark themes. In full view, the gap uses a subtly tinted theme background so that page boundaries are visible in light themes too.
 
 Paths are relative to the vault root and use `/`. Spaces and Unicode are supported. Double quotes use JSON escaping; single quotes support `''`. The long form accepts only `path` and `view`; duplicate or unknown options show an error. Embeds work in Reading view and in Live Preview outside the active code block. Source file changes refresh the embed automatically.
 
 ## Playback and note highlighting
 
-Play uses native MuseScore/FluidSynth synthesis and the bundled **FluidR3Mono GM** soundfont. Web Audio schedules stereo PCM at 44.1 kHz. Stop clears queued audio and native synthesis. Only one score plays at a time, across embeds and editors.
+Play uses native MuseScore/FluidSynth synthesis and the bundled **FluidR3Mono GM** soundfont. Web Audio schedules stereo PCM at 44.1 kHz. While playing, the Play button becomes **Pause playback**. Pause freezes audio and note highlighting; **Resume playback** continues the same stream at the same position. Stop clears queued audio and native synthesis; the next Play starts from the beginning. Only one score plays at a time, across embeds and editors.
 
-The first playback loads the approximately 24 MB local soundfont and may take a moment. Sounds come from this free soundfont. Muse Sounds and MuseSampler are not included. Colored noteheads follow the audible notes using the engine's repeat- and tempo-aware segment positions and the audio output clock. Stop clears the highlights. Embed playback starts at the beginning; the original editor also provides pause, tempo, selection playback and follow controls.
+The first playback loads the approximately 24 MB local soundfont and may take a moment. Sounds come from this free soundfont. Muse Sounds and MuseSampler are not included. Colored noteheads follow the audible notes using the engine's repeat- and tempo-aware segment positions and the audio output clock. Stop clears the highlights. In `view: page`, the embed scrolls to the audible notes and turns to the next page automatically. In `view: full`, the surrounding Obsidian note scrolls as needed to keep the playing notes visible. The original editor also provides tempo, selection playback and follow controls.
 
 ## Complete OTS editor in an Obsidian tab
 
@@ -52,6 +61,8 @@ The Obsidian toolbar adds **Save a new score copy to the vault**, **Open in Muse
 Changes are stored as native recovery snapshots in the plugin's `drafts/` folder. Reopening the editor restores its draft with a fresh undo history. **Reload original** asks before discarding the draft. Source files are preserved.
 
 The website's server-dependent AI, cloud/catalog and specialized server conversion features need OTS infrastructure and are unavailable locally. Their API calls receive a local explanatory response. Scores and telemetry are not sent to a server.
+
+**Performance mode is disabled in the Obsidian editor.** The upstream command opens a separate `/perform` web application that is not bundled here. Its menu entry is marked **Performance mode (unavailable in Obsidian)** and cannot open a broken page. Normal editing, playback and following remain available.
 
 ## Build and install
 
@@ -71,7 +82,7 @@ npm run package
 
 `npm run test:engine` uses the installed Chrome app on macOS. Set `CHROME_PATH=/path/to/chromium` elsewhere. It checks actual SVG output, native edits and saving, undo/redo and nonzero synthesized PCM without HTTP requests from the engine.
 
-`npm run test:obsidian` requires a running Obsidian instance with its CLI enabled and the comparison note in the development vault. It checks hover controls, both modes, page gaps, real audio buffers, note highlighting, the complete editor in a leaf, edits, native copy saving and draft recovery. Temporary test files are removed and focus emulation is restored. Reports and screenshots are written to `test-results/`.
+`npm run test:obsidian` requires a running Obsidian instance with its CLI enabled. It creates its own temporary fixture notes and scores in the development vault, leaving user examples unchanged. It checks hover controls, both modes, page gaps, real audio buffers, pause/resume with a frozen audio clock and retained highlighting, native page following in both modes, the disabled Performance command, the complete editor in a leaf, edits, native copy saving and draft recovery. Temporary test files are removed and focus emulation is restored. Reports and screenshots are written to `test-results/`.
 
 This working folder is already installed under `.obsidian/plugins/MuseScorer` in the development vault. For another vault, copy **all** of `dist/MuseScorer/` into `<Vault>/.obsidian/plugins/MuseScorer/`, or extract `dist/MuseScorer.zip` there. **Include `renderer-worker.js`, `engine.js`, and the complete `engine/` and `full-editor/` folders.** The usual three plugin files alone are insufficient.
 

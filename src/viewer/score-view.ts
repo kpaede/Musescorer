@@ -5,6 +5,7 @@ import { iconButton } from '../ui/icon-button';
 import type { PlaybackController } from '../playback/controller';
 import { openInMuseScore } from '../ui/open-native';
 import { NoteOverlay } from '../playback/note-overlay';
+import { followScore } from '../playback/follow-score';
 
 export class ScoreView extends MarkdownRenderChild {
  private generation = 0;
@@ -31,21 +32,30 @@ export class ScoreView extends MarkdownRenderChild {
   this.containerEl.empty();
   this.containerEl.addClass('musescorer');
   this.containerEl.setAttribute('aria-label', 'Score');
-  const toolbar = this.containerEl.createDiv({ cls: 'musescorer-toolbar' });
+  const controls = this.containerEl.createDiv({ cls: 'musescorer-controls' });
+  const toolbar = controls.createDiv({ cls: 'musescorer-toolbar' });
   toolbar.setAttribute('role', 'group');
   toolbar.setAttribute('aria-label', 'Score controls');
   this.previous = iconButton(this, toolbar, 'chevron-left', 'Previous page', () => this.turnPage(-1));
   this.next = iconButton(this, toolbar, 'chevron-right', 'Next page', () => this.turnPage(1));
   const play = iconButton(this, toolbar, 'play', 'Play score', () => {
    const file = this.app.vault.getAbstractFileByPath(this.path);
-   if (file instanceof TFile) void this.player.playFile(file, this.playbackOwner);
+   if (file instanceof TFile) void this.player.toggleFile(file, this.playbackOwner);
   });
   const stop = iconButton(this, toolbar, 'square', 'Stop playback', () => { void this.player.stop(this.playbackOwner); });
-  this.register(this.player.subscribeHighlights((owner, box) => { for (const overlay of this.overlays) overlay.show(owner === this.playbackOwner ? box : null); }));
+  this.register(this.player.subscribeHighlights((owner, box) => {
+   const active = owner === this.playbackOwner ? box : null;
+   for (const overlay of this.overlays) overlay.show(active);
+   if (active && this.viewport && this.pageContainer) followScore(active, this.viewport, this.pageContainer, this.mode);
+  }));
   this.register(this.player.subscribe(state => {
    const own = state.owner === this.playbackOwner;
    play.disabled = own && state.status === 'loading';
-   play.setAttribute('aria-pressed', String(own && state.status !== 'idle'));
+   const playing = own && state.status === 'playing';
+   const label = playing ? 'Pause playback' : own && state.status === 'paused' ? 'Resume playback' : 'Play score';
+   setIcon(play, playing ? 'pause' : 'play');
+   play.setAttribute('aria-label', label); play.title = label;
+   play.setAttribute('aria-pressed', String(playing));
    stop.disabled = !own || state.status === 'idle';
    if (own && state.error) { this.status?.addClass('musescorer-error'); this.status?.setText(`Playback failed: ${state.error}`); }
   }));

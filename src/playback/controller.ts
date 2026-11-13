@@ -2,7 +2,7 @@ import type { TFile, Vault } from 'obsidian';
 import { EngineClient } from '../engine/client';
 import type { AudioChunk, ScoreFormat, ScorePosition, ScorePositions } from '../engine/protocol';
 
-export interface PlaybackState { owner: string | null; status: 'idle' | 'loading' | 'playing'; error?: string }
+export interface PlaybackState { owner: string | null; status: 'idle' | 'loading' | 'playing' | 'paused'; error?: string }
 
 /** One audible transport per plugin, fed by native 44.1-kHz stereo synthesis. */
 export class PlaybackController {
@@ -25,6 +25,34 @@ export class PlaybackController {
  stopExternal(except?: string): void { for (const [owner, stop] of this.external) if (owner !== except) stop(); }
  subscribeHighlights(listener: (owner: string | null, box: ScorePosition | null) => void): () => void { this.highlights.add(listener); return () => this.highlights.delete(listener); }
  isOwner(owner: string): boolean { return this.state.owner === owner; }
+ async toggleFile(file: TFile, owner: string): Promise<void> {
+  if (this.isOwner(owner)) {
+   if (this.state.status === 'playing') return this.pause(owner);
+   if (this.state.status === 'paused') return this.resume(owner);
+   if (this.state.status === 'loading') return;
+  }
+  await this.playFile(file, owner);
+ }
+ async pause(owner: string): Promise<void> {
+  if (!this.isOwner(owner) || this.state.status !== 'playing' || !this.context) return;
+  const generation = this.generation;
+  this.emit({ owner, status: 'paused' });
+  try { await this.context.suspend(); }
+  catch (error) { await this.transportFailed(generation, owner, error); }
+ }
+ async resume(owner: string): Promise<void> {
+  if (!this.isOwner(owner) || this.state.status !== 'paused' || !this.context) return;
+  const generation = this.generation;
+  const resumed = this.context.resume();
+  this.emit({ owner, status: 'playing' });
+  try { await resumed; }
+  catch (error) { await this.transportFailed(generation, owner, error); }
+ }
+ private async transportFailed(generation: number, owner: string, error: unknown): Promise<void> {
+  if (generation !== this.generation) return;
+  await this.stop(owner);
+  if (generation + 1 === this.generation) this.emit({ owner, status: 'idle', error: error instanceof Error ? error.message : 'Playback failed.' });
+ }
  async playFile(file: TFile, owner: string): Promise<void> { await this.start(owner, `playback-${crypto.randomUUID()}`, file); }
  async playSession(session: string, owner: string): Promise<void> { await this.start(owner, session); }
  private async start(owner: string, scoreSession: string, file?: TFile): Promise<void> {
@@ -120,6 +148,8 @@ export class PlaybackController {
   const events = positions.events.filter(event => Number.isFinite(event.position)).sort((a, b) => a.position - b.position);
   const tick = (): void => {
    if (generation !== this.generation || !this.context) return;
+   // Suspending the context freezes queued audio and its clock. Keep the last audible highlight.
+   if (this.state.status === 'paused') { this.animation = window.requestAnimationFrame(tick); return; }
    const stamp = this.context.getOutputTimestamp?.();
    const audible = stamp && typeof stamp.contextTime === 'number' && typeof stamp.performanceTime === 'number' && stamp.performanceTime > 0
     ? Math.min(this.context.currentTime, stamp.contextTime + Math.max(0, performance.now() - stamp.performanceTime) / 1000)

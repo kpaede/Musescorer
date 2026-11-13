@@ -15,6 +15,14 @@ await build({
  plugins: [{ name: 'obsidian-native-host', setup(b) {
   b.onResolve({ filter: /webmscore-(?:worker|in-process-browser|in-process-node)-runtime\.js$/ }, () => ({ path: path.resolve('editor-app/engine-adapter.ts') }));
   b.onLoad({filter:/editor-analytics\.ts$/},async args=>({contents:(await readFile(args.path,'utf8')).replace("typeof window === 'undefined' ||",'true ||'),loader:'ts'}));
+  b.onLoad({filter:/components[\\/]score-editor[\\/]exportCommands\.ts$/},async args=>{
+   let contents=await readFile(args.path,'utf8');
+   const label="label: 'Open in Performance Mode'";
+   const gate='enabled: (ctx) => ctx.hasScore && Boolean(getProps().onPerform),';
+   if(!contents.includes(label)||!contents.includes(gate))throw new Error('Review the Obsidian performance-mode gate against the updated OTS command source.');
+   contents=contents.replace(label,"label: 'Performance mode (unavailable in Obsidian)'").replace(gate,'enabled: () => false,');
+   return {contents,loader:'ts'};
+  });
  }}], logLevel: 'info',
 });
 const moduleCss = await readFile('full-editor/editor.css','utf8').catch(()=> '');
